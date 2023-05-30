@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="database.css">
+    <script src="database.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="main">
+        <div class="left"></div>
+        <div class="right">
+            <div class="horizontal-tab">
+                <img src="/assets/3dots.svg" alt="" width="20" height="20" style="padding-bottom: 7px; ">
+            </div>
+
+            <div class="filters">
+                <div class="search">
+                    <input type="search" name="search" id="search" placeholder="search...">
+                    <button type="submit">Search</button>
+                </div>
+                <select name="category" id="category"></select>
+            </div>
+
+            <!-- <div class="database">
+                <div class="head"></div>
+
+                <div class="rows" >
+                    <label for="select-row" id="select-row-container">
+                        <input type="checkbox" name="select-row" id="select-row" class="blue-accent">
+                        ITEM
+                    </label>
+                </div>
+
+            </div> -->
+
+            <table id="database">
+                <tr class="th"> </tr>
+              </table>
+
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,110 @@
+.html, body{
+    padding: 0;
+    margin: 0;
+}
+
+.blue-accent:checked{
+    accent-color: blue;
+}
+
+div.main{
+    display: flex;
+}
+
+div.left{
+    background-color: red;
+    width: 10%;
+    height: 30px; 
+}
+
+div.right{
+    background-color: #362D47;
+    width: 90%;
+    color: white;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-top: 2.5%;
+    padding-bottom: 2%;
+    height: 100vh;
+}
+
+div.horizontal-tab{
+    display: grid;
+    border-bottom: 0.2px solid #B9B4CB;
+    padding-bottom: 5px;
+    overflow-x: auto;
+}
+
+div.tab{
+    text-align: center;
+    font-size: 14px;
+}
+
+div.horizontal-tab:hover, div.tab:hover{
+    cursor: pointer;
+}
+
+div.filters{
+    padding-top: 20px;
+    display: flex;
+    column-gap: 20px;
+}
+
+div.search input[type=search]{
+    background: none;
+    border: 0.1px solid #777678;
+    border-radius: 5px;
+    padding: 6px 10px;
+    width: 210px
+}
+
+div.search button{
+    background: none;
+    border: 0.1px solid #777678;
+    border-radius: 5px;
+    padding: 6px 10px;
+    width: 80px;
+    color: white;
+}
+
+select#category{
+    background: none;
+    border: 0.1px solid #777678;
+    border-radius: 5px;
+    padding: 6px 10px;
+    width: 130px;
+    color: white;
+}
+
+div.database div.head{
+    background-color: #9895a482;
+    color: white;
+    display: grid;
+    margin-top: 20px;
+    padding: 8px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    font-size: 13px;
+}
+
+div.head-tab{
+    text-align: center;
+}
+
+div.database div.rows{
+    padding:8px; 
+    font-size:13px; 
+    border:0.1px solid #777678
+}
+
+label#select-row-container{
+    display: flex;
+    align-items: center;
+    /* background-color: red; */
+    font-size: 15px;
+    column-gap: 7px;
+}
+
+input#select-row:not(:checked){
+    accent-color: red;
+}
