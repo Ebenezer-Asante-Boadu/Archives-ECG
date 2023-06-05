@@ -63,17 +63,12 @@ div.search input[type=search]{
     border: 0.1px solid #777678;
     border-radius: 5px;
     padding: 6px 10px;
-    width: 210px
+    width: 210px;
+    color: white;
+    font-size: 15.5px;
 }
 
-div.search button{
-    background: none;
-    border: 0.1px solid #777678;
-    border-radius: 5px;
-    padding: 6px 10px;
-    width: 80px;
-    color: white;
-}
+
 
 select#category{
     background: none;

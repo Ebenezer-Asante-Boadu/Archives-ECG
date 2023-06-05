@@ -1,8 +1,12 @@
+import { Data } from "../backend/data_retriever.js";
+
+let dt = new Data();
 
 let tabs = ["REG DATE", "FILE TYPE", "FILE NO", "TYPE OF FILE", "DATE", "ORIGIN OF FILE", "DATE COMPLETED",
     "DATE COMMENCED", "NAME OF FILE", "DATE COMPLETED", "DATE COMMENCED", "NAME OF FILE", "DATE COMPLETED", "DATE COMMENCED", "NAME OF FILE",
     "DATE COMMENCED", "NAME OF FILE", "DATE COMMENCED", "NAME OF FILE",];
 
+  
 let rows = {
     row1: ["d ", "KIF", "KAF", "NOF", "KAF", "NOF", "KAF", "NOF", "KAF", "NOF", "NOF", "KAF", "NOF", "KAF", "NOF", "KAF", "NOF", "KAF", "NOF"],
     row2: [" d", "KIF", "KAF", "NOF", "KAF", "NOF", "KAF", "NOF", "KAF", "NOF", "NOF", "KAF", "NOF", "KAF", "NOF", "KAF", "NOF", "KAF", "NOF"],
