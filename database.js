@@ -1,7 +1,7 @@
 
-let tabs = [ "REG DATE", "FILE TYPE", "FILE NO", "TYPE OF FILE", "DATE", "ORIGIN OF FILE", "DATE COMPLETED",
-    "DATE COMMENCED", "NAME OF FILE", "DATE COMPLETED", "DATE COMMENCED", "NAME OF FILE", "DATE COMPLETED", "DATE COMMENCED", "NAME OF FILE", 
-    "DATE COMMENCED", "NAME OF FILE","DATE COMMENCED", "NAME OF FILE",];
+let tabs = ["REG DATE", "FILE TYPE", "FILE NO", "TYPE OF FILE", "DATE", "ORIGIN OF FILE", "DATE COMPLETED",
+    "DATE COMMENCED", "NAME OF FILE", "DATE COMPLETED", "DATE COMMENCED", "NAME OF FILE", "DATE COMPLETED", "DATE COMMENCED", "NAME OF FILE",
+    "DATE COMMENCED", "NAME OF FILE", "DATE COMMENCED", "NAME OF FILE",];
 
 let rows = {
     row1: ["d ", "KIF", "KAF", "NOF", "KAF", "NOF", "KAF", "NOF", "KAF", "NOF", "NOF", "KAF", "NOF", "KAF", "NOF", "KAF", "NOF", "KAF", "NOF"],
@@ -31,9 +31,36 @@ function createTabs(tabname) {
 }
 
 function createTableHead() {
-    tabs.forEach((item,index)=>{
+    tabs.forEach((item, index) => {
         let parent = document.getElementsByClassName("th")[0];
-        parent.innerHTML += (index == 0) ? `<th> </th> <th>${item}</th>` : `<th>${item}</th>`;
+
+        if (index == 0) {
+            let th = document.createElement("th");
+            let text = document.createTextNode(" ");
+            th.appendChild(text)
+            parent.appendChild(th);
+            th = 0;
+
+            th = document.createElement("th");
+            let input = document.createElement("input");
+            input.type = "text"
+            input.value = item;
+            input.classList = "read";
+            input.readOnly = true;
+            th.appendChild(input);
+            parent.appendChild(th);
+        }
+        else {
+            let th = document.createElement("th");
+            let input = document.createElement("input");
+            input.type = "text";
+            input.value = item;
+            input.classList = "read";
+            input.readOnly = true;
+            th.appendChild(input)
+            parent.appendChild(th);
+        }
+        //parent.innerHTML += (index == 0) ? `<th> </th> <th>${item}</th>` : `<th>${item}</th>`;
     })
 }
 
@@ -52,23 +79,31 @@ function setTabGridItems(className = "horizontal-tab") {
 
 
 
-function createDatabaseRows(){
+function createDatabaseRows() {
     let parent = document.getElementById("database").querySelector("tbody");
     let row = null;
-    for(let i = 0; i < Object.keys(rows).length; i++){ //looping through the object
-            row = document.createElement('tr');//create a row for each element in the object
+    for (let i = 0; i < Object.keys(rows).length; i++) { //looping through the object
+        row = document.createElement('tr');//create a row for each element in the object
         for (let x = 0; x < rows[Object.keys(rows)[i]].length; x++) { //looping through the array
             let tableData = document.createElement('td');
 
-            if(x == 0){ 
-                let checkbox = document.createElement('input'); 
-                checkbox.type = "checkbox" ;
+            if (x == 0) {
+                let checkbox = document.createElement('input');
+                checkbox.type = "checkbox";
                 checkbox.classList += "blue-accent";
                 tableData.appendChild(checkbox);
                 row.appendChild(tableData);
                 tableData = document.createElement('td');
             }
-            let data = () => { let text = document.createTextNode(rows[Object.keys(rows)[i]][x]); return text; };
+            let data = () => { 
+                let input = document.createElement("input");
+                input.type = "text";
+                input.value = rows[Object.keys(rows)[i]][x];
+                input.classList = "read";
+                input.id = "read-row";
+                input.readOnly = true;
+                return input; 
+            };
 
             tableData.appendChild(data());
             row.appendChild(tableData);
@@ -77,6 +112,30 @@ function createDatabaseRows(){
     }
 }
 
+
+function setModeEnvironment() {
+    let element = document.getElementById("mode").value;
+  
+    let readElements = Array.from(document.getElementsByClassName("read"));
+    let writeElements = Array.from(document.getElementsByClassName("write"));
+  
+    if (element == "write and read") {
+      for (let i = 0; i < readElements.length; i++) {
+        readElements[i].readOnly = false;
+        readElements[i].classList.remove("read");
+        readElements[i].classList.add("write");
+        readElements[i].id = "write-row";
+      }
+    } else if (element == "read only") {
+      for (let i = 0; i < writeElements.length; i++) {
+        writeElements[i].readOnly = true;
+        writeElements[i].classList.remove("write");
+        writeElements[i].classList.add("read");
+        writeElements[i].id = "read-row";
+      }
+    }
+  }
+  
 
 window.addEventListener("load", () => {
     setTabGridItems();

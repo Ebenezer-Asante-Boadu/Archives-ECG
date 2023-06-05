@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="database.css">
     <script src="database.js"></script>
-    <script src="tkayElement.js"></script>
     <title>Document</title>
 </head>
 
@@ -24,7 +23,19 @@
                     <input type="search" name="search" id="search" placeholder="search...">
                     <button type="submit">Search</button>
                 </div>
-                <select name="category" id="category"></select>
+                
+                <label for="category">
+                    Filter By: &nbsp;
+                    <select name="category" id="category"></select>
+                </label>
+
+                <label for="mode">
+                    MODE: &nbsp;
+                    <select name="mode" id="mode" onchange="setModeEnvironment()">
+                        <option value="read only">read only</option>
+                        <option value="write and read">write and read</option>
+                    </select>
+                </label>
             </div>
 
             <!-- <div class="database">

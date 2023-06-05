@@ -4,6 +4,11 @@
     /* font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; */
 }
 
+option{
+    background-color: #ffffff;
+    color: black;
+}
+
 .blue-accent:checked{
     accent-color: blue;
 }
@@ -50,7 +55,7 @@ div.horizontal-tab:hover, div.tab:hover{
 div.filters{
     padding-top: 20px;
     display: flex;
-    column-gap: 20px;
+    column-gap: 40px;
 }
 
 div.search input[type=search]{
@@ -75,41 +80,20 @@ select#category{
     border: 0.1px solid #777678;
     border-radius: 5px;
     padding: 6px 10px;
-    width: 130px;
+    width: auto;
     color: white;
+    font-size: 15.5px;
 }
 
-/* div.database div.head{
-    background-color: #9895a482;
+select#mode{
+    background: none;
+    border: 0.1px solid #777678;
+    border-radius: 5px;
+    padding: 6px 10px;
+    width: auto;
     color: white;
-    display: grid;
-    margin-top: 20px;
-    padding: 8px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    font-size: 13px;
-}
+    font-size: 15.5px;
 
-div.head-tab{
-    text-align: center;
-}
-
-div.database div.rows{
-    padding:8px; 
-    font-size:13px; 
-    border:0.1px solid #777678
-} */
-
-label#select-row-container{
-    display: flex;
-    align-items: center;
-    /* background-color: red; */
-    font-size: 15px;
-    column-gap: 7px;
-}
-
-input#select-row:not(:checked){
-    accent-color: red;
 }
 
 table, th, td {
@@ -126,6 +110,10 @@ table, th, td {
     margin-top: 20px;
 }
 
+#database th{
+    position: sticky;
+  top: 0;
+}
 
 #database td{
     padding: 5px 20px;
@@ -137,7 +125,52 @@ th{
     font-size: 12.5px;
 }
 
-.th th:first-child{
-    /* border-top-left-radius: 15px; */
+input.read, input.read:focus{
+    background: none;
+    color: rgb(228, 228, 228);
+    font-size: 12.5px;
+    width:min-content;
+    border: none;
+    text-align: center;
+    outline: none;
+    font-weight: 600;
 }
+
+input#read-row.read, input#read-row.row:focus{
+    background: none;
+    color: rgb(228, 228, 228);
+    font-size: 13.5px;
+    width:min-content;
+    border: none;
+    text-align: center;
+    outline: none;
+    font-weight: 500;
+}
+
+
+
+input.write, input.write:focus{
+    background: none;
+    color: rgb(228, 228, 228);
+    font-size: 12.5px;
+    width:min-content;
+    /* border: none; */
+    text-align: center;
+    outline: none;
+    font-weight: 600;
+    padding: 2px;
+}
+
+input#write-row.read, input#write-row.row:focus{
+    background: none;
+    color: rgb(228, 228, 228);
+    font-size: 13.5px;
+    width:min-content;
+    /* border: none; */
+    text-align: center;
+    outline: none;
+    font-weight: 500;
+}
+
+
 
