@@ -5,28 +5,32 @@
   "main": "data_retriever.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "serve" : "tsc && node ./src/dist/server.js",
-    "build" : "tsc && pkg ."
+    "serve": "tsc && cd ./front-end/archives-frontend &&  npm run build && cd ../../ && node ./src/dist/server.js",
+    "build": "cd ./front-end/archives-frontend &&  npm run build && cd ../../ && tsc && pkg . --force"
   },
   "author": "MENSAH TORKORNOO DERRICK",
   "license": "ISC",
   "devDependencies": {
+    "@types/sqlite3": "^3.1.8",
     "express": "^4.18.2",
-    "typescript": "^5.1.3"
+    "sqlite3": "^5.1.6",
+    "typescript": "^5.1.3",
+    "vite": "^4.3.9"
   },
   "dependencies": {
     "@types/express": "^4.17.17"
   },
   "pkg": {
-  "scripts": "./src/dist/server.js",
-  "targets": [
-    "node14-win-x64",
-    "node14-macos-x64",
-    "node14-linux-x64"
-  ]
-},
-"bin": {
-  "myapp": "./src/dist/server.js"
-}
-
+    "scripts": "./src/dist/**/*.js",
+    "assets": "./src/dist/**/*",
+    "outputPath": "DESKTOP-APPS",
+    "targets": [
+      "node14-win-x64",
+      "node14-macos-x64",
+      "node14-linux-x64"
+    ]
+  },
+  "bin": {
+    "myapp": "./src/dist/server.js"
+  }
 }
