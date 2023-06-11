@@ -1,0 +1,6 @@
+{
+    "watch": ["src", "front-end/archives-frontend/src"],
+    "ext": "ts",
+    "exec": "tsc && cd ./front-end/archives-frontend &&  npm run build && cd ../../ && node ./src/dist/server.js"
+}
+  

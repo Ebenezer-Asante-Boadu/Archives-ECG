@@ -1,7 +1,12 @@
 import express, {Response} from 'express';
 const { exec } = require('child_process');
 const path = require('path');
+import { _Database } from './Database';
+import { logError } from './Error_logger';
+require('dotenv').config(); 
 
+
+ logError({id: 3, file: "op", line:"h", message:"786",error_code:"okp"});
 const app = express();
 const port = 3000;
 
@@ -9,7 +14,7 @@ const port = 3000;
 app.use(express.static(path.join(__dirname, './public')));
 
 app.get('/home', (_, res:Response) => {
-  res.sendFile(path.join(__dirname, './public/index.html'));
+  res.sendFile(path.join(__dirname, './public/src/views/homepage/homepage.html'));
 });
 
 app.get('/database-management', (_, res:Response) => {
@@ -21,4 +26,49 @@ app.listen(port, () => {
   console.log(`Server is listening on port localhost:${port}`);
 });
 
-exec('start http://localhost:3000/home');
+// _Database.createDatabase("BOM");
+
+//TODO: SPECIFIC DATABASE FORMANAGING DYNAMIC ENVIRONMENT VARIABLES
+// if(process.env.DEVELOPMENT_STARTED_COUNT == "0"){ console.log(process.env.DEVELOPMENT_STARTED_COUNT);
+//   process.env.DEVELOPMENT_STARTED_COUNT = "1";  
+//   exec('start http://localhost:3000/home');
+// }else if (process.env.NODE_ENV === 'production') {
+//   exec('start http://localhost:3000/home');
+//   console.log('Running in production mode');
+// } 
+// startBrowserAutomatically();
+
+
+function startBrowserAutomatically(){
+  const home = "http://localhost:3000/home";
+const possible_platforms = ["darwin", "freebsd", "linux", "openbsd", "sunos", "win32"];
+
+ switch(process.platform){
+  case possible_platforms[5]:
+    exec(`start ${home}`, (error:any, stdout:any, stderr:any)=>{
+      if(error){
+        console.warn("Sorry, we couldn't start the application by opening the browser automatically but you can open a browser to this link localhost:3000/home");
+        return;
+      }
+    });
+    break;
+  
+  case possible_platforms[0]:
+    exec(`open ${home}`, (error:any, stdout:any, stderr:any)=>{
+      if(error){
+        console.warn("Sorry, we couldn't start the application by opening the browser automatically but you can open a browser to this link localhost:3000/home");
+        return;
+      }
+    });
+    break;
+  
+  case possible_platforms[1] || possible_platforms[2] || possible_platforms[3] || possible_platforms[4]:
+    exec(`xdg-open ${home}`, (error:any, stdout:any, stderr:any)=>{
+      if(error){
+        console.warn("Sorry, we couldn't start the application by opening the browser automatically but you can open a browser to this link localhost:3000/home");
+        return;
+      }
+    });
+    break;
+ }
+}

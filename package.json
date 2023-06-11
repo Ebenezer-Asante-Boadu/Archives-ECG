@@ -2,16 +2,18 @@
   "name": "ecg-archives",
   "version": "1.0.0",
   "description": "LOCAL SERVER APP FOR MANAGING DATABASE SYSTEMS",
-  "main": "data_retriever.js",
+  "main": "./src/dist/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "tsc && cd ./front-end/archives-frontend &&  npm run build && cd ../../ && node ./src/dist/server.js",
+    "serve": "cd ./front-end/archives-frontend &&  npm run build && cd ../../ && nodemon",
     "build": "cd ./front-end/archives-frontend &&  npm run build && cd ../../ && tsc && pkg . --force"
   },
   "author": "MENSAH TORKORNOO DERRICK",
   "license": "ISC",
   "devDependencies": {
     "@types/sqlite3": "^3.1.8",
+    "csv-writer": "^1.6.0",
+    "dotenv": "^16.1.4",
     "express": "^4.18.2",
     "sqlite3": "^5.1.6",
     "typescript": "^5.1.3",
