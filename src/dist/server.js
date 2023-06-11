@@ -6,9 +6,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const { exec } = require('child_process');
 const path = require('path');
-const Error_logger_1 = require("./Error_logger");
 require('dotenv').config();
-(0, Error_logger_1.logError)({ id: 3, file: "op", line: "h", message: "786", error_code: "okp" });
+//  logError({id: 3, file: "op", line:"h", message:"786",error_code:"okp"});
 const app = (0, express_1.default)();
 const port = 3000;
 // Serve static assets with explicit MIME type
@@ -16,9 +15,9 @@ app.use(express_1.default.static(path.join(__dirname, './public')));
 app.get('/home', (_, res) => {
     res.sendFile(path.join(__dirname, './public/src/views/homepage/homepage.html'));
 });
-app.get('/database-management', (_, res) => {
-    res.sendFile(path.join(__dirname, './public/database.html'));
-});
+// app.get('/database-management', (_, res:Response) => {
+//   res.sendFile(path.join(__dirname, './public/database.html'));
+// });
 // Start the server
 app.listen(port, () => {
     console.log(`Server is listening on port localhost:${port}`);

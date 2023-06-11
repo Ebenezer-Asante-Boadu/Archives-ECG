@@ -6,7 +6,7 @@ import { logError } from './Error_logger';
 require('dotenv').config(); 
 
 
- logError({id: 3, file: "op", line:"h", message:"786",error_code:"okp"});
+//  logError({id: 3, file: "op", line:"h", message:"786",error_code:"okp"});
 const app = express();
 const port = 3000;
 
@@ -17,9 +17,9 @@ app.get('/home', (_, res:Response) => {
   res.sendFile(path.join(__dirname, './public/src/views/homepage/homepage.html'));
 });
 
-app.get('/database-management', (_, res:Response) => {
-  res.sendFile(path.join(__dirname, './public/database.html'));
-});
+// app.get('/database-management', (_, res:Response) => {
+//   res.sendFile(path.join(__dirname, './public/database.html'));
+// });
 
 // Start the server
 app.listen(port, () => {
