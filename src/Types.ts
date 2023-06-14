@@ -1,8 +1,8 @@
 interface newTable {
     database_name : string,
+    tableName : string,
     columns : string[],
     types : string[],
-    ["size of type"]? : string[],
 }
 
 interface newError {
@@ -13,4 +13,18 @@ interface newError {
     error_code : string
 }
 
-export {newTable, newError}
+interface newColumn{
+    database_name : string,
+    tableName : string,
+    column : string,
+    type : string
+}
+
+
+interface deleteColumn{
+    database_name : string,
+    tableName : string,
+    column : string
+}
+
+export {newTable, newError, newColumn, deleteColumn}

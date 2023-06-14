@@ -3,7 +3,10 @@
 module.exports = {
     build: {
       rollupOptions: {
-        input: 'src/views/homepage/homepage.html', // Specify the correct entry module here
+        input: {
+          homepage : 'src/views/homepage/homepage.html', // Specify the correct entry module here
+          database : "src/views/database/database.html"
+        }
       },
       outDir: '../../src/dist/public', // Specify the output directory here
     },

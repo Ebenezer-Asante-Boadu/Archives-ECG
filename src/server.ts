@@ -17,16 +17,17 @@ app.get('/home', (_, res:Response) => {
   res.sendFile(path.join(__dirname, './public/src/views/homepage/homepage.html'));
 });
 
-// app.get('/database-management', (_, res:Response) => {
-//   res.sendFile(path.join(__dirname, './public/database.html'));
-// });
+app.get('/database-management', (_, res:Response) => {
+  res.sendFile(path.join(__dirname, './public/src/views/database/database.html'));
+});
 
 // Start the server
 app.listen(port, () => {
   console.log(`Server is listening on port localhost:${port}`);
 });
 
-// _Database.createDatabase("BOM");
+ //_Database.createTable({database_name: "BOM", tableName: "kok", columns: ["id", "name", "complexion"], types: ["int", "varchar(255)", "varchar(255)"]});
+// _Database.deleteTable("BOM", "kok");
 
 //TODO: SPECIFIC DATABASE FORMANAGING DYNAMIC ENVIRONMENT VARIABLES
 // if(process.env.DEVELOPMENT_STARTED_COUNT == "0"){ console.log(process.env.DEVELOPMENT_STARTED_COUNT);
