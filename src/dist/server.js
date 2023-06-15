@@ -7,6 +7,8 @@ const express_1 = __importDefault(require("express"));
 const { exec } = require('child_process');
 const path = require('path');
 require('dotenv').config();
+//new Firebase().addData({collection:"categories", sub_directory: "categories1", data: {"name":"derrick"}});
+//  new Firebase().getAllFirebaseDocument("categories");
 //  logError({id: 3, file: "op", line:"h", message:"786",error_code:"okp"});
 const app = (0, express_1.default)();
 const port = 3000;
@@ -14,6 +16,9 @@ const port = 3000;
 app.use(express_1.default.static(path.join(__dirname, '../../front-end/src/')));
 app.get('/', (_, res) => {
     res.sendFile(path.join(__dirname, '../../front-end/src/views/homepage/homepage.html'));
+});
+app.get('/database-management', (_, res) => {
+    res.sendFile(path.join(__dirname, '../../front-end/src/views/database/database.html'));
 });
 // Start the server
 app.listen(port, () => {
@@ -29,7 +34,7 @@ app.listen(port, () => {
 //   exec('start http://localhost:3000/home');
 //   console.log('Running in production mode');
 // } 
-startBrowserAutomatically();
+//startBrowserAutomatically();
 function startBrowserAutomatically() {
     const home = "http://localhost:3000/";
     const possible_platforms = ["darwin", "freebsd", "linux", "openbsd", "sunos", "win32"];

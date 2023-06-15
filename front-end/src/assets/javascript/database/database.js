@@ -3,7 +3,7 @@ var DATABASE;
 (function (DATABASE) {
     class __Database {
         constructor() {
-            this.parent = document.getElementsByClassName("main")[0];
+            this.parent = document.getElementById("app");
             this.div_left = document.createElement("div");
             this.div_left.classList.add("left");
             this.div_right = document.createElement("div");
@@ -138,4 +138,6 @@ var DATABASE;
     }
     DATABASE.Utility = Utility;
 })(DATABASE || (DATABASE = {}));
-new DATABASE.__Database().assembler();
+window.addEventListener("load", () => {
+    new DATABASE.__Database().assembler();
+});

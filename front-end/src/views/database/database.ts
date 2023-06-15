@@ -9,7 +9,7 @@ namespace DATABASE{
         private div_right : HTMLDivElement;
     
         constructor(){
-            this.parent = document.getElementsByClassName("main")[0] as HTMLDivElement;
+            this.parent = document.getElementById("app") as HTMLDivElement;
             this.div_left = document.createElement("div");
             this.div_left.classList.add("left");
             this.div_right = document.createElement("div");
@@ -179,4 +179,6 @@ namespace DATABASE{
 }
 
 
-new DATABASE.__Database().assembler();
+window.addEventListener("load", ()=>{
+    new DATABASE.__Database().assembler();
+})
