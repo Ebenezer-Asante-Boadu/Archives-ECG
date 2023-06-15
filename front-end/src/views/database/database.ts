@@ -1,4 +1,3 @@
-import dots from "/src/assets/3dots.svg";
 
 namespace DATABASE{
 
@@ -27,7 +26,7 @@ namespace DATABASE{
     
             function image():HTMLImageElement{
                 let image = document.createElement("img");
-                image.src = dots;
+                image.src = "../../assets/3dots.svg";
                 image.alt = ":";
                 image.width = 20;
                 image.height = 20;

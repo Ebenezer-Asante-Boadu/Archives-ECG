@@ -1,13 +1,14 @@
-import { initializeApp } from 'firebase-admin/app';
+import { initializeApp } from 'firebase-admin';
+require('dotenv').config();
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCMeKky2FyaCwTiI5lNz46VtJJd68b9O4I",
-    authDomain: "tkayel.firebaseapp.com",
-    projectId: "tkayel",
-    storageBucket: "tkayel.appspot.com",
-    messagingSenderId: "957300711510",
-    appId: "1:957300711510:web:a7fac2141969e6b3ff5bf7",
-    measurementId: "G-WXNH8VC627"
+    apiKey: process.env.apiKey,
+    authDomain: process.env.authDomain,
+    projectId: process.env.projectId,
+    storageBucket: process.env.storageBucket,
+    messagingSenderId: process.env.messagingSenderId,
+    appId: process.env.appId,
+    measurementId: process.env.measurementId
   };
   
   export class Firebase{

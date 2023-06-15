@@ -11,12 +11,9 @@ require('dotenv').config();
 const app = (0, express_1.default)();
 const port = 3000;
 // Serve static assets with explicit MIME type
-app.use(express_1.default.static(path.join(__dirname, './public')));
-app.get('/home', (_, res) => {
-    res.sendFile(path.join(__dirname, './public/src/views/homepage/homepage.html'));
-});
-app.get('/database-management', (_, res) => {
-    res.sendFile(path.join(__dirname, './public/src/views/database/database.html'));
+app.use(express_1.default.static(path.join(__dirname, '../../front-end/src/')));
+app.get('/', (_, res) => {
+    res.sendFile(path.join(__dirname, '../../front-end/src/views/homepage/homepage.html'));
 });
 // Start the server
 app.listen(port, () => {
@@ -32,9 +29,9 @@ app.listen(port, () => {
 //   exec('start http://localhost:3000/home');
 //   console.log('Running in production mode');
 // } 
-// startBrowserAutomatically();
+startBrowserAutomatically();
 function startBrowserAutomatically() {
-    const home = "http://localhost:3000/home";
+    const home = "http://localhost:3000/";
     const possible_platforms = ["darwin", "freebsd", "linux", "openbsd", "sunos", "win32"];
     switch (process.platform) {
         case possible_platforms[5]:
