@@ -31,27 +31,6 @@ interface deleteColumn{
     column : string
 }
 
-interface addFirebaseData{
-    collection : string,
-    sub_directory : string,
-    data :Object
-}
 
-interface deleteFirebaseDocument{
-    collection : string,
-    sub_directory : string
-}
 
-interface deleteFirebaseFields{
-    collection : string,
-    sub_directory : string,
-    fields: Array<string>
-}
-
-interface updateFirebaseFields{
-    collection : string,
-    sub_directory : string,
-    data: object
-}
-
-export {newTable, newError, newColumn, deleteColumn, addFirebaseData, deleteFirebaseDocument, deleteFirebaseFields, updateFirebaseFields, newObject}
+export {newTable, newError, newColumn, deleteColumn,  newObject}

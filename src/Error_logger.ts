@@ -106,9 +106,6 @@ async function prepareFileForAppending() {
 
 // prepareFileForAppending();
 
-
-
-
 export async function logError(error: newError) { 
     prepareFileForAppending(); 
     let results: boolean = false;

@@ -7,9 +7,11 @@ const express_1 = __importDefault(require("express"));
 const { exec } = require('child_process');
 const path = require('path');
 require('dotenv').config();
+require("./Mailer");
 //new Firebase().addData({collection:"categories", sub_directory: "categories1", data: {"name":"derrick"}});
 //  new Firebase().getAllFirebaseDocument("categories");
 //  logError({id: 3, file: "op", line:"h", message:"786",error_code:"okp"});
+// new Firebase().uploadFirebaseFile({filepath:"src/dist/FILES_TO_UPLOAD", filename:"derrick.txt", generationMatchPrecondition:0, bucketName:"gs://tkayel.appspot.com"})
 const app = (0, express_1.default)();
 const port = 3000;
 // Serve static assets with explicit MIME type
