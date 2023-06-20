@@ -1,3 +1,46 @@
-.html{
-    color:red;
+html,body{
+    padding: 0;
+    margin: 0;
+}
+
+.frame{
+    background-color: bisque;
+    background-image: url("/assets/side-pic.png"), url("/assets/background-fame-cover.png");
+    height:700px;
+    background-repeat: no-repeat;
+    background-size: 18% 100%, 82% 100%;
+    background-position: left, right;
+    filter: brightness(0.82);
+    
+    /* opacity: 0.96; */
+}
+
+.bigger{
+    display: flex;
+    justify-content: center;
+    padding-top: 40px;
+}
+
+.navbar{
+    width: 70%;
+    height: 50px;
+    border-radius: 15px;
+    background: #E2D6D6F0;
+   
+}
+
+.large-txt{
+   font-size:42px;
+   color:#FFFFFD;
+   font-weight: 600;
+   width:40%;
+   margin-left: 15%;
+   margin-top: 140px;
+   letter-spacing: 2px;
+   word-spacing: 4px;
+   font-family: 'Poppins', sans-serif;
+}
+
+.small-txt{
+    font-size: 14px;
 }

@@ -6,8 +6,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const { exec } = require('child_process');
 const path = require('path');
-require('dotenv').config();
-require("./Mailer");
+// require('dotenv').config(); 
+//import "./Mailer"
 //new Firebase().addData({collection:"categories", sub_directory: "categories1", data: {"name":"derrick"}});
 //  new Firebase().getAllFirebaseDocument("categories");
 //  logError({id: 3, file: "op", line:"h", message:"786",error_code:"okp"});
@@ -25,18 +25,17 @@ app.get('/database-management', (_, res) => {
 // Start the server
 app.listen(port, () => {
     console.log(`Server is listening on port localhost:${port}`);
+    //console.log(process.env.NODE_ENV)
 });
 //_Database.createTable({database_name: "BOM", tableName: "kok", columns: ["id", "name", "complexion"], types: ["int", "varchar(255)", "varchar(255)"]});
 // _Database.deleteTable("BOM", "kok");
 //TODO: SPECIFIC DATABASE FORMANAGING DYNAMIC ENVIRONMENT VARIABLES
-// if(process.env.DEVELOPMENT_STARTED_COUNT == "0"){ console.log(process.env.DEVELOPMENT_STARTED_COUNT);
-//   process.env.DEVELOPMENT_STARTED_COUNT = "1";  
-//   exec('start http://localhost:3000/home');
+// if(process.env.DEVELOPMENT_STARTED_COUNT == "1"){ 
+//   startBrowserAutomatically();
 // }else if (process.env.NODE_ENV === 'production') {
-//   exec('start http://localhost:3000/home');
-//   console.log('Running in production mode');
+//   startBrowserAutomatically();
 // } 
-//startBrowserAutomatically();
+startBrowserAutomatically();
 function startBrowserAutomatically() {
     const home = "http://localhost:3000/";
     const possible_platforms = ["darwin", "freebsd", "linux", "openbsd", "sunos", "win32"];

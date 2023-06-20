@@ -5,7 +5,7 @@
   "main": "./src/dist/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "cross-env NODE_ENV=development && cd ./front-end &&  npm run build && cd ../ && nodemon",
+    "serve": "cross-env NODE_ENV=development  && cd ./front-end &&  npm run build && cd ../ && nodemon",
     "build": "cross-env NODE_ENV=production && cd ./front-end &&  npm run build && cd ../ && tsc && pkg . --force"
   },
   "author": "MENSAH TORKORNOO DERRICK",
