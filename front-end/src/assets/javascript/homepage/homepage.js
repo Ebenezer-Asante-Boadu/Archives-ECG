@@ -105,12 +105,15 @@ class Home {
         function title() {
             let tit = document.createElement("p");
             tit.classList.add("big-title");
-            let txt = document.createTextNode("");
+            let txt = document.createTextNode("Who are we? Meet our team!");
+            tit.appendChild(txt);
             return tit;
         }
         function caption() {
             let cap = document.createElement("p");
             cap.classList.add("caption");
+            let txt = document.createTextNode("We listen, advice, provide the best electricity service at an affordable price you would never get anywhere on this earth!!!");
+            cap.appendChild(txt);
             return cap;
         }
         div.append(title(), caption());
