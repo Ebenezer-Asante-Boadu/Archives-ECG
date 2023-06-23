@@ -12,6 +12,58 @@ class Home {
             let div = document.createElement("div");
             div.classList.add("navbar");
             _1stdiv.appendChild(div);
+            function navlist() {
+                let ul = document.createElement("ul");
+                ul.classList.add("navlist");
+                function brand() {
+                    let li = document.createElement("li");
+                    li.classList.add("brand");
+                    let brand = document.createElement("a");
+                    brand.setAttribute("href", "#");
+                    brand.innerText = "ECG ARCHIVES";
+                    li.appendChild(brand);
+                    return li;
+                }
+                function link1() {
+                    let li = document.createElement("li");
+                    li.classList.add("nav-link");
+                    let linker = document.createElement("a");
+                    linker.setAttribute("href", "#");
+                    linker.innerText = "Request For File";
+                    li.appendChild(linker);
+                    return li;
+                }
+                function link2() {
+                    let li = document.createElement("li");
+                    li.classList.add("nav-link");
+                    let linker = document.createElement("a");
+                    linker.setAttribute("href", "#");
+                    linker.innerText = "Admin Panel";
+                    li.appendChild(linker);
+                    return li;
+                }
+                function link3() {
+                    let li = document.createElement("li");
+                    li.classList.add("nav-link");
+                    let linker = document.createElement("a");
+                    linker.setAttribute("href", "#");
+                    linker.innerText = "Manage Database";
+                    li.appendChild(linker);
+                    return li;
+                }
+                function link4() {
+                    let li = document.createElement("li");
+                    li.classList.add("nav-link", "login-button");
+                    let linker = document.createElement("a");
+                    linker.setAttribute("href", "#");
+                    linker.innerText = "Log In";
+                    li.appendChild(linker);
+                    return li;
+                }
+                ul.append(brand(), link4(), link3(), link2(), link1());
+                return ul;
+            }
+            div.appendChild(navlist());
             return _1stdiv;
         }
         function textbox() {
