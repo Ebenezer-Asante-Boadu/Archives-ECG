@@ -3,13 +3,19 @@ const { exec } = require('child_process');
 const path = require('path');
 import { _Database } from './Database';
 import { logError } from './Error_logger';
+import { Firebase } from './firebase';
 // require('dotenv').config(); 
 //import "./Mailer"
 
  //new Firebase().addData({collection:"categories", sub_directory: "categories1", data: {"name":"derrick"}});
-//  new Firebase().getAllFirebaseDocument("categories");
+  // const y = new Firebase(); y.getFirebaseDocument("categories", "category1")
+  //  .then((data)=>{console.log(data)});
 //  logError({id: 3, file: "op", line:"h", message:"786",error_code:"okp"});
-// new Firebase().uploadFirebaseFile({filepath:"src/dist/FILES_TO_UPLOAD", filename:"derrick.txt", generationMatchPrecondition:0, bucketName:"gs://tkayel.appspot.com"})
+// new Firebase().uploadFirebaseFile({bucketName:"tkayel.appspot.com", path_to_the_file_to_upload: "./src/dist/FILES_TO_UPLOAD/derrick.txt", new_filename:"NEW.txt"});
+//const _path = "./src/dist/FILES_TO_UPLOAD/";
+// new Firebase().uploadFirebaseMultiplefiles({bucketName: "tkayel.appspot.com", path_to_the_files_to_upload: [`${_path}derrick.txt`, `${_path}kpalu.txt`]});
+//new Firebase().deleteFirebaseFile({bucketName:"tkayel.appspot.com", file:"newer.txt"});
+//new Firebase().downloadFirebaseFile("tkayel.appspot.com", "img.jpg");
 const app = express();
 const port = 3000;
 
@@ -42,7 +48,7 @@ app.listen(port, () => {
 //   startBrowserAutomatically();
 // } 
 
-startBrowserAutomatically();
+//startBrowserAutomatically();
 
 function startBrowserAutomatically(){
   const home = "http://localhost:3000/";

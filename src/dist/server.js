@@ -9,9 +9,14 @@ const path = require('path');
 // require('dotenv').config(); 
 //import "./Mailer"
 //new Firebase().addData({collection:"categories", sub_directory: "categories1", data: {"name":"derrick"}});
-//  new Firebase().getAllFirebaseDocument("categories");
+// const y = new Firebase(); y.getFirebaseDocument("categories", "category1")
+//  .then((data)=>{console.log(data)});
 //  logError({id: 3, file: "op", line:"h", message:"786",error_code:"okp"});
-// new Firebase().uploadFirebaseFile({filepath:"src/dist/FILES_TO_UPLOAD", filename:"derrick.txt", generationMatchPrecondition:0, bucketName:"gs://tkayel.appspot.com"})
+// new Firebase().uploadFirebaseFile({bucketName:"tkayel.appspot.com", path_to_the_file_to_upload: "./src/dist/FILES_TO_UPLOAD/derrick.txt", new_filename:"NEW.txt"});
+//const _path = "./src/dist/FILES_TO_UPLOAD/";
+// new Firebase().uploadFirebaseMultiplefiles({bucketName: "tkayel.appspot.com", path_to_the_files_to_upload: [`${_path}derrick.txt`, `${_path}kpalu.txt`]});
+//new Firebase().deleteFirebaseFile({bucketName:"tkayel.appspot.com", file:"newer.txt"});
+//new Firebase().downloadFirebaseFile("tkayel.appspot.com", "img.jpg");
 const app = (0, express_1.default)();
 const port = 3000;
 // Serve static assets with explicit MIME type
@@ -35,7 +40,7 @@ app.listen(port, () => {
 // }else if (process.env.NODE_ENV === 'production') {
 //   startBrowserAutomatically();
 // } 
-startBrowserAutomatically();
+//startBrowserAutomatically();
 function startBrowserAutomatically() {
     const home = "http://localhost:3000/";
     const possible_platforms = ["darwin", "freebsd", "linux", "openbsd", "sunos", "win32"];
