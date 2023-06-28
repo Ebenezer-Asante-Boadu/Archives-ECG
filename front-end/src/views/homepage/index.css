@@ -1,0 +1,227 @@
+html,
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.frame {
+    background-color: bisque;
+    background-image: url("../../assets/side-pic.png"), url("../../assets/background-fame-cover.png");
+    height: 700px;
+    background-repeat: no-repeat;
+    background-size: 18% 100%, 82% 100%;
+    background-position: left, right;
+    
+    /* filter: brightness(0.72); */
+
+    /* opacity: 0.96; */
+}
+
+.bigger {
+    display: flex;
+    justify-content: center;
+    padding-top: 40px;
+}
+
+.navbar {
+    width: 70%;
+    height:auto;
+    border-radius: 15px;
+    background: #E2D6D6F0;
+
+}
+
+.large-txt {
+    font-size: 42px;
+    color: white;
+    font-weight: 600;
+    width: 40%;
+    margin-left: 15%;
+    margin-top: 140px;
+    letter-spacing: 2px;
+    word-spacing: 4px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.small-txt {
+    font-size: 14px;
+}
+
+
+.group-card {
+    display: flex;
+    justify-content: center;
+    margin-top: -130px;
+    position: relative;
+    z-index: 10;
+
+}
+
+.group-card .grid {
+    width: 70%;
+    display: grid;
+    grid-template-columns: 30% 30% 30%;
+    column-gap: 5%;
+    /* background-color: red; */
+}
+
+.card1,
+.card2,
+.card3 {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    text-align: center;
+    padding: 20px;
+}
+
+.image-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.image-wrapper img {
+    width: 70px
+}
+
+.group-card .title {
+    margin-top: 20px;
+    color: #33B11F;
+    font-weight: 500;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 17px;
+}
+
+.group-card .writing {
+    /* font-size: 13px;
+    font-family: 'Poppins', sans-serif;
+    word-spacing: 3px;
+    line-height: 20px; */
+    color: #393838;
+    font-size: 16px;
+    font-family: Inter;
+    line-height: 25px;
+}
+
+.middle-pic {
+    margin-top: 90px;
+    background-image: url("../../assets/middle-rectangle.png");
+    background-repeat: no-repeat;
+    background-size: 100vw 100%;
+    height: 130px;
+    margin-bottom: 30px;
+}
+
+.big-title {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    padding: 0px;
+    margin: 0;
+}
+
+.caption {
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    margin: 0;
+}
+
+
+.profiles {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.profiles .grid {
+    width: 70%;
+    display: grid;
+    grid-template-columns: 30% 30% 30%;
+    column-gap: 5%;
+}
+
+.profiles .middleLine {
+    grid-column: 1/4;
+    margin: 15px 0;
+}
+
+.profiles .cover .img-container {
+    display: flex;
+    justify-content: center;
+}
+
+.profiles .cover p {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    padding: 15px 0;
+    margin: 0;
+}
+
+.profiles .cover .description {
+    text-align: center;
+    color: #393838;
+    font-size: 16px;
+    font-family: Inter;
+    line-height: 25px;
+}
+
+.profiles .card-footer .iconPositionContainer{
+    display: flex;
+    justify-content: center;
+}
+
+.card-footer .job-title{
+    text-align: center;
+}
+
+.footerDiv{
+    height:200px;
+    background-color: black;
+    margin-top:100px
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    padding: 0px 15px;
+    border-radius: 15px;
+  }
+
+.navlist .brand{
+    float: left;
+    font-family: Kristen ITC;
+    font-size:18px;
+    padding: 0!important;
+    background-color:#33B11F;
+}
+
+.navlist .nav-link{
+    float: right;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+.navlist .login-button{
+    background-color: black;
+}
+
+.navlist .login-button a{
+    color: white;
+}
+
+li a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }

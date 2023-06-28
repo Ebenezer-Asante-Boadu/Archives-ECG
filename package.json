@@ -5,8 +5,8 @@
   "main": "./src/dist/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "cross-env NODE_ENV=development  && cd ./front-end &&  npm run build && cd ../ && nodemon",
-    "build": "cross-env NODE_ENV=production && cd ./front-end &&  npm run build && cd ../ && tsc && pkg . --force"
+    "serve": "cross-env NODE_ENV=development  && cd ./front-end &&  npm run start && cd ../ && nodemon",
+    "build": "cross-env NODE_ENV=production && cd ./front-end &&  npm run start && cd ../ && tsc && pkg . --force"
   },
   "author": "MENSAH TORKORNOO DERRICK",
   "license": "ISC",
@@ -24,16 +24,18 @@
   "dependencies": {
     "@google-cloud/storage": "^6.11.0",
     "@types/express": "^4.17.17",
-    "nodemailer": "^6.9.3"
+    "nodemailer": "^6.9.3",
+    "nodemon": "^2.0.22"
   },
   "pkg": {
     "scripts": [
       "./src/dist/**/*.js",
-      "./front-end/src/**/*.js"
+      "./front-end/dist/assets/javascript/**/*.js"
     ],
     "assets": [
       "./src/dist/**/*",
-      "./front-end/src/**/*"
+      "./front-end/dist/assets/resources/**/*",
+      "./front-end/dist/assets/css/**/*"
     ],
     "outputPath": "DESKTOP-APPS",
     "targets": [

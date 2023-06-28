@@ -20,12 +20,12 @@ const path = require('path');
 const app = (0, express_1.default)();
 const port = 3000;
 // Serve static assets with explicit MIME type
-app.use(express_1.default.static(path.join(__dirname, '../../front-end/src/')));
+app.use("/assets/", express_1.default.static(path.join(__dirname, '../../front-end/dist/assets/')));
 app.get('/', (_, res) => {
-    res.sendFile(path.join(__dirname, '../../front-end/src/views/homepage/homepage.html'));
+    res.sendFile(path.join(__dirname, '../../front-end/dist/views/index.html'));
 });
 app.get('/database-management', (_, res) => {
-    res.sendFile(path.join(__dirname, '../../front-end/src/views/database/database.html'));
+    res.sendFile(path.join(__dirname, '../../front-end/dist/views/database.html'));
 });
 // Start the server
 app.listen(port, () => {

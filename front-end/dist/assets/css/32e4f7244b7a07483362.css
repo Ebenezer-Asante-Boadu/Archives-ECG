@@ -6,7 +6,7 @@ body {
 
 .frame {
     background-color: bisque;
-    background-image: url("/assets/side-pic.png"), url("/assets/background-fame-cover.png");
+    background-image: url(../../assets/resources/0a9e4f399c074c37937a.png), url(../../assets/resources/d07a7c39fc1f67b7d60e.png);
     height: 700px;
     background-repeat: no-repeat;
     background-size: 18% 100%, 82% 100%;
@@ -105,7 +105,7 @@ body {
 
 .middle-pic {
     margin-top: 90px;
-    background-image: url("/assets/middle-rectangle.png");
+    background-image: url(../../assets/resources/3b5c099056aa072d0912.png);
     background-repeat: no-repeat;
     background-size: 100vw 100%;
     height: 130px;
