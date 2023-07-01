@@ -1,0 +1,113 @@
+div.header {
+    position: relative;
+}
+
+div.header img {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+}
+
+div.body {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.left {
+    padding: 25px 10px;
+    width: 50%;
+}
+
+.top-left-img {
+    width: 17px;
+    height: 17px
+}
+
+.title {
+    color: #000;
+    font-size: 21px;
+    font-family: Trebuchet MS;
+    line-height: 60px;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    margin-top: 10px;
+}
+
+
+.admin-option,
+.editor-option {
+    display: flex;
+    justify-content: center;
+}
+
+.admin-option {
+    margin-bottom: 30px;
+}
+
+.admin-option label,
+.editor-option label {
+    color: black;
+    height: 50px;
+    padding: 10px 30px;
+    border-radius: 10px;
+    border: 2px solid #A8A4A4;
+    background: linear-gradient(0deg, #FFF 0%, #FFF 100%), linear-gradient(0deg, #224DE5 0%, #224DE5 100%), #224DE5;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+
+.next-container {
+    display: flex;
+    justify-content: center;
+}
+
+.next {
+    margin-top: 40px;
+    width: 70%;
+    border-radius: 5px;
+    border: 2px solid #D0D0D0;
+    background: #224DE5;
+    color: white;
+    padding: 6px 0;
+}
+
+
+.right {
+    padding: 25px;
+    height: 400px;
+    width: 50%;
+}
+
+.right .cover {
+    background: url("/assets/authentication-img.png"), lightgray 50% / cover no-repeat;
+    background-repeat: no-repeat;
+    border-radius: 15px;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-color: red;
+    background-position: 50% 100%;
+    padding: 30px 40px;
+}
+
+.top-text {
+    font-size: 14px;
+    color: #FFF;
+    font-family: Palatino Linotype;
+    font-weight: 500;
+    line-height: 30px;
+}
+
+.bottom-text {
+    margin-top: 65px;
+    color: #FFF;
+    font-size: 26px;
+    font-family: Palatino Linotype;
+    font-weight: 500;
+    line-height: 40px;
+    word-spacing: 4px;
+}

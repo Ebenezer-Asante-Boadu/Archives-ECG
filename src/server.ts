@@ -4,7 +4,7 @@ const path = require('path');
 import { _Database } from './Database';
 import { logError } from './Error_logger';
 import { Firebase } from './firebase';
-// require('dotenv').config(); 
+require('dotenv').config(); 
 //import "./Mailer"
 
  //new Firebase().addData({collection:"categories", sub_directory: "categories1", data: {"name":"derrick"}});
@@ -18,18 +18,14 @@ import { Firebase } from './firebase';
 //new Firebase().downloadFirebaseFile("tkayel.appspot.com", "img.jpg");
 const app = express();
 const port = 3000;
-
+// let express_static_path = (process.env.NODE_ENV == "DEVELOPMENT") ? "../../front-end/src/" :  '../../front-end/dist/app/';
+// let filepath = (process.env.NODE_ENV == "DEVELOPMENT") ? "../../front-end/src/index.html" : '../../front-end/dist/app/index.html';
 // Serve static assets with explicit MIME type
-app.use("/assets/", express.static(path.join(__dirname, '../../front-end/dist/assets/')));
+app.use( express.static(path.join(__dirname, '../../front-end/dist/app/')));
 
-app.get('/', (_, res:Response) => {
-  res.sendFile(path.join(__dirname, '../../front-end/dist/views/index.html'));
+app.get('*', (_, res:Response) => {
+  res.sendFile(path.join(__dirname, '../../front-end/dist/app/index.html'));
 });
-
-app.get('/database-management', (_, res:Response) => {
-  res.sendFile(path.join(__dirname, '../../front-end/dist/views/database.html'));
-});
-
 
 // Start the server
 app.listen(port, () => {

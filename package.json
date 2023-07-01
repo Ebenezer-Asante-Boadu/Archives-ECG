@@ -5,15 +5,14 @@
   "main": "./src/dist/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "cross-env NODE_ENV=development  && cd ./front-end &&  npm run start && cd ../ && nodemon",
-    "build": "cross-env NODE_ENV=production && cd ./front-end &&  npm run start && cd ../ && tsc && pkg . --force"
+    "serve": " nodemon ",
+    "build": " cd ./front-end &&  npm run build && cd ../ && tsc && pkg . --force"
   },
   "author": "MENSAH TORKORNOO DERRICK",
   "license": "ISC",
   "devDependencies": {
     "@types/nodemailer": "^6.4.8",
     "@types/sqlite3": "^3.1.8",
-    "cross-env": "^7.0.3",
     "csv-writer": "^1.6.0",
     "dotenv": "^16.1.4",
     "express": "^4.18.2",
@@ -30,12 +29,11 @@
   "pkg": {
     "scripts": [
       "./src/dist/**/*.js",
-      "./front-end/dist/assets/javascript/**/*.js"
+      "./front-end/dist/app/**/*.js"
     ],
     "assets": [
       "./src/dist/**/*",
-      "./front-end/dist/assets/resources/**/*",
-      "./front-end/dist/assets/css/**/*"
+      "./front-end/dist/app/**/*"
     ],
     "outputPath": "DESKTOP-APPS",
     "targets": [

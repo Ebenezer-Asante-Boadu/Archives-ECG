@@ -1,0 +1,10 @@
+/* You can add global styles to this file, and also import other style files */
+.login-signup-select .modal-lg{
+    max-width:50%!important;
+}
+
+.login-signup-select .modal-content{
+    border-radius: 15px;
+    height:400px;
+}
+
