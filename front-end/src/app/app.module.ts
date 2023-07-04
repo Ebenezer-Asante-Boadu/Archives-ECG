@@ -1,21 +1,27 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginSignupSelectComponent } from './login-signup-select/login-signup-select.component';
-import { LibraryModule } from './library/library/library.module';
+import { LibraryModule } from './library/library.module';
+import { SignupComponent } from './signup/signup.component';
+import { VerifyEmailComponent } from './verify-email/verify-email.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomepageComponent,
-    LoginSignupSelectComponent
+    LoginSignupSelectComponent,
+    SignupComponent,
+    VerifyEmailComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     LibraryModule,
     AppRoutingModule,
     NgbModule

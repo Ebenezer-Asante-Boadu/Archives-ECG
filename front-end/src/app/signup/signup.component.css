@@ -24,14 +24,16 @@ div.header img {
 }
 
 div.body {
-    display: flex;
+    /* display: flex;
     justify-content: center;
-    align-content: center;
+    align-content: center; */
+    display: grid;
+    grid-template-columns: 50% 50%;
+    /* height: 500px; */
 }
 
 .left {
-    padding: 25px 10px;
-    width: 50%;
+    padding: 20px 10px;
 }
 
 .top-left-img {
@@ -43,65 +45,15 @@ div.body {
     color: #000;
     font-size: 21px;
     font-family: Trebuchet MS;
-    line-height: 60px;
-    text-align: center;
+    text-align: left;
     padding: 0;
     margin: 0;
-    margin-top: 10px;
-}
-
-
-.admin-option,
-.editor-option {
-    display: flex;
-    justify-content: center;
-}
-
-.admin-option {
-    margin-bottom: 30px;
-}
-
-.option-label-inactive{
-    color: black;
-    height: 60px;
-    padding: 15px 30px;
-    border-radius: 10px;
-    border: 1.7px solid #A8A4A4;
-    background: linear-gradient(0deg, #FFF 0%, #FFF 100%), linear-gradient(0deg, #224DE5 0%, #224DE5 100%), #224DE5;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    cursor: pointer;
-}
-
-.option-label-active{
-    cursor: pointer;
-    color: #4226EF;
-    height: 60px;
-    padding: 15px 30px;
-    border-radius: 10px;
-    border: 1.7px solid #224DE5;
-    background: linear-gradient(0deg, #ECECFD 0%, #ECECFD 100%), linear-gradient(0deg, #224DE5 0%, #224DE5 100%), #224DE5;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-}
-
-.admin-option input, 
-.editor-option input{
-    margin-right:8px;
-    cursor: pointer;
-}
-
-
-.next-container {
-    display: flex;
-    justify-content: center;
+    margin-top: 0px;
 }
 
 .next {
-    margin-top: 40px;
-    width: 75%;
+    margin-top: 15px;
+    width: 100%;
     border-radius: 5px;
     border: 2px solid #D0D0D0;
     background: #224DE5;
@@ -111,9 +63,8 @@ div.body {
 
 
 .right {
-    padding: 25px;
-    height: 400px;
-    width: 50%;
+    padding: 15px;
+    height: 100%;
 }
 
 .right .cover {
@@ -125,7 +76,7 @@ div.body {
     background-size: cover;
     background-color: black;
     background-position: 50% 100%;
-    padding: 30px 40px;
+    padding: 40px 40px;
 }
 
 .top-text {
@@ -137,7 +88,7 @@ div.body {
 }
 
 .bottom-text {
-    margin-top: 65px;
+    margin-top: 40%;
     color: #FFF;
     font-size: 26px;
     font-family: Palatino Linotype;
@@ -145,3 +96,73 @@ div.body {
     line-height: 35px;
     word-spacing: 4px;
 }
+
+.input-group{
+    height: 30px;
+}
+
+ #addon-wrapping{
+    padding: 10px;
+}
+
+form.editor-signup-form{
+    margin-left: 10%;
+}
+
+.label-txt{
+    font-size: 14px;
+    color: #383838;
+}
+label{
+    margin-bottom: 10px;
+}
+
+
+.user-already span.normal{
+    font-size: 13px;
+    font-weight: 600;
+}
+.user-already span.unormal{
+    font-size:13px;
+    color:blue;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#dob-container{
+    position: relative;
+}
+
+#dob-container input[type=date]{
+    transform: rotate(180deg);
+  opacity:0;
+  position:absolute;
+top:0;
+left:0;
+  z-index:10;
+  width: 100%;
+}
+
+input:disabled{
+    background-color: white;
+}
+
+div.back{
+    display: flex;
+    justify-content: left;
+    align-content: center;
+    align-items: center;
+    margin-left: -12%;
+    font-size: 13px;
+    font-weight: 600;
+    padding-bottom: 10px;
+}
+
+div.back img{
+    margin-right: 6px;
+}
+.tooltip-button{
+    border:none;
+    background: none;
+}
+

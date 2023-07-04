@@ -1,0 +1,288 @@
+<ng-container>
+    <div class="header">
+        <div class="close-btn-container">
+            <img src="assets/close-btn.png" alt="close-button" (click)="activeModal.close()">
+        </div>
+    </div>
+    <div class="body">
+        <div class="left">
+            <div class="container">
+                <img src="assets/add-user.png" alt="" class="top-left-img">
+
+                <form action="" class="editor-signup-form">
+                    <p class="title" [ngStyle]="{padding: '0px', lineHeight : (showGroup1) ? '60px' :'45px'}">Sign Up As
+                        An {{EditorAdmin}}</p>
+
+                    <div class="group1"  *ngIf="showGroup1">
+                        <label for="phone-number">
+                            <span class="label-txt">Phone number</span>
+                            <br>
+                            <div class="input-group flex-nowrap phone-number">
+                                <span class="input-group-text" id="addon-wrapping">
+                                    <img src="assets/phone.png" alt="" width="16" height="16">
+                                </span>
+                                <input type="tel" class="form-control" placeholder="" aria-label="phone-number"
+                                    aria-describedby="addon-wrapping" id="phone-number" pattern="[0-9]{9}"
+                                    [(ngModel)]="phoneNumber">
+                            </div>
+                        </label>
+
+                        <label for="first-name">
+                            <span class="label-txt">First Name </span>
+                            <br>
+                            <div class="input-group flex-nowrap">
+                                <span class="input-group-text" id="addon-wrapping">
+                                    <img src="assets/name.png" alt="" width="16" height="16">
+                                </span>
+                                <input type="text" class="form-control" placeholder="" aria-label="first-name"
+                                    aria-describedby="addon-wrapping" id="first-name" pattern=""
+                                    [(ngModel)]="firstName">
+                            </div>
+                        </label>
+
+                        <label for="last-name">
+                            <span class="label-txt">Last Name </span>
+                            <br>
+                            <div class="input-group flex-nowrap">
+                                <span class="input-group-text" id="addon-wrapping">
+                                    <img src="assets/name.png" alt="" width="16" height="16">
+                                </span>
+                                <input type="text" class="form-control" placeholder="" aria-label="last-name"
+                                    aria-describedby="addon-wrapping" id="last-name" pattern="" [(ngModel)]="lastName">
+                            </div>
+                        </label>
+
+                        <label for="email">
+                            <span class="label-txt">Email </span>
+                            <br>
+                            <div class="input-group flex-nowrap">
+                                <span class="input-group-text" id="addon-wrapping">
+                                    <img src="assets/email.png" alt="" width="16" height="16">
+                                </span>
+                                <input type="email" class="form-control" placeholder="" aria-label="email"
+                                    aria-describedby="addon-wrapping" id="email" pattern="" [(ngModel)]="email">
+                            </div>
+                        </label>
+
+                    </div>
+
+
+                    <div class="group2" [ngStyle]="{display : showGroup2? 'block':'none', position:'relative'}">
+                        <div class="back" >
+                            <img src="assets/left-arrow.png" alt="" width="13" height="13" (click)="groupShower(1)"
+                                [ngStyle]="{cursor:'pointer'}">
+                            <span>Go Back</span>
+                        </div>
+
+                        <label for="dob">
+                            <span class="label-txt">Date of Birth </span>
+                            <br>
+                            <div id="dob-container">
+                                <div class="input-group flex-nowrap">
+                                    <span class="input-group-text" id="addon-wrapping">
+                                        <img src="assets/calendar.png" alt="" width="16" height="16">
+                                    </span>
+                                    <input type="text" class="form-control" placeholder="" aria-label="dob"
+                                        aria-describedby="addon-wrapping" id="dob-container" disabled [value]="dob">
+                                </div>
+                                <input type="date" name="dob" id="dob" [(ngModel)]="dob">
+                            </div>
+                        </label>
+
+
+                        <label for="password">
+                            <span class="label-txt">Password </span>
+                            <br>
+                            <div class="input-group flex-nowrap">
+                                <span class="input-group-text" id="addon-wrapping">
+                                    <img src="assets/password-icon.png" alt="" width="16" height="16">
+                                </span>
+                                <input type="password" class="form-control" placeholder="" aria-label="password"
+                                    aria-describedby="addon-wrapping" id="password" pattern="" [(ngModel)]="password">
+                            </div>
+                        </label>
+
+                        <label for="password-confirmation">
+                            <span class="label-txt">Confirm Password </span>
+                            <br>
+                            <div class="input-group flex-nowrap">
+                                <span class="input-group-text" id="addon-wrapping">
+                                    <img src="assets/password-icon.png" alt="" width="16" height="16">
+                                </span>
+                                <input type="password" class="form-control" placeholder=""
+                                    aria-label="password-confirmation" aria-describedby="addon-wrapping"
+                                    id="password-confirmation" pattern="" [(ngModel)]="passwordConfirmation">
+                            </div>
+                        </label>
+
+
+                        <label for="recovery-email" [ngStyle]="{display: (EditorAdmin == 'Admin') ? 'block' : 'none'}">
+                            <span class="label-txt">
+                                Additonal Recovery Email
+                                <sup [ngStyle]="{ marginLeft:'0px'}">
+                                    <button type="button" class="tooltip-button" placement="right"
+                                        [ngbTooltip]="tooltips.recoveryEmail" [autoClose]="true" triggers="manual"
+                                        tooltipClass="tooltips" #recoveryEmail_="ngbTooltip"
+                                        (mouseenter)="recoveryEmail_.open()" (mouseleave)="recoveryEmail_.close()"
+                                        (click)="recoveryEmail_.open()">
+                                        <img src="assets/question.png" alt="" width="11" height="11">
+                                    </button>
+                                </sup>
+                            </span>
+                            <br>
+                            <div class="input-group flex-nowrap">
+                                <span class="input-group-text" id="addon-wrapping">
+                                    <img src="assets/email.png" alt="" width="16" height="16">
+                                </span>
+                                <input type="email" class="form-control" placeholder="" aria-label="recovery-email"
+                                    aria-describedby="addon-wrapping" id="recovery-email" pattern=""
+                                    [(ngModel)]="recoveryEmail">
+                            </div>
+                        </label>
+
+                        <label for="nick-name" [ngStyle]="{display: (EditorAdmin == 'Editor') ? 'block' : 'none'}">
+                            <span class="label-txt">
+                                What's your nickname?
+                                <sup [ngStyle]="{ marginLeft:'0px'}">
+                                    <button type="button" class="tooltip-button" placement="right"
+                                        [ngbTooltip]="tooltips.nickName" [autoClose]="true" triggers="manual"
+                                        tooltipClass="tooltips" #nicki="ngbTooltip" (mouseenter)="nicki.open()"
+                                        (mouseleave)="nicki.close()" (click)="nicki.open()">
+                                        <img src="assets/question.png" alt="" width="11" height="11">
+                                    </button>
+                                </sup>
+                            </span>
+                            <br>
+                            <div class="input-group flex-nowrap">
+                                <span class="input-group-text" id="addon-wrapping">
+                                    <img src="assets/security-question.png" alt="" width="16" height="16">
+                                </span>
+                                <input type="text" class="form-control" placeholder="" aria-label="nick-name"
+                                    aria-describedby="addon-wrapping" id="nick-name" pattern="" [(ngModel)]="nickName">
+                            </div>
+                        </label>
+                    </div>
+
+
+
+                    <div class="group3" *ngIf="showGroup3">
+                        <div class="back">
+                            <img src="assets/left-arrow.png" alt="" width="13" height="13" (click)="groupShower(2)"
+                                [ngStyle]="{cursor:'pointer'}">
+                            <span>Go Back</span>
+                        </div>
+
+                        <label for="emergency-code">
+                            <span class="label-txt">
+                                Emergency Code (16-digits)
+                                <sup [ngStyle]="{ marginLeft:'0px'}">
+                                    <button type="button" class="tooltip-button" placement="right"
+                                        [ngbTooltip]="tooltips.emergencyCode" [autoClose]="true" triggers="manual"
+                                        tooltipClass="tooltips" #_emergencyCode="ngbTooltip"
+                                        (mouseenter)="_emergencyCode.open()" (mouseleave)="_emergencyCode.close()"
+                                        (click)="_emergencyCode.open()">
+                                        <img src="assets/question.png" alt="" width="11" height="11">
+                                    </button>
+                                </sup>
+                            </span>
+                            <br>
+                            <div class="input-group flex-nowrap">
+                                <span class="input-group-text" id="addon-wrapping">
+                                    <img src="assets/password-icon.png" alt="" width="16" height="16">
+                                </span>
+                                <input type="text" class="form-control" placeholder="" aria-label="emergency-code"
+                                    aria-describedby="addon-wrapping" id="emergency-code" pattern=""
+                                    [(ngModel)]="emergencyCode">
+                            </div>
+                        </label>
+
+
+                        <label for="emergency-code-confirmation">
+                            <span class="label-txt">
+                                Confirm Emergency Code
+                            </span>
+                            <br>
+                            <div class="input-group flex-nowrap">
+                                <span class="input-group-text" id="addon-wrapping">
+                                    <img src="assets/password-icon.png" alt="" width="16" height="16">
+                                </span>
+                                <input type="text" class="form-control" placeholder=""
+                                    aria-label="emergency-code-confirmation" aria-describedby="addon-wrapping"
+                                    id="emergency-code-confirmation" pattern="" [(ngModel)]="emergencyCodeConfirmation">
+                            </div>
+                        </label>
+
+                        <div class="row">
+                            <div class="col">
+                                <div ngbDropdown class="">
+                                        <label for="security-quetions">
+                                            <span class="label-txt">
+                                                Select or type a security question
+                                            </span>
+                                            <br>
+                                            <div class="input-group flex-nowrap">
+                                                <span class="input-group-text" id="addon-wrapping">
+                                                    <img src="assets/security-question.png" alt="" width="16" height="16">
+                                                </span>
+                                                <input type="text" class="form-control" placeholder=""
+                                                    aria-label="security-quetions" aria-describedby="addon-wrapping"
+                                                    id="security-questions" pattern="" [value]="securityQuestion" ngbDropdownToggle #securityQuestionInput>
+                                            </div>
+                                        </label>
+                                    <div ngbDropdownMenu aria-labelledby="security-questions">
+                                        <button ngbDropdownItem (click)="securityQuestion = question1.innerText" #question1>
+                                            What's your favourite food?
+                                        </button>
+                                        <button ngbDropdownItem (click)="securityQuestion = question2.innerText" #question2>
+                                            The name of the first school you attended is?
+                                        </button>
+                                        <button ngbDropdownItem (click)="securityQuestion = question3.innerText" #question3>
+                                            Name of your best friend is?
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                        <label for="secuirty-answer">
+                            <span class="label-txt">
+                                Answer
+                            </span>
+                            <br>
+                            <div class="input-group flex-nowrap">
+                                <span class="input-group-text" id="addon-wrapping">
+                                    <img src="assets/security-question.png" alt="" width="16" height="16">
+                                </span>
+                                <input type="text" class="form-control" placeholder=""
+                                    aria-label="emergency-code-confirmation" aria-describedby="addon-wrapping"
+                                    id="emergency-code-confirmation" pattern="" [(ngModel)]="securityAnswer">
+                            </div>
+                        </label>
+
+                    </div>
+
+
+                    <div class="next-container">
+                        <button class="next" type="submit" (click)="movePages()">Next</button>
+                        <p class="user-already">
+                            <span class="normal">
+                                Already have an account?
+                            </span>
+                            <span class="unormal">
+                                Log In
+                            </span>
+                        </p>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <div class="right">
+            <div class="cover">
+                <p class="top-text ">ECG ARCHIVES</p>
+                <p class="bottom-text">We like to provide electric current at a best affordable price</p>
+            </div>
+        </div>
+    </div>
+</ng-container>

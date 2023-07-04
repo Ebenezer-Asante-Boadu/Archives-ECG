@@ -1,27 +1,33 @@
 <ng-container>
     <div class="header">
-        <img src="assets/close-btn.png" alt="" width="20" height="20">
+        <div class="close-btn-container">
+            <img src="assets/close-btn.png" alt="close-button" (click)="activeModal.close()">
+        </div>
     </div>
     <div class="body">
         <div class="left">
             <div class="container">
-                <img src="assets/add-user.png" alt=""  class="top-left-img">
+                <img src="assets/add-user.png" alt=""  class="top-left-img" >
                 <p class="title">{{title}}</p>
                 <form action="" style="margin-top:15px">
+                    
                     <div class="admin-option">
-                        <label for="admin-input">
-                            <input type="radio" name="admin-input" id="admin-input">
-                            <p>Admin</p>
+                        <label for="admin-input" [ngClass]="AdminInput?.checked  ? 'option-label-active' : 'option-label-inactive'">
+                          <input type="radio" name="status-input" id="admin-input" (change)="setExceptInput()" checked>
+                          <p>Admin</p>
                         </label>
-                    </div>
-                    <div class="editor-option">
-                        <label for="editor-input">
-                            <input type="radio" name="editor-input" id="editor-input">
-                            <p>Editor</p>
+                      </div>
+                      
+                      <div class="editor-option">
+                        <label for="editor-input" [ngClass]="EditorInput?.checked ? 'option-label-active' : 'option-label-inactive'">
+                          <input type="radio" name="status-input" id="editor-input" (change)="setExceptInput()">
+                          <p>Editor</p>
                         </label>
-                    </div>
+                      </div>
+                      
+                      
                     <div class="next-container">
-                        <button class="next" type="submit">Next</button>
+                        <button class="next" type="submit" (click)="openStatusModal()">Next</button>
                     </div>
                 </form>
             </div>

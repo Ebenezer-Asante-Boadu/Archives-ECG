@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { loginSignup, admin_editor, LibraryModule } from '../library/library/library.module';
+import { loginSignup, LibraryModule } from '../library/library.module';
 
 @Component({
   selector: 'app-homepage',
@@ -12,7 +12,12 @@ export class HomepageComponent {
 
    constructor(private library:LibraryModule){}
    
-   openStatusModal(){
-    this.library.openLoginSignupSelectModal(loginSignup.login, admin_editor.editor);
+  //  openStatusModal(){
+  //   // this.library.openLoginSignupSelectModal(loginSignup.login);
+  //   this.library.openSignupModal();
+  //  }
+
+   openLogin(){
+    this.library.openLoginSignupSelectModal(loginSignup.login);
    }
 }

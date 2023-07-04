@@ -4,17 +4,19 @@
         <div class="bigger">
             <div class="navbar">
                 <ul class="navlist">
-                    <li class="brand"><a href="#">ECG ARCHIVES</a></li>
-                    <div class="right">
-                        <li class="nav-link login-button"><a href="#">Log In</a></li>
+                    <li class="brand nav-link"><a href="#">ECG ARCHIVES</a></li>
+                    <div class="right" >
                         <li class="nav-link"><a href="#">Manage Database</a></li>
                         <li class="nav-link"><a href="#">Admin Panel</a></li>
                         <li class="nav-link"><a href="#">Request For File</a></li>
+                        <li class="login-button nav-link" (click)="openLogin()">
+                            <a href="#">Log In</a>
+                        </li>
                     </div>
                 </ul>
             </div>
         </div>
-        <p class="large-txt" (click)="openStatusModal()" >We delight in rendering the most accurate file requested</p>
+        <p class="large-txt"  >We delight in rendering the most accurate file requested</p>
         <p class="small-txt">We like to serve you better</p>
     </div>
     <div class="group-card">

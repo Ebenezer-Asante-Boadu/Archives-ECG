@@ -1,0 +1,81 @@
+div.header {
+    position: relative;
+}
+
+div.header .close-btn-container {
+    background-color: white !important;
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    top: -21px;
+    right: -18px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding: 11px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+div.header img {
+    width: auto;
+    height: auto;
+    cursor: pointer;
+}
+
+div.body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 6% 6%;
+
+}
+
+p {
+    padding: 0;
+    margin: 0;
+}
+
+p.verify-text {
+    padding: 4px 0px;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+p.verify-instruction {
+    margin-top: -5px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+div.verify-codes {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 13% 13% 13% 13% 13%;
+    column-gap: 9%;
+    border-top: 0.5px solid #C5C4C4;
+    padding: 20px 0;
+    padding-bottom: 0px;
+}
+
+div.verify-codes input {
+    border-radius: 5px;
+    border: 1px solid #898989;
+    background: #FFF;
+    height: 45px;
+    text-align: center;
+}
+
+button.verify {
+    border-radius: 10px;
+    border: 0.5px solid #D0D0D0;
+    background: #224DE5;
+    width: 100%;
+    color: white;
+    grid-column: 1/6;
+    padding: 6px 0;
+    margin-top: 25px;
+    font-size: 14px;
+    font-weight: 600;
+}

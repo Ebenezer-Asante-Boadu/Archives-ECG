@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 .login-signup-select .modal-lg{
-    max-width:50%!important;
+    max-width:45%!important;
 }
 
 .login-signup-select .modal-content{
@@ -8,3 +8,84 @@
     height:400px;
 }
 
+.editor-signup .modal-lg{
+    max-width:45%!important;
+    
+}
+
+.editor-signup .modal-content{
+    border-radius: 15px;
+}
+
+.verify-email .modal-lg{
+    max-width:28%!important;
+}
+
+.verify-email .modal-content{
+    border-radius: 15px;
+}
+
+input:focus{
+    outline: none;
+}
+
+.form-control:focus {
+    border: 0.3px solid rgba(119, 119, 119, 0.7);
+    border-left: none;
+    box-shadow: none; /* Remove any box shadow */
+    outline: none; /* Remove the default blue outline */
+  }
+
+.form-control{
+    border: 0.3px solid rgba(119, 119, 119, 0.7);
+    border-left: none;
+    outline: none;
+}
+
+#addon-wrapping{
+    border: 0.3px solid rgba(119, 119, 119, 0.7);
+    background:none;
+}
+
+.tooltips .tooltip-inner {
+    background-color: white;
+    font-size: 13px;
+    color: black;
+    box-shadow:0 4px 10px 0 rgba(0,0,0,0.2),0 4px 20px 0 rgba(0,0,0,0.19);
+    width: 100px;
+}
+.tooltips .tooltip-arrow::before {
+    border-right-color: white;
+    box-shadow:0 4px 10px 0 rgba(0,0,0,0.2),0 4px 20px 0 rgba(0,0,0,0.19)
+}
+.tooltipsp .tooltip-arrow::before {
+    border-left-color: darkgreen;
+}
+.tooltipsp .tooltip-arrow::before {
+    border-top-color: darkgreen;
+}
+.tooltipsp .tooltip-arrow::before {
+    border-bottom-color: darkgreen;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+  }
+  
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  
+  input[type="number"]::-webkit-inner-spin-button:focus,
+  input[type="number"]::-webkit-outer-spin-button:focus {
+    outline: none;
+  }
+  
+
+/* 
+Accra Technical University 
+MATILDA ADJO LARBIE 
+Accra- Tudu
+Laboratory Technician */

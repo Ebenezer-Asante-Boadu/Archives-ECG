@@ -1,0 +1,45 @@
+<ng-container>
+    <div class="header">
+        <div class="close-btn-container">
+            <img src="assets/close-btn.png" alt="close-button" (click)="activeModal.close()">
+        </div>
+    </div>
+    <div class="body">
+        <img src="assets/verify-email.png" alt="" width="50" height="50">
+        <p class="verify-text">Verify email</p>
+        <p class="verify-instruction">Please enter the verification code that has been sent to you</p>
+        <div class="verify-codes">
+
+            
+            <input type="number"  placeholder=""
+                        aria-label="emergency-code-confirmation" 
+                        id="0" pattern="" 
+                        [(ngModel)]="inputs[0]" >
+
+           <input type="number" placeholder=""
+                        aria-label="emergency-code-confirmation" 
+                        id="1" pattern="" 
+                        [(ngModel)]="inputs[1]" >
+               
+            <input type="number" placeholder=""
+                        aria-label="emergency-code-confirmation" 
+                        id="2" pattern="" 
+                        [(ngModel)]="inputs[2]" >
+
+            <input type="number"  placeholder=""
+                        aria-label="emergency-code-confirmation" 
+                        id="3" pattern="" 
+                        [(ngModel)]="inputs[3]" >
+
+            <input type="number"  placeholder=""
+                        aria-label="emergency-code-confirmation" 
+                        id="4" pattern="" 
+                        [(ngModel)]="inputs[4]" >
+            
+            <button class="verify">
+                Verify email
+            </button>
+
+        </div>
+    </div>
+</ng-container>
