@@ -1,0 +1,33 @@
+div.header {
+    position: relative;
+}
+
+div.header .close-btn-container {
+    background-color: white !important;
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    top: -21px;
+    right: -18px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding: 11px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+div.header img {
+    width: auto;
+    height: auto;
+    cursor: pointer;
+}
+
+div.body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 6% 6%;
+
+}

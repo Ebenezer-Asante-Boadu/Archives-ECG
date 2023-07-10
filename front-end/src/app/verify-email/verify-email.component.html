@@ -5,9 +5,10 @@
         </div>
     </div>
     <div class="body">
-        <img src="assets/verify-email.png" alt="" width="50" height="50">
-        <p class="verify-text">Verify email</p>
-        <p class="verify-instruction">Please enter the verification code that has been sent to you</p>
+        <img src="assets/verify-email.png" alt="" width="50" height="50" *ngIf="!emailVerified">
+        <img src="assets/email-verified.png" alt=""  width="50" height="50" *ngIf="emailVerified">
+        <p class="verify-text">{{VerificationText}}</p>
+        <p class="verify-instruction">{{SubtextDone}}</p>
         <div class="verify-codes">
 
             
@@ -36,8 +37,8 @@
                         id="4" pattern="" 
                         [(ngModel)]="inputs[4]" >
             
-            <button class="verify">
-                Verify email
+            <button class="verify" (click)=" changeText()">
+                {{DoneText}}
             </button>
 
         </div>

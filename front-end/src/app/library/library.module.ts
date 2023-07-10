@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoginSignupSelectComponent } from 'src/app/login-signup-select/login-signup-select.component';
 import { SignupComponent } from '../signup/signup.component';
 import { VerifyEmailComponent } from '../verify-email/verify-email.component';
+import { LoginComponent } from '../login/login.component';
 
 export enum loginSignup{
   login = "Log In",
@@ -37,8 +38,13 @@ export class LibraryModule {
     instance.componentInstance.EditorAdmin = option;
   }
   
-  openVerifyEmailModal(){
+  openVerifyEmailModal(option:editorAdmin){
     const instance = this.modal.open(VerifyEmailComponent,{ size:"lg", windowClass:"verify-email", centered: true, backdrop:"static"});
     instance;
+  }
+
+  openLoginModal(option:editorAdmin){
+    const instance = this.modal.open(LoginComponent, { size:"lg", windowClass:"login", centered: true, backdrop:"static"});
+    instance.componentInstance.EditorAdmin = option;
   }
  }

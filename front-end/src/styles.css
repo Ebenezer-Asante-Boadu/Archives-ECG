@@ -17,6 +17,15 @@
     border-radius: 15px;
 }
 
+.login .modal-lg{
+    max-width:25%!important;
+    
+}
+
+.login .modal-content{
+    border-radius: 15px;
+}
+
 .verify-email .modal-lg{
     max-width:28%!important;
 }
@@ -70,6 +79,7 @@ input:focus{
 
 input[type="number"] {
     -moz-appearance: textfield;
+    appearance: textfield;
   }
   
   input[type="number"]::-webkit-inner-spin-button,

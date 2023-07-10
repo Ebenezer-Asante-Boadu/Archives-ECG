@@ -1,0 +1,15 @@
+<ng-container>
+    <div class="main">
+        <div class="left"></div>
+        <div class="right">
+            <div class="tab">
+                <img src="assets/new-folder.svg" class="add" alt="" width="30" placement="right" ngbTooltip="Add a new category">
+                <img src="assets/right-arrow.png" alt="" width="30" (click)="scrollToRight()">
+                <div class="scrollers" id="b">
+                    <li class="tab" *ngFor="let item of categories">{{item}}</li>
+                </div>
+               <img src="assets/right-arrow.png" alt="" width="30" (click)="scrollToRight()">
+            </div>
+        </div>
+    </div>
+</ng-container>

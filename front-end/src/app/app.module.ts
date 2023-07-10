@@ -10,6 +10,8 @@ import { LoginSignupSelectComponent } from './login-signup-select/login-signup-s
 import { LibraryModule } from './library/library.module';
 import { SignupComponent } from './signup/signup.component';
 import { VerifyEmailComponent } from './verify-email/verify-email.component';
+import { LoginComponent } from './login/login.component';
+import { DatabaseComponent } from './database/database.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { VerifyEmailComponent } from './verify-email/verify-email.component';
     HomepageComponent,
     LoginSignupSelectComponent,
     SignupComponent,
-    VerifyEmailComponent
+    VerifyEmailComponent,
+    LoginComponent,
+    DatabaseComponent
   ],
   imports: [
     BrowserModule,

@@ -70,7 +70,7 @@ export class SignupComponent {
   }
 
   openEmail(){
-    this.lib.openVerifyEmailModal();
+    this.lib.openVerifyEmailModal(this.EditorAdmin);
   }
 
   getLength(item:number | string):number{ console.log(item)
