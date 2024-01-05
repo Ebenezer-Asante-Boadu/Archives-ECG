@@ -90,3 +90,6 @@ input{
     display: flex;
     justify-content: center;
 }
+.input:focus {
+    outline: none!important;
+}

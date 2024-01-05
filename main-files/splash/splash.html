@@ -19,19 +19,19 @@
                     <i class="mdi mdi-window-close"></i>
                 </div>
                 <div class="lock">
-                    <i class="mdi mdi-lock"></i>
+                    <i class="mdi mdi-lock" id="lock"></i>
                 </div>
                 <div class="heading">
                     <div>Verify your identity with the company.</div>
-                    <div>Enter the company code</div>
+                    <div id="instruction">Enter the company code</div>
                 </div>
                 <div class="input">
-                    <input type="text" name="company-code" id="company-code" placeholder="Enter company code">
+                    <input type="password" name="company-code" id="company-code" placeholder="Enter company code">
                 </div>
             </div>
             <div class="footer">
-                <button>Cancel</button>
-                <button>Verify</button>
+                <button id="cancel">Cancel</button>
+                <button id="verify">Verify</button>
             </div>
         </div>
     </div>
