@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; img-src 'self';">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../assets/splash.css">
+    <link rel="stylesheet" href="../../node_modules/@mdi/font/css/materialdesignicons.min.css">
+    <script type="module" src="./splash-renderer.js"></script>
+    <title>DEVICE AND USER CHECK</title>
+</head>
+
+<body>
+    <div class="submain">
+        <div class="main" id="main">
+            <div >
+                <div class="close" id="close-app">
+                    <i class="mdi mdi-window-close"></i>
+                </div>
+                <div class="lock">
+                    <i class="mdi mdi-lock"></i>
+                </div>
+                <div class="heading">
+                    <div>Verify your identity with the company.</div>
+                    <div>Enter the company code</div>
+                </div>
+                <div class="input">
+                    <input type="text" name="company-code" id="company-code" placeholder="Enter company code">
+                </div>
+            </div>
+            <div class="footer">
+                <button>Cancel</button>
+                <button>Verify</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

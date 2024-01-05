@@ -1,6 +1,10 @@
 <template>
     <div class="main">
-        <div class="left"><h1>hello</h1></div>
+        <div class="left">
+            <div class="icon">
+                <v-icon>mdi-delete-forever</v-icon>
+            </div>
+        </div>
         <div class="right"></div>
     </div>
 </template>
