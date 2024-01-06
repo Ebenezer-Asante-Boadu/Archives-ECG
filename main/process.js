@@ -1,7 +1,7 @@
 import {  BrowserWindow, app} from 'electron';
 import { fileURLToPath } from 'url';
 import { join, dirname } from 'node:path';
-import { createMenu } from './main-menu.js';
+import { createMenu } from './menu.js';
 import path from 'path';
 
 export let applicationWindow;
@@ -23,15 +23,16 @@ export const createApplicationWindow = () => {
       webPreferences: {
         nodeIntegration: false,
         contextIsolation: true,
-        preload: join(__dirname, 'main-preload.js'),
+        // preload: join(__dirname, 'preload.js'),
+        devTools: true
       },
     });
   
     // and load the index.html of the app.
-    applicationWindow.loadFile(path.join(__dirname, "..", "..", 'dist/index.html'));
+    // applicationWindow.loadFile(path.join(__dirname, "..", "..", 'dist/index.html'));
   
-    // applicationWindow.loadURL('http://localhost:5173');
-    applicationWindow.webContents.openDevTools();
+    applicationWindow.loadURL('http://localhost:5173');
+    // applicationWindow.webContents.openDevTools();
     createMenu();
   
   };

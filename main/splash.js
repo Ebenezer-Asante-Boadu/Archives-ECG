@@ -24,13 +24,13 @@ export function createSplashWindow() {
         transparent: true,
         alwaysOnTop: true, 
         webPreferences:{
-            preload: path.join(__dirname, "splash-preload.js"), 
+            preload: path.join(__dirname, "preloads", "verify.js"), 
             devTools: true
         }
     });
 
  
-    splashWindow.loadFile(path.join(__dirname, "splash.html"));
-    // splashWindow.loadURL("http://127.0.0.1:5500/loading.html");
+    // splashWindow.loadFile(path.join(__dirname, "splash.html"));
+    splashWindow.loadURL("http://localhost:5173");
     splashWindow.center();
 }

@@ -5,9 +5,9 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: ()=>import("../views/Auth.vue")
-    },
+      name: 'verify',
+      component: ()=>import("../views/Verify.vue")
+    }
   ]
 })
 

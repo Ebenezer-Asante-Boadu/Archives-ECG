@@ -10,7 +10,6 @@ lerna-debug.log*
 node_modules
 .DS_Store
 dist
-out
 dist-ssr
 coverage
 *.local
@@ -29,3 +28,5 @@ coverage
 *.sw?
 
 *.tsbuildinfo
+
+out/

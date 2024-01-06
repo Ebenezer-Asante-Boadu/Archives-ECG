@@ -1,8 +1,8 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 // import { fileURLToPath } from 'url';
 // import { join, dirname } from 'node:path';
-import { createApplicationWindow, applicationWindow } from './main-files/main/main-process.js';
-import { createSplashWindow, splashWindow } from './main-files/splash/splash-process.js';
+import { createApplicationWindow, applicationWindow } from './main/process.js';
+import { createSplashWindow, splashWindow } from './main/splash.js';
 
 
 app.whenReady().then(() => {
@@ -11,11 +11,8 @@ app.whenReady().then(() => {
     app.quit();
   })
 
+  // createApplicationWindow();
   createSplashWindow();
-  setTimeout(function () {
-    splashWindow.close();
-    createApplicationWindow();
-  }, 500000);
 
   app.on('activate', () => {
     // On macOS it's common to re-create a window in the app when the
