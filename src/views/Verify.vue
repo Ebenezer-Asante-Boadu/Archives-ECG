@@ -2,23 +2,24 @@
     <div class="submain">
         <div class="main" id="main">
             <div >
-                <div class="close" id="close-app">
-                    <i class="mdi mdi-window-close"></i>
+                <div class="close" id="close-app" @click="close()">
+                    <v-icon size="23">mdi-window-close</v-icon>
                 </div>
-                <div class="lock">
-                    <i class="mdi mdi-lock" id="lock"></i>
+                <div class="lockl">
+                    <v-icon size="23" class="lock" :color="lockColor">mdi-lock</v-icon>
+                    <!-- <i class="mdi mdi-lock" id="lock"></i> -->
                 </div>
-                <div class="heading">
+                <div class="heading pl-2">
                     <div>Verify your identity with the company.</div>
-                    <div id="instruction">Enter the company code</div>
+                    <div id="instruction" :style="{color: instructionColor}">{{instructionText}}</div>
                 </div>
-                <div class="input">
-                    <input type="password" name="company-code" id="company-code" placeholder="Enter company code">
+                <div class="input mt-2" ref="company-code">
+                    <input type="password" name="company-code" id="company-code" placeholder="Enter company code" ref="company_code" @input="continueValidate()">
                 </div>
             </div>
             <div class="footer">
-                <button id="cancel">Cancel</button>
-                <button id="verify">Verify</button>
+                <button id="cancel" @click="close()">Cancel</button>
+                <button id="verify" @click="validateCodeInput()">Verify</button>
             </div>
         </div>
     </div>
@@ -26,54 +27,41 @@
 
 <script setup lang="ts">
 import {ref} from "vue";
-const lock = ref<HTMLElement|null>(null)
+import {close} from "../lib/utils"
+const lockColor = ref("#2A3BE3")
 const company_code = ref<HTMLInputElement|null>(null);
-const instruction = ref<HTMLDivElement|null>(null)
+const instructionText = ref("Enter the company code");
+const instructionColor = ref("black");
+const startValidation = ref(false);
 
-function validateCodeInput(inputElement:HTMLInputElement) {
-    const lock = document.getElementById("lock");
-    const instruction = document.getElementById("instruction") as HTMLElement;
+function validateCodeInput(inputElement:HTMLInputElement|null = company_code.value) {
+    startValidation.value = true;
 
-    if (inputElement.value.length === 16) {
+    console.log(inputElement?.value.length)
+    if (inputElement && inputElement.value.length === 16) {
         inputElement.setCustomValidity("");
-        if(lock){
-            lock.style.color = "#2A3BE3";
+            lockColor.value = "#2A3BE3";
             inputElement.style.border = "1px solid #2A3BE3";
-            instruction.innerText = "Enter the company code.";
-            instruction.style.color = "black";
-        }
+            instructionText.value = "Enter the company code.";
+            instructionColor.value = "black";
         // Optionally, perform additional actions for successful validation
     } else {  
-        if(lock){
-            lock.style.color = "red";
+        if(inputElement){
+            lockColor.value = "red";
             inputElement.style.border = "1px solid red";
-            instruction.innerText = "Please try again.";
-            instruction.style.color = "red"
+            instructionText.value = "Please try again.";
+            instructionColor.value = "red"
         }
-        inputElement.setCustomValidity("Please enter a valid input");
+        inputElement? inputElement.setCustomValidity("Please enter a valid input"): null;
     }
-    inputElement.reportValidity();
+    inputElement? inputElement.reportValidity():null;
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    const submit = document.getElementById("verify");
-    const codeInput = document.getElementById("company-code") as HTMLInputElement;
-
-    if(submit && codeInput){
-        submit.addEventListener("click", ()=>{
-        // if (submit && codeInput) {
-        //     submit.addEventListener("click", () => {
-                validateCodeInput(codeInput);
-            // });
-    
-            codeInput.addEventListener("input", () => {
-                validateCodeInput(codeInput);
-            });
-        // }
-    })
+function continueValidate(){
+    if(startValidation.value){
+        validateCodeInput();
     }
-    
-});
+}
 
 
 </script>
@@ -82,8 +70,8 @@ document.addEventListener("DOMContentLoaded", () => {
 .main{
     background-color: white; 
     /* background: linear-gradient(119deg, #D9D9D9 17.7%, rgba(137, 136, 176, 0.00) 96.71%); */
-    /* width: 100%;
-    height: 100%; */
+     width: 100vw;
+    height: 100vh; 
     padding: 15px 20px;
     /* border-radius: 15px; */
     display: flex;
@@ -108,11 +96,9 @@ document.addEventListener("DOMContentLoaded", () => {
     cursor: pointer;
     color: rgb(61, 61, 61);
 }
-.lock i{
-    font-size: 23px;
-    color: #2A3BE3;
+.lock{
     background-color: #EDE5F0;
-    padding: 5px;
+    padding: 17px;
     border-radius: 50%;
 }
 
@@ -121,20 +107,21 @@ document.addEventListener("DOMContentLoaded", () => {
     justify-content: right;
     column-gap: 5px;
     width: 100%;
+    font-size: 14px;
 }
 
 .footer button:first-child{
     background-color: white;
     color: black;
-    border: 1px solid black;
-    padding: 7px 30px;
+    border: 1px solid rgb(116, 116, 116);
+    padding: 3px 20px;
     cursor: pointer;
 }
 .footer button:last-child{
     background-color: rgb(0, 0, 66);
     color: white;
     border: 1px solid rgb(0, 0, 66);
-    padding: 7px 30px;
+    padding: 3px 30px;
     cursor: pointer;
 }
 
@@ -154,11 +141,12 @@ document.addEventListener("DOMContentLoaded", () => {
     font-weight: 500;
     color: rgb(97, 97, 97);
 }
-input{
+.input #company-code{
     width: 100%;
-    padding: 8px;
+    padding: 5px;
     border-radius: 3px;
     border: 1px solid rgb(190, 190, 190);
+    font-size: 14px;
 }
 .input{
     display: flex;

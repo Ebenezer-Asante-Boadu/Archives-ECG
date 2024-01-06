@@ -30,7 +30,7 @@ export function createSplashWindow() {
     });
 
  
-    // splashWindow.loadFile(path.join(__dirname, "splash.html"));
+    // splashWindow.loadFile(path.join(__dirname, "..", "dist" ,"index.html"));
     splashWindow.loadURL("http://localhost:5173");
     splashWindow.center();
 }
