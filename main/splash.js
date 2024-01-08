@@ -1,4 +1,4 @@
-import { app, BrowserWindow, Menu } from 'electron';
+import { app, BrowserWindow, Menu, screen } from 'electron';
 import { fileURLToPath } from 'url';
 import { join, dirname } from 'node:path';
 import path from 'path';
@@ -24,13 +24,47 @@ export function createSplashWindow() {
         transparent: true,
         alwaysOnTop: true, 
         webPreferences:{
+          sandbox:true,
             preload: path.join(__dirname, "preloads", "verify.js"), 
             devTools: true
         }
     });
 
  
-    // splashWindow.loadFile(path.join(__dirname, "..", "dist" ,"index.html"));
-    splashWindow.loadURL("http://localhost:5173");
+    splashWindow.loadFile(path.join(__dirname, "..", "dist" ,"index.html"));
+    // splashWindow.loadFile("../dist/index.html")
+    // splashWindow.loadURL("http://localhost:5173/#/");
     splashWindow.center();
+
+  
+    
 }
+
+
+
+export function generateDeviceFingerprint(event,userAgent) {
+// console.log(userAgent)
+    try {
+      // Get Electron version
+      const electronVersion = process.versions.electron;
+  
+      // Get platform information
+      const platform = process.platform;
+      const arch = process.arch;
+  
+      // Get screen dimensions
+      const primaryDisplay = screen.getPrimaryDisplay()
+    const { width, height } = primaryDisplay.workAreaSize
+  
+    //   // Get other relevant information
+    //   const userAgent = navigator.userAgent;
+  
+      // Create a fingerprint using relevant information
+      const fingerprint = `${electronVersion}${platform}${arch}${width}${height}${userAgent}`;
+  
+      return fingerprint;
+    } catch (error) {
+      console.error('Error generating device fingerprint:', error);
+      return null; // or handle the error in an appropriate way
+    }
+  }

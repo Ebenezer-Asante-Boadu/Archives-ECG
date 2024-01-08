@@ -2,8 +2,10 @@
     <div class="submain">
         <div class="main" id="main">
             <div >
-                <div class="close" id="close-app" @click="close()">
-                    <v-icon size="23">mdi-window-close</v-icon>
+                <div class="close" id="close-app" >
+                    <span @click="close()">
+                        <v-icon size="23">mdi-window-close</v-icon>
+                    </span>
                 </div>
                 <div class="lockl">
                     <v-icon size="23" class="lock" :color="lockColor">mdi-lock</v-icon>
@@ -20,6 +22,7 @@
             <div class="footer">
                 <button id="cancel" @click="close()">Cancel</button>
                 <button id="verify" @click="validateCodeInput()">Verify</button>
+                <!-- <button @click="$router.push('/k')">ch</button> -->
             </div>
         </div>
     </div>
@@ -27,23 +30,33 @@
 
 <script setup lang="ts">
 import {ref} from "vue";
-import {close} from "../lib/utils"
+import router from "@/router";
+import {close, getFingerprint, startApp, setVerification} from "../lib/utils";
+import {useAppDetails } from "../stores/appDetails";
+import { storeToRefs } from "pinia";
+
+const store = useAppDetails();
+const {setVerified} = store;
+const {verified}= storeToRefs(store)
 const lockColor = ref("#2A3BE3")
 const company_code = ref<HTMLInputElement|null>(null);
 const instructionText = ref("Enter the company code");
 const instructionColor = ref("black");
 const startValidation = ref(false);
 
-function validateCodeInput(inputElement:HTMLInputElement|null = company_code.value) {
+
+async function validateCodeInput(inputElement:HTMLInputElement|null = company_code.value) {
     startValidation.value = true;
 
-    console.log(inputElement?.value.length)
     if (inputElement && inputElement.value.length === 16) {
         inputElement.setCustomValidity("");
             lockColor.value = "#2A3BE3";
             inputElement.style.border = "1px solid #2A3BE3";
             instructionText.value = "Enter the company code.";
             instructionColor.value = "black";
+            // setVerified(true)
+            setVerification(true)
+            startApp();
         // Optionally, perform additional actions for successful validation
     } else {  
         if(inputElement){
