@@ -4,6 +4,14 @@ export function close(){
     window.verify.close();
 }
 
+export function closeMain(){
+    window.main.close();
+}
+
+export function minimize(){
+    window.main.minimize();
+}
+
 export async function getFingerprint(){
    return await window.verify.fingerprint();
 }

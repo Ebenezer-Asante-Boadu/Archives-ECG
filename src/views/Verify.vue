@@ -49,7 +49,7 @@ async function validateCodeInput(inputElement:HTMLInputElement|null = company_co
     startValidation.value = true;
 
     if (inputElement && inputElement.value.length === 16) {
-        inputElement.setCustomValidity("");
+        // inputElement.setCustomValidity("");
             lockColor.value = "#2A3BE3";
             inputElement.style.border = "1px solid #2A3BE3";
             instructionText.value = "Enter the company code.";
@@ -65,9 +65,7 @@ async function validateCodeInput(inputElement:HTMLInputElement|null = company_co
             instructionText.value = "Please try again.";
             instructionColor.value = "red"
         }
-        inputElement? inputElement.setCustomValidity("Please enter a valid input"): null;
     }
-    inputElement? inputElement.reportValidity():null;
 }
 
 function continueValidate(){

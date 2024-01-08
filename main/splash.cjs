@@ -1,15 +1,13 @@
-import { app, BrowserWindow, Menu, screen } from 'electron';
-import { fileURLToPath } from 'url';
-import { join, dirname } from 'node:path';
-import path from 'path';
+const { app, BrowserWindow, Menu, screen } = require('electron');
+const { fileURLToPath } = require('url');
+const { join, dirname } = require('node:path');
+const path = require('path');
 
-export let splashWindow;
 
-export function createSplashWindow() {
-    const __filename = fileURLToPath(import.meta.url);
-    const __dirname = dirname(__filename);
-
-    splashWindow = new BrowserWindow({
+let splashWindow;
+function createSplashWindow() {
+    
+   splashWindow = new BrowserWindow({
         //    backgroundColor: "linear-gradient(119deg, #D9D9D9 17.7%, rgba(137, 136, 176, 0.00) 96.71%);",
         backgroundColor: 'white',
         hasShadow: true,
@@ -37,12 +35,12 @@ export function createSplashWindow() {
     splashWindow.center();
 
   
-    
+    return splashWindow.id;
 }
 
 
 
-export function generateDeviceFingerprint(event,userAgent) {
+ function generateDeviceFingerprint(event,userAgent) {
 // console.log(userAgent)
     try {
       // Get Electron version
@@ -68,3 +66,5 @@ export function generateDeviceFingerprint(event,userAgent) {
       return null; // or handle the error in an appropriate way
     }
   }
+
+  module.exports = { createSplashWindow, generateDeviceFingerprint};

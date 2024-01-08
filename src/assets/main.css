@@ -14,3 +14,7 @@ body{
 html{
   overflow-y: auto!important;
 }
+
+input:focus{
+  outline: none;
+}

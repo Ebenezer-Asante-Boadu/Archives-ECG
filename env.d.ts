@@ -11,5 +11,10 @@ interface Window {
 
     main: {
       getVerification: () => Promise<boolean>;
+      close: () => void;
+      minimize: ()=> void;
     }
   }
+
+
+  
