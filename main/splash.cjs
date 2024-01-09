@@ -29,9 +29,9 @@ function createSplashWindow() {
     });
 
  
-    splashWindow.loadFile(path.join(__dirname, "..", "dist" ,"index.html"));
+    // splashWindow.loadFile(path.join(__dirname, "..", "dist" ,"index.html"));
     // splashWindow.loadFile("../dist/index.html")
-    // splashWindow.loadURL("http://localhost:5173/#/");
+    splashWindow.loadURL("http://localhost:5173");
     splashWindow.center();
 
   

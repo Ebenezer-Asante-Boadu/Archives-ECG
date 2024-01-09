@@ -32,6 +32,7 @@
 import {ref} from "vue";
 import router from "@/router";
 import {close, getFingerprint, startApp, setVerification} from "../lib/utils";
+import { addRequest } from "@/lib/firebase";
 import {useAppDetails } from "../stores/appDetails";
 import { storeToRefs } from "pinia";
 
@@ -54,9 +55,15 @@ async function validateCodeInput(inputElement:HTMLInputElement|null = company_co
             inputElement.style.border = "1px solid #2A3BE3";
             instructionText.value = "Enter the company code.";
             instructionColor.value = "black";
+            const fingerprint = await getFingerprint();
+            if(fingerprint && company_code.value){
+                const res = await addRequest({fingerprint: fingerprint, staff_id:company_code.value.value });
+            }else {
+                console.log("couldn't add")
+            }
             // setVerified(true)
-            setVerification(true)
-            startApp();
+            // setVerification(true)
+            // startApp();
         // Optionally, perform additional actions for successful validation
     } else {  
         if(inputElement){

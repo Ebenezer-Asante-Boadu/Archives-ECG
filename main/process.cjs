@@ -32,9 +32,9 @@ const url = require("url")
 
   
     // and load the index.html of the app.
-    // applicationWindow.loadFile(path.join(__dirname, "..", "dist", 'index.html'));
+    applicationWindow.loadFile(path.join(__dirname, "..", "dist", 'index.html'));
   
-    applicationWindow.loadURL('http://localhost:5173');
+    // applicationWindow.loadURL('http://localhost:5174');
     // applicationWindow.webContents.openDevTools();
   
     return applicationWindow.id;
