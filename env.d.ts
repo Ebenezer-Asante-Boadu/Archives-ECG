@@ -4,9 +4,9 @@ interface Window {
       // Define your API methods and properties here
       close: () => void;
       fingerprint: () => Promise<string | null>;
-      verified: ()=> void;
-      setVerification: (state:boolean) => void;
       getVerification:  () => Promise<boolean>;
+      verifyApp: ({fingerprint, date, staff_id}: {fingerprint:string, date:string, staff_id:string}) => 
+      Promise<{ success: boolean, message: number }>;
     };
 
     main: {

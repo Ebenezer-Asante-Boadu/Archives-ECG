@@ -1,37 +1,38 @@
 
 
-export function close(){
+export function close() {
     window.verify.close();
 }
 
-export function closeMain(){
+export function closeMain() {
     window.main.close();
 }
 
-export function minimize(){
+export function minimize() {
     window.main.minimize();
 }
 
-export async function getFingerprint(){
-   return await window.verify.fingerprint();
+export async function getFingerprint() {
+    return await window.verify.fingerprint();
 }
 
-export function startApp(){
-    window.verify.verified();
-}
-
-export function setVerification(state:boolean){
-    window.verify.setVerification(state);
-}
-
-export function getVerification(){
-    if(window.main){
-        console.log(window.main.getVerification())
-        return window.main.getVerification();
-    }else{
-        console.log(window.verify.getVerification())
-        return window.verify.getVerification();
+export async function getMainVerification() {
+    if (window.main) {
+        const res = await window.main.getVerification();
+        return res;
     }
+}
+
+export async function getVerifyVerification() {
+    if (window.verify) {
+        const res = await window.verify.getVerification();
+        return res;
+    }
+}
+
+export async function verifyApp({fingerprint, date, staff_id}: {fingerprint:string, date:string, staff_id:string}){
+    const res = await window.verify.verifyApp({fingerprint, date, staff_id});
+    return res;
 }
 
 // store work files in the cloud
@@ -42,13 +43,13 @@ export function getVerification(){
 //settings
 //notification tab
 // announcements window
-// who edited my file 
+// who edited my file
 
 //admin
 // request reverification of an account
 // block an account
 //see users
-// check each users activities, like last seen, 
+// check each users activities, like last seen,
 // receive user help messages
 // see all files been worked on
 // edit files

@@ -1,6 +1,6 @@
 {
   "name": "archives-ecg",
-  "main": "main.cjs",
+  "main": "electron-controller/dist/main.js",
   "description": "ECG ARCHIVES APPLICATION FOR AUTHORIZED COMPANY USERS",
   "author": "Mensah Torkornoo Derrick",
   "version": "1.0.0",
@@ -11,8 +11,8 @@
     "dev": "vite",
     "preview": "vite preview",
     "type-check": "vue-tsc --build --force",
-    "edev": "electron .",
-    "start": "electron-forge start",
+    "edev": "cd electron-controller && npm run start && cd .. && electron .",
+    "start": " electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make"
   },

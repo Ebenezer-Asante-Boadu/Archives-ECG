@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory} from 'vue-router';
-import { getVerification } from '@/lib/utils';
+import { getVerifyVerification, getMainVerification } from '@/lib/utils';
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -18,7 +18,8 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
-  const verified = await getVerification();
+  const verified = from.name === "home" ? await getVerifyVerification(): await getMainVerification();
+  console.log(typeof verified, verified)
 
   if (verified) {
     // console.log(to.name, from.name)
