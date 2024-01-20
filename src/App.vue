@@ -16,8 +16,6 @@ watchEffect(()=>{
   if(router.currentRoute.value.meta.requiresAuth && !authenticated.value){
     alert(authenticated.value)
     router.push("/app-auth")
-  }else if(router.currentRoute.value.meta.requiresAuth && authenticated.value){
-    router.push("/front-page")
   }
 })
 </script>
@@ -29,7 +27,11 @@ watchEffect(()=>{
     </div>
     <div class="router-view" :style="{width: isNormalState? '95.5%':'100%'}">
       <navbar v-if="isNormalState"/>
-      <RouterView />
+      <router-view v-slot="{ Component }">
+        <transition name="slide-left">
+          <component :is="Component" />
+        </transition>
+      </router-view>
     </div>
   </div>
 </template>
@@ -38,6 +40,7 @@ watchEffect(()=>{
   height: 100vh;
   overflow: scroll;
   display: flex;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 

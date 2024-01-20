@@ -12,7 +12,7 @@ let splashWindowId = 0;
 let mainWindowId = 0;
 let authenticated = false;
 
- function getAuth(){
+function getAuth() {
   console.log("from function", authenticated)
   return authenticated;
 }
@@ -29,32 +29,38 @@ app.whenReady().then(() => {
   ipcMain.on("minimize-app", (event) => {
     const window = BrowserWindow.fromId(mainWindowId);
     if (window !== null) {
-      window.minimize(); 
+      window.minimize();
     }
   });
 
-  ipcMain.on("minimize-restore",()=>{
-    const window = BrowserWindow.fromId(mainWindowId);
-    if(window){
-      if(window.isMaximized()){
-        window.restore();
-      }else{
-        window.maximize();
+  ipcMain.on("minimize-restore", () => {
+    try {
+      const window = BrowserWindow.fromId(mainWindowId);
+      if (window) {
+        if (window.isMaximized()) {
+          const screenWidth = screen.getPrimaryDisplay().workAreaSize;
+          window.setSize(Math.floor(0.65 * screenWidth.width), Math.floor(0.75 * screenWidth.height), true);
+          window.center()
+        } else {
+          window.maximize();
+        }
       }
+    } catch (err) {
+      console.log(err)
     }
   })
 
-  ipcMain.on("reset-default", (event)=>{
+  ipcMain.on("reset-default", (event) => {
     const window = BrowserWindow.fromId(mainWindowId);
 
-    if(window){
+    if (window) {
       const screenWidth = screen.getPrimaryDisplay().workAreaSize;
       window.setSize(screenWidth.width, screenWidth.height, true); // Set width to full screen width
       window.setResizable(true);
       window.setMinimumSize(
-        screenWidth.width-700 >= 750 ? screenWidth.width-700: 750, 
-        screenWidth.height-300 >= 500? screenWidth.height-300: 500
-        ); // Set minimum width
+        screenWidth.width - 700 >= 750 ? screenWidth.width - 700 : 750,
+        screenWidth.height - 300 >= 500 ? screenWidth.height - 300 : 500
+      ); // Set minimum width
       window.setMaximumSize(screenWidth.width, screenWidth.height); // Set maximum width
       window.center();
       // window.setMenuBarVisibility(true)
@@ -133,19 +139,19 @@ app.whenReady().then(() => {
   });
 
 
-  ipcMain.handle("get-userDetails", ()=>{
-    if(userinfo){
-      return {status:userinfo.status, staff_id: userinfo.staff_id}
+  ipcMain.handle("get-userDetails", () => {
+    if (userinfo) {
+      return { status: userinfo.status, staff_id: userinfo.staff_id }
     }
     return null;
   })
 
 
-  ipcMain.on("set-authenticated", (ecent, auth:boolean)=>{
+  ipcMain.on("set-authenticated", (ecent, auth: boolean) => {
     authenticated = auth;
   });
 
-  ipcMain.handle("get-authenticated", async ()=>{
+  ipcMain.handle("get-authenticated", async () => {
     console.log("didn't work", authenticated)
     console.log("done", getAuth())
     return getAuth();

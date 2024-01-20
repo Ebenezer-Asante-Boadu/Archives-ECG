@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory} from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
 import { getVerifyVerification, getMainVerification } from '@/lib/utils';
 
 const router = createRouter({
@@ -7,49 +7,72 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: ()=>import("../views/Verify.vue")
+      component: () => import("../views/Verify.vue")
     },
     {
       path: '/app-auth',
       name: 'app-auth',
-      component: ()=>import("../views/Auth.vue"),
+      component: () => import("../views/Auth.vue"),
     },
     {
       path: "/front-page",
       name: "front-page",
-      component: ()=> import("../views/home.vue"),
+      component: () => import("../views/home.vue"),
       meta: {
         requiresAuth: true,
-        admin:false
+        admin: false
+      }
+    },
+    {
+      path: "/send-request",
+      name: "send-request",
+      component: () => import("../views/sendRequest.vue"),
+      meta: {
+        requiresAuth: true,
+        admin: false
+      }
+    },
+    {
+      path: "/edit-file",
+      name: "edit-file",
+      component: () => import("../views/editFile.vue"),
+      meta: {
+        requiresAuth: true,
+        admin: false
       }
     }
   ]
 });
 
 router.beforeEach(async (to, from, next) => {
-  const verified = from.name === "home" ? await getVerifyVerification(): await getMainVerification();
-  console.log(typeof verified, verified)
+  try {
+    const verified = from.name === 'home' ? await getVerifyVerification() : await getMainVerification();
 
-  if (verified) {
-    // console.log(to.name, from.name)
-    // Check if the destination route is not the 'home' route
-    if (to.name === 'home') {
-      next({
-        name: 'app-auth',
-      });
+    if (verified) {
+      console.log("from verified")
+      if (to.name === 'home') {
+        console.log("from home")
+        next({
+          name: 'app-auth',
+        });
+      }
+      else {
+        console.log("from true")
+        next(true);
+      }
     } else {
-      next(); // Avoid infinite loop if already on the 'home' route
+
+      if (to.name !== 'home') {
+        next({
+          name: 'home',
+        });
+      } else {
+        next();
+      }
     }
-  } else {
-    // console.log(verified)
-    // Check if the destination route is not the 'home' route
-    if (to.name !== 'home') {
-      next({
-        name: 'home',
-      });
-    } else {
-      next(); // Avoid infinite loop if already on the 'home' route
-    }
+  } catch (error) {
+    console.error('Error during verification:', error);
+    next(false); // Prevent navigation in case of an error
   }
 });
 

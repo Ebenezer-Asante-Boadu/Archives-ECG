@@ -11,7 +11,7 @@
             <button class="maximize actions" @click="maximizeRestore()">
                 <v-icon color="white" size="15">mdi-window-maximize</v-icon>
             </button>
-            <button class="close actions" @click="close()">
+            <button class="close actions" @click="closeMain()">
                 <v-icon color="white" size="18">mdi-close</v-icon>
             </button>
         </div>
@@ -20,7 +20,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { maximizeRestore, close, minimize } from "@/lib/utils";
+import { maximizeRestore, closeMain, minimize } from "@/lib/utils";
 
 </script>
 

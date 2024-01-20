@@ -4,9 +4,25 @@
             <img src="../assets/logo.jpg"  style="border-radius:50%; heigh: 80%; width:80%">
         </div>
         <div class="links">
-            <div class="link" v-for="link in links">
-                <v-icon  class="link-name" size="22">{{link.icon}}</v-icon>
+            <div class="link" v-for="link in links" @click="router.push(link.path)">
+                <v-tooltip :text="link.tooltip">
+                    <template v-slot:activator="{ props }">
+                        <button v-bind="props">
+                            <v-icon  class="link-name" size="22" >{{link.icon}}</v-icon>
+                        </button>
+                    </template>
+                </v-tooltip>
             </div>
+
+            <!-- <div class="link" v-for="link in links">
+                <v-tooltip :text="link.tooltip">
+                    <template v-slot:activator="{ props }">
+                        <button v-bind="props">
+                            <v-icon  class="link-name" size="22" >{{link.icon}}</v-icon>
+                        </button>
+                    </template>
+                </v-tooltip>
+            </div> -->
         </div>
 
     </div>
@@ -14,14 +30,15 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import router from "@/router"
 
 const links = ref([
-    {name:"Home", icon: "mdi-home-outline"}, 
-    {name: "requests", icon: "mdi-send-outline"},
-    {name:"notifications", icon:"mdi-bell"},
-    {name:"help", icon:"mdi-help-network"},
-    {name:"edit", icon:"mdi-file-edit"},
-    {name:"settings", icon:"mdi-cog"}
+    {name:"Home", icon: "mdi-home-outline", tooltip: "Home", type:"normal", path: "/front-page"}, 
+    {name: "requests", icon: "mdi-send-outline", tooltip: "Send a file request", type:"normal", path:"/send-request"},
+    {name:"notifications", icon:"mdi-bell", tooltip:"Notifications", type:"normal", path:""},
+    {name:"help", icon:"mdi-help-network", tooltip:"Get help", type:"normal", path:""},
+    {name:"edit", icon:"mdi-file-edit", tooltip:"Start editing a file", type:"normal", path:"/edit-file"},
+    {name:"settings", icon:"mdi-cog", tooltip:"Settings", type:"not-normal", path:""}
     ])
 </script>
 
@@ -61,6 +78,7 @@ const links = ref([
     display: flex;
     flex-direction: column;
     row-gap: 10px;
+    height: 100%;
 }
 
 .link{
