@@ -34,5 +34,6 @@ contextBridge.exposeInMainWorld('verify', {
       }catch(err){
         return {success: false, message:1000};
       }
-    }
+    },
+    // getStaffId
   });

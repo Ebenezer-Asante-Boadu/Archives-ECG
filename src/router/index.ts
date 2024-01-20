@@ -10,9 +10,18 @@ const router = createRouter({
       component: ()=>import("../views/Verify.vue")
     },
     {
-      path: '/app-home',
-      name: 'app-home',
-      component: ()=>import("../views/home.vue")
+      path: '/app-auth',
+      name: 'app-auth',
+      component: ()=>import("../views/Auth.vue"),
+    },
+    {
+      path: "/front-page",
+      name: "front-page",
+      component: ()=> import("../views/home.vue"),
+      meta: {
+        requiresAuth: true,
+        admin:false
+      }
     }
   ]
 });
@@ -26,7 +35,7 @@ router.beforeEach(async (to, from, next) => {
     // Check if the destination route is not the 'home' route
     if (to.name === 'home') {
       next({
-        name: 'app-home',
+        name: 'app-auth',
       });
     } else {
       next(); // Avoid infinite loop if already on the 'home' route

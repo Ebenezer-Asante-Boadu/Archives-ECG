@@ -4,11 +4,15 @@ import 'vuetify/styles'
 
 // Vuetify
 import { createVuetify } from 'vuetify';
-import { VIcon } from 'vuetify/components';
+import { VIcon, VSlideGroup, VSlideGroupItem,VBtn, VSheet } from 'vuetify/components';
 
 export default createVuetify({
   components: {
-    VIcon
+    VIcon,
+    VSlideGroup,
+    VSlideGroupItem,
+    VBtn,
+    VSheet
   }
 }
 )

@@ -1,4 +1,4 @@
-import { BrowserWindow, app, screen } from "electron";
+import { BrowserWindow, app, screen, Menu } from "electron";
 import path from "path";
 
 export function createApplicationWindow(){
@@ -11,6 +11,7 @@ export function createApplicationWindow(){
       height: height-300 >= 500? height-300: 500,
       resizable:false,
       frame: false,
+      titleBarStyle: 'hiddenInset',
       roundedCorners: false,
       transparent:true,
       center: true,
@@ -24,9 +25,10 @@ export function createApplicationWindow(){
     });
 
 
+    // applicationWindow.setMenuBarVisibility(false)
 //   applicationWindow.webContents.
     // and load the index.html of the app.
-    // applicationWindow.loadFile(path.join(__dirname, "..", "dist", 'index.html'));
+    // applicationWindow.loadFile(path.join(__dirname, "..", "..", "..",  "dist", 'index.html'));
   
     applicationWindow.loadURL('http://localhost:5173');
     // applicationWindow.webContents.openDevTools();

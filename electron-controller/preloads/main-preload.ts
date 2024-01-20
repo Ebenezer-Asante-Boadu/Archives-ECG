@@ -23,4 +23,42 @@ contextBridge.exposeInMainWorld("main", {
         console.error('Error sending minimize-app IPC message:', error);
       }
     },
+    maximizeRestore: ()=>{
+      try{
+        ipcRenderer.send("minimize-restore");
+      }catch(err){
+        console.log(err)
+      }
+    },
+    getUserDetails: async()=>{
+      try{
+        const response = await ipcRenderer.invoke("get-userDetails");
+        return response;
+      }catch(err){
+        return null;
+      }
+    },
+    resetDefault: ()=>{
+      try{
+        ipcRenderer.send("reset-default");
+      }catch(err){
+        console.log(err)
+      }
+    },
+    setAuthenticated: ()=>{
+      try{
+        ipcRenderer.send("set-authenticated");
+      }catch(err){
+        console.log(err)
+      }
+    },
+    getAuthenticated: async()=>{
+      try{
+        const response = await ipcRenderer.invoke("get-authenticated");
+        return response;
+      }catch(err){
+        return null
+        console.log(err)
+      }
+    }
   })

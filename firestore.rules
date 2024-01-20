@@ -7,6 +7,10 @@ service cloud.firestore {
       // allow write: if request.resource.data.staff_id == "";
       allow write: if true;
     }
+
+    match /users/{id} {
+      allow read, write: if true;
+    }
     
     match /{document=**} {
       allow read, write: if false;

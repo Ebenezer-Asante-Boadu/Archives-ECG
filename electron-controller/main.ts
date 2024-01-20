@@ -10,7 +10,12 @@ import type { UserRequest } from "./types";
 let userinfo: UserRequest | undefined;
 let splashWindowId = 0;
 let mainWindowId = 0;
+let authenticated = false;
 
+ function getAuth(){
+  console.log("from function", authenticated)
+  return authenticated;
+}
 
 
 app.whenReady().then(() => {
@@ -24,9 +29,37 @@ app.whenReady().then(() => {
   ipcMain.on("minimize-app", (event) => {
     const window = BrowserWindow.fromId(mainWindowId);
     if (window !== null) {
-      window.minimize();
+      window.minimize(); 
     }
   });
+
+  ipcMain.on("minimize-restore",()=>{
+    const window = BrowserWindow.fromId(mainWindowId);
+    if(window){
+      if(window.isMaximized()){
+        window.restore();
+      }else{
+        window.maximize();
+      }
+    }
+  })
+
+  ipcMain.on("reset-default", (event)=>{
+    const window = BrowserWindow.fromId(mainWindowId);
+
+    if(window){
+      const screenWidth = screen.getPrimaryDisplay().workAreaSize;
+      window.setSize(screenWidth.width, screenWidth.height, true); // Set width to full screen width
+      window.setResizable(true);
+      window.setMinimumSize(
+        screenWidth.width-700 >= 750 ? screenWidth.width-700: 750, 
+        screenWidth.height-300 >= 500? screenWidth.height-300: 500
+        ); // Set minimum width
+      window.setMaximumSize(screenWidth.width, screenWidth.height); // Set maximum width
+      window.center();
+      // window.setMenuBarVisibility(true)
+    }
+  })
 
   ipcMain.handle('get-fingerprint', generateDeviceFingerprint);
 
@@ -90,32 +123,33 @@ app.whenReady().then(() => {
 
   ipcMain.handle("get-verification", (event) => {
     let returnValue = false;
-
-//     const already = isUserDataAvailableAndValid(staff_id);
-// console.log("userinfo here", userinfo)
-//     if (userinfo) {
-//       if (!isPastSevenDays(userinfo.date)) {
-//         console.log("yeah")
-
-//         returnValue = true;
-//       }
-//     } else {
-//       if (already.success) {
-//         const res = readAndDecryptData(staff_id);
-//         if (res && res !== 5000) {
-//           userinfo = res;
-console.log(userinfo?.date)
-          if (userinfo && !isPastSevenDays((userinfo.date as any).toDate())) {
-            console.log("yeahma")
-            returnValue = true;
-          }
-      //   }
-      // }
-    // }
+    console.log(userinfo?.date)
+    if (userinfo && !isPastSevenDays((userinfo.date as any).toDate())) {
+      console.log("yeahma")
+      returnValue = true;
+    }
 
     return returnValue;
   });
 
+
+  ipcMain.handle("get-userDetails", ()=>{
+    if(userinfo){
+      return {status:userinfo.status, staff_id: userinfo.staff_id}
+    }
+    return null;
+  })
+
+
+  ipcMain.on("set-authenticated", (ecent, auth:boolean)=>{
+    authenticated = auth;
+  });
+
+  ipcMain.handle("get-authenticated", async ()=>{
+    console.log("didn't work", authenticated)
+    console.log("done", getAuth())
+    return getAuth();
+  });
 
   // createApplicationWindow();
   splashWindowId = createSplashWindow();
@@ -127,6 +161,7 @@ console.log(userinfo?.date)
       splashWindowId = createSplashWindow();
     }
   });
+
 });
 
 

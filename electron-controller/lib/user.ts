@@ -2,6 +2,7 @@ import { app } from "electron";
 import crypto from "crypto";
 import fs from "fs";
 import path from "path";
+import type { UserRequest } from "../types";
 
 const userDataPath = app.getPath('userData');
 
@@ -35,7 +36,7 @@ export function encryptAndSaveData(fingerprint: string, date: string, staff_id: 
 }
 
 // Read and decrypt data from the file
-export function readAndDecryptData(encryptionKey: string, filePath = `${userDataPath}/ushgtf.tkay`) {
+export function readAndDecryptData(encryptionKey: string, filePath = `${userDataPath}/ushgtf.tkay`):UserRequest|null|5000{
     try {
         if (!fs.existsSync(filePath)) {
             console.log("File does not exist");
@@ -57,7 +58,8 @@ export function readAndDecryptData(encryptionKey: string, filePath = `${userData
             staff_id: data.staff_id,
             fingerprint: data.fingerprint,
             date: data.date,
-            verified: data.verified
+            verified: data.verified,
+            status: data.status
         };
     } catch (error: any) {
         console.error("Error decrypting data:", error.message);

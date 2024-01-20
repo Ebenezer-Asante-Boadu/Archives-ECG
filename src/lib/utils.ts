@@ -12,6 +12,10 @@ export function minimize() {
     window.main.minimize();
 }
 
+export function maximizeRestore(){
+    window.main.maximizeRestore();
+}
+
 export async function getFingerprint() {
     return await window.verify.fingerprint();
 }
@@ -35,6 +39,46 @@ export async function verifyApp({fingerprint, date, staff_id}: {fingerprint:stri
     return res;
 }
 
+export async function getUserDetails(){
+    try{
+        const res = await window.main.getUserDetails();
+
+        if(!res){
+            return null;
+        }
+        return res;
+    }catch(err){
+        return null;
+    }
+}
+
+export function resetDefault(){
+    try{
+        window.main.resetDefault();
+        return true;
+    }catch(err){
+        return err;
+    }
+}
+
+export function setAuthenticated(state:boolean){
+    try{
+        window.main.setAuthenticated(state);
+        return true;
+    }catch(err){
+        return err;
+    }
+}
+
+export async function getAuthenticated() {
+    try{
+        const res = await window.main.getAuthenticated();
+        alert(`from utils library ${res}`)
+        return res;
+    }catch(err){
+        return err;
+    }
+}
 // store work files in the cloud
 //upload excel sheet to add to existing data or start new data
 //request for files

@@ -25,7 +25,7 @@ export function isPastSevenDays(timeStamp = 'December 23, 2023 18:54:51 UTC') {
 export function isUserDataAvailableAndValid(staff_id:string) {
     //checks if user data is available on the machine and it's valid
     try {
-        let results = { success: false, value: { staff_id: '', fingerprint: "", date: "", verified:false }, message: 0 };
+        let results = { success: false, value: { staff_id: '', fingerprint: "", date: "", verified:false, status:"" }, message: 0 };
 
         const res = readAndDecryptData(staff_id);
         if (res !== null && res !== 5000) {
@@ -39,6 +39,6 @@ export function isUserDataAvailableAndValid(staff_id:string) {
         return results;
     } catch (err) {
         console.log(err)
-        return { success: false, value: { staff_id: '', fingerprint: "", date: "", verified:false }, message: 1000 }
+        return { success: false, value: { staff_id: '', fingerprint: "", date: "", verified:false, status:"" }, message: 1000 }
     }
 }

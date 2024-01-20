@@ -38,11 +38,11 @@ import { useAppDetails } from "../stores/appDetails";
 import { storeToRefs } from "pinia";
 
 const store = useAppDetails();
-const { setVerified } = store;
-const { verified } = storeToRefs(store)
+// const { setVerified } = store;
+// const { verified } = storeToRefs(store)
 const lockColor = ref("#2A3BE3")
 const company_code = ref<HTMLInputElement | null>(null);
-const instructionText = ref("Enter the company code");
+const instructionText = ref("Enter your staff ID.");
 const instructionColor = ref("black");
 const startValidation = ref(false);
 
@@ -68,7 +68,7 @@ async function validateCodeInput(inputElement: HTMLInputElement | null = company
 
                 if (results.success) { 
                     resetValidationStyles();
-                    router.push("/app-home");
+                    router.push("/app-auth");
                     return;
                 } else {
                     console.log("Verification failed. Please try again.");
@@ -93,7 +93,7 @@ async function validateCodeInput(inputElement: HTMLInputElement | null = company
 function resetValidationStyles() {
     lockColor.value = "#2A3BE3";
     company_code.value ? company_code.value.style.border = "1px solid #2A3BE3" : null;
-    instructionText.value = "Enter the company code.";
+    instructionText.value = "Enter your staff ID.";
     instructionColor.value = "black";
 }
 
@@ -181,14 +181,13 @@ function continueValidate() {
 
 .heading {
     padding: 3% 0;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     display: grid;
     row-gap: 6%;
     grid-template-columns: 100%;
 }
 
 .heading div:first-child {
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 600;
 }
 
