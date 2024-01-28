@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* @import url(./base.css); */
 
 #app {
@@ -20,38 +24,36 @@ input:focus{
 }
 
  /* Apply styles to the scrollbar */
- ::-webkit-scrollbar {
-  width: 8px!important; /* Adjust the width as needed */
+ /* ::-webkit-scrollbar {
+  width: 8px!important; 
   display: none;
-}
+} */
 
 /* Remove the track (the background) */
-::-webkit-scrollbar-track {
+/* ::-webkit-scrollbar-track {
   background: linear-gradient(180deg, #29161D 0%, #121922 100%);
   padding: 0 2%;
   display: none;
-  /* background: none!important; */
-  /* background-color: green; */
-}
+} */
 
 /* Style the scrollbar handle */
-::-webkit-scrollbar-thumb {
-  background-color: rgba(255, 255, 255, 0.671); /* Adjust the color as needed */
-  border: 0px solid #ffffff; /* Adjust the border as needed */
-  border-radius: 10px; /* Adjust the border radius as needed */
+/* ::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.671); 
+  border: 0px solid #ffffff; 
+  border-radius: 10px; 
   margin: 0 2%;
   display: none;
-}
+} */
 
 /* Style the scrollbar handle on hover */
-::-webkit-scrollbar-thumb:hover {
+/* ::-webkit-scrollbar-thumb:hover {
   display: none;
-}
+} */
 
 /* Remove the arrows at the ends of the scrollbar */
-::-webkit-scrollbar-button {
+/* ::-webkit-scrollbar-button {
   display: none;
-}
+} */
 
 :root{
   --app-bar: rgb(27, 27, 27);

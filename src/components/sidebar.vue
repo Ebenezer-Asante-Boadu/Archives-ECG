@@ -44,6 +44,7 @@ const links = ref([
 
 <style scoped>
 .main {
+    overflow: hidden;
     height: 100%;
     width: 4.5%;
     display: flex;

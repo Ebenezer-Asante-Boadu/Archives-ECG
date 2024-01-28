@@ -26,6 +26,7 @@ import { maximizeRestore, closeMain, minimize } from "@/lib/utils";
 
 <style scoped>
 .main {
+    overflow: hidden;
     width: 100%;
     height: 50px;
     display: flex;

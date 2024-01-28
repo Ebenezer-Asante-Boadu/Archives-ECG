@@ -44,32 +44,5 @@ watchEffect(()=>{
 }
 
 
-.main::-webkit-scrollbar {
-  width: 8px!important; /* Adjust the width as needed */
-}
 
-/* Remove the track (the background) */
-.main::-webkit-scrollbar-track {
-  background: linear-gradient(180deg, #29161D 0%, #121922 100%);
-  padding: 0 2%;
-  /* background: none!important; */
-  /* background-color: green; */
-}
-
-/* Style the scrollbar handle */
-.main::-webkit-scrollbar-thumb {
-  background-color: rgba(255, 255, 255, 0.671); /* Adjust the color as needed */
-  border: 0px solid #ffffff; /* Adjust the border as needed */
-  border-radius: 10px; /* Adjust the border radius as needed */
-  margin: 0 2%;
-}
-
-/* Style the scrollbar handle on hover */
-.main::-webkit-scrollbar-thumb:hover {
-}
-
-/* Remove the arrows at the ends of the scrollbar */
-.main::-webkit-scrollbar-button {
-  display: none;
-}
 </style>
