@@ -1,13 +1,15 @@
 <template>
-    <div class="main">
-        <div class="left">
-            <p class="text-right font-extrabold text-4xl  md:text-7xl text-blue-950 font-mono leading-10">
-                Request For A File
+    <div class="main" :style="{backgroundColor: (darkmode)? 'var(--dark_mode_2)' : 'white'}">
+        <div class="left ">
+            <p class="text-right font-extrabold text-4xl  md:text-5xl  font-mono leading-10 pt-9 mb-4" 
+            :class="{  'text-white' : darkmode, 'text-blue-950': !darkmode }">
+                Requisition Board
             </p>
+            <img src="../assets/desktop-design-outline.png" alt="">
         </div>
         <div class="right">
-            <div class="container">
-                <form action="" class="form grid gap-y-5">
+            <div class="container ">
+                <form action="" class="form grid gap-y-5 bg-purple-100">
                     <div class="grid grid-cols-2 gap-6">
                         <label for="email">
                             <span class="spans">Email:</span>
@@ -65,7 +67,7 @@
 
                     <label for="reason">
                         <span class="spans">Reason for request</span>
-                        <textarea name="" id="reason" cols="30" rows="10" class="input"></textarea>
+                        <textarea name="" id="reason" cols="30" rows="5" class="input"></textarea>
                     </label>
 
                     <v-switch label='SIGNATURE (TICK "YES" TO VERIFY SIGNATURE)' color="blue"></v-switch>
@@ -76,13 +78,18 @@
 </template>
 
 <script setup lang="ts">
+import {ref} from "vue";
 
+import { useAppDetails } from "../stores/appDetails";
+import { storeToRefs } from "pinia";
+
+const store = useAppDetails();
+const { darkmode } = storeToRefs(store);
 </script>
 
 <style scoped>
 .main {
     display: flex;
-    background-color: white;
     width: 100%;
 }
 
@@ -105,10 +112,9 @@
 }
 
 .form {
-    background-color: white;
     padding: 10px;
     border-radius: 15px;
-    padding: 7%;
+    padding: 5%;
     box-shadow:
         0 3px 6px rgba(0, 0, 0, 0.1),
         /* Base shadow */

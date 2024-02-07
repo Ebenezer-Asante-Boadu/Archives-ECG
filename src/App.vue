@@ -27,11 +27,13 @@ watchEffect(()=>{
     </div>
     <div class="router-view" :style="{width: isNormalState? '95.5%':'100%'}">
       <navbar v-if="isNormalState"/>
-      <router-view v-slot="{ Component }">
-        <transition name="slide-left">
-          <component :is="Component" />
-        </transition>
-      </router-view>
+      <div class="custom-scrollj">
+        <router-view v-slot="{ Component }">
+          <transition name="slide-left">
+            <component :is="Component" />
+          </transition>
+        </router-view>
+      </div>
     </div>
   </div>
 </template>
@@ -44,5 +46,7 @@ watchEffect(()=>{
 }
 
 
-
+.main::-webkit-scrollbar{
+  display: none;
+}
 </style>

@@ -79,6 +79,16 @@ export async function getAuthenticated() {
         return err;
     }
 }
+
+export async function exportExcel(data:Array<Array<string>>){console.log(11)
+    try{
+        const res = await window.main.exportExcel(data);
+        console.log(10)
+        return res;
+    }catch(err){
+        return err;
+    }
+}
 // store work files in the cloud
 //upload excel sheet to add to existing data or start new data
 //request for files

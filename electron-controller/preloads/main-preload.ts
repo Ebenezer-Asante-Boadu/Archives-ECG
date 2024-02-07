@@ -1,5 +1,6 @@
 import { contextBridge, ipcRenderer } from "electron/renderer";
 
+
 contextBridge.exposeInMainWorld("main", {
     getVerification: async ()=>{
       try{
@@ -59,6 +60,17 @@ contextBridge.exposeInMainWorld("main", {
       }catch(err){
         return null
         console.log(err)
+      }
+    },
+    exportExcel: async(data:Array<Array<string>>)=>{
+      console.log("from preload")
+      try{
+        const res = await ipcRenderer.invoke("export", data);
+        console.log(res)
+        return res;
+      }catch (err){
+        console.log(err)
+        return null
       }
     }
   })

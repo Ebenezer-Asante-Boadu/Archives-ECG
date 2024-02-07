@@ -49,7 +49,8 @@ pinia.use((context) => {
   }
 
   context.store.$subscribe((mutation, state) => {
-    // console.log("State changed:", state); 
+    console.log("State changed:", state); 
+    // console.log(state)
     window.localStorage.setItem(storeId, serilizer.serialize(state))
   })
 });
@@ -61,32 +62,33 @@ createApp(App)
   .mount('#app')
 
 
-const itemsToClear = [
-  'app-main'
-  // `userManagement${import.meta.env.VITE_STORE_REACH}`,
-  // `orderHistory${import.meta.env.VITE_STORE_REACH}`,
-  // `categoryStorea${import.meta.env.VITE_STORE_REACH}`,
-  // `CartManagement${import.meta.env.VITE_STORE_REACH}`
-];
+// const itemsToClear = [
+//   'app-main',
+//   "dark_mode"
+//   // `userManagement${import.meta.env.VITE_STORE_REACH}`,
+//   // `orderHistory${import.meta.env.VITE_STORE_REACH}`,
+//   // `categoryStorea${import.meta.env.VITE_STORE_REACH}`,
+//   // `CartManagement${import.meta.env.VITE_STORE_REACH}`
+// ];
 
-// Get all keys from localStorage
-const allKeys = Object.keys(localStorage);
+// // Get all keys from localStorage
+// const allKeys = Object.keys(localStorage);
 
-// Iterate through all keys
-allKeys.forEach((key) => {
-  // Check if the key is not in the itemsToClear array and does not start with "amplitude"
-  if (!itemsToClear.includes(key) && !key.startsWith("amplitude")) {
-    // Check if the key starts with "CartManagement"
-    if (key.startsWith("CartManagement")) {
-      // Retrieve the data associated with the key
-      const cartManagementData = localStorage.getItem(key);
+// // Iterate through all keys
+// allKeys.forEach((key) => {
+//   // Check if the key is not in the itemsToClear array and does not start with "amplitude"
+//   if (!itemsToClear.includes(key) && !key.startsWith("amplitude")) {
+//     // Check if the key starts with "CartManagement"
+//     if (key.startsWith("CartManagement")) {
+//       // Retrieve the data associated with the key
+//       const cartManagementData = localStorage.getItem(key);
 
-      // Store the data in the new CartManagement version
-      const newKey = `CartManagement${import.meta.env.VITE_STORE_REACH}`;
-      localStorage.setItem(newKey, cartManagementData || "");
-    }
+//       // Store the data in the new CartManagement version
+//       const newKey = `CartManagement${import.meta.env.VITE_STORE_REACH}`;
+//       localStorage.setItem(newKey, cartManagementData || "");
+//     }
 
-    // Remove the item from localStorage
-    localStorage.removeItem(key);
-  }
-});
+//     // Remove the item from localStorage
+//     localStorage.removeItem(key);
+//   }
+// });

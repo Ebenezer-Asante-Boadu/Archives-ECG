@@ -1,11 +1,14 @@
-import { BrowserWindow, ipcMain, app, screen } from "electron";
+import { BrowserWindow, ipcMain, app, screen, nativeTheme } from "electron";
 import { createApplicationWindow } from "./processes/main-process";
 import { createSplashWindow, generateDeviceFingerprint } from "./processes/verify-process";
 import { encryptAndSaveData, readAndDecryptData } from "./lib/user";
 import { isPastSevenDays, isUserDataAvailableAndValid } from "./utils/userUtils";
 import { addRequest } from "./lib/firebase";
 import type { UserRequest } from "./types";
+import { saveWorkbook } from "./utils/fileUtils";
+import dotenv from "dotenv";
 
+dotenv.config();
 
 let userinfo: UserRequest | undefined;
 let splashWindowId = 0;
@@ -19,12 +22,29 @@ function getAuth() {
 
 
 app.whenReady().then(() => {
-
-  // encryptAndSaveData("how are you");
-  // console.log(readAndDecryptData());
+  
+console.log(process.env.ENV)
+  
   ipcMain.on("close-app", (event) => {
     app.quit();
   });
+
+  // if(!event){
+  //   const event = new CustomEvent("theme-change", {detail:{darkMode:${nativeTheme.shouldUseDarkColors}}}); 
+  //   document.dispatchEvent(event)
+  // }else{
+  //   event = new CustomEvent("theme-change", {detail:{darkMode:${nativeTheme.shouldUseDarkColors}}}); 
+  //   document.dispatchEvent(event)
+  // }
+
+  nativeTheme.on("updated",()=>{
+    const window = BrowserWindow.fromId(mainWindowId);
+    if(window){
+      window.webContents.executeJavaScript(
+        `localStorage.setItem("dark_mode", ${nativeTheme.shouldUseDarkColors});  window.dispatchEvent(new Event('storage'));`
+        , true);
+    };
+  })
 
   ipcMain.on("minimize-app", (event) => {
     const window = BrowserWindow.fromId(mainWindowId);
@@ -144,6 +164,15 @@ app.whenReady().then(() => {
       return { status: userinfo.status, staff_id: userinfo.staff_id }
     }
     return null;
+  });
+
+  ipcMain.handle("export", async (event, data:Array<Array<string>>)=>{
+    try{
+      console.log(56)
+      const res = await saveWorkbook();
+    }catch(err){
+      console.log(err)
+    }
   })
 
 

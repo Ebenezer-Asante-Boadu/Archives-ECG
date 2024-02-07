@@ -8,8 +8,10 @@ export const useAppDetails = defineStore('app-main', () => {
   startFirebaseApp();
   const auth = getAuth();
   const authenticated = ref(false);
+  const systemColor = ref("red-blackk");
+  const darkmode = ref(localStorage.getItem("dark_mode") === "true" ? true: false);
 
-
+console.log(localStorage.getItem("dark_mode"), darkmode.value)
   const unsubscribe = onAuthStateChanged(auth, (user) => {
     setAuthentication(!!user);
     console.log(authenticated.value)
@@ -21,12 +23,19 @@ export const useAppDetails = defineStore('app-main', () => {
   });
 
 
+  window.addEventListener("storage",()=>{
+    darkmode.value = localStorage.getItem("dark_mode") === "true" ? true: false;
+  });
+
+  
   function setAuthentication(state:boolean){
     authenticated.value = state;
   }
 
   return {
+    darkmode,
     authenticated,
-    setAuthentication
+    setAuthentication,
+    systemColor
   }
 })

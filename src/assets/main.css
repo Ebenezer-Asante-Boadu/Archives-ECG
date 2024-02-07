@@ -8,6 +8,7 @@
   margin: 0;
   padding: 0;
   font-weight: normal;
+  background-color: var(--light-system);
   /* height: 100%; */
 }
 
@@ -23,21 +24,30 @@ input:focus{
   outline: none;
 }
 
- /* Apply styles to the scrollbar */
- /* ::-webkit-scrollbar {
+ /* Apply styles to the scrollbar
+ ::-webkit-scrollbar {
   width: 8px!important; 
   display: none;
-} */
+}
+
+.custom-scroll
+{
+  height: 20px;
+}
+.custom-scroll::-webkit-scrollbar {
+  width: 8px!important; 
+  display: block!important;
+}
 
 /* Remove the track (the background) */
-/* ::-webkit-scrollbar-track {
-  background: linear-gradient(180deg, #29161D 0%, #121922 100%);
+/* .custom-scroll::-webkit-scrollbar-track {
+  background-color: red;
   padding: 0 2%;
   display: none;
 } */
 
 /* Style the scrollbar handle */
-/* ::-webkit-scrollbar-thumb {
+/* .custom-scroll::-webkit-scrollbar-thumb {
   background-color: rgba(255, 255, 255, 0.671); 
   border: 0px solid #ffffff; 
   border-radius: 10px; 
@@ -46,39 +56,46 @@ input:focus{
 } */
 
 /* Style the scrollbar handle on hover */
-/* ::-webkit-scrollbar-thumb:hover {
+/* .custom-scroll::-webkit-scrollbar-thumb:hover {
   display: none;
 } */
 
 /* Remove the arrows at the ends of the scrollbar */
-/* ::-webkit-scrollbar-button {
+/* .custom-scroll::-webkit-scrollbar-button {
   display: none;
 } */
 
+/* *{
+} */
 :root{
+  --dark_mode: rgb(9, 0, 19)!important;
+  --dark_mode_2: rgb(31, 8, 58)!important;
   --app-bar: rgb(27, 27, 27);
   --app-bar-2: #ebebeb;
-  --app-bar-3: rgb(0, 0, 51);
+  --app-bar-3: rgb(0, 0, 27);
+  --light-system: white;
+  
 }
 
-/* .swiper {
+.swiper {
   width: 100%;
-  height: 200px;
+}
+
+/* .swiper-slide {
+width:80% !important;
 } */
 
-.swiper-slide {
-  text-align: center;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
-.swiper-slide img {
+/* .swiper-slide img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
+} */
+
+textarea {
+  resize: none;
 }
 
 /* .swiper-slide {

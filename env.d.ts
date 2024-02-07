@@ -1,4 +1,5 @@
 /// <reference types="vite/client" />
+declare module 'qrcode';
 
 interface Window {
     verify: {
@@ -19,8 +20,22 @@ interface Window {
       resetDefault: ()=> void;
       setAuthenticated: (state:boolean)=>void;
       getAuthenticated: ()=>Promise<boolean>;
+      exportExcel: (data:Array<Array<string>>) => Promise<any>;
     }
   }
 
-
+  interface DocumentEventTarget extends EventTarget {
+    addEventListener(
+      type: 'theme-change',
+      listener: (event: ThemeChangeEvent) => void,
+      options?: boolean | AddEventListenerOptions
+    ): void;
+  }
+  
+  interface ThemeChangeEvent extends Event {
+    detail: {
+      darkMode: boolean;
+    };
+  }
+  
   

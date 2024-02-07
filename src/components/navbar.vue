@@ -1,9 +1,10 @@
 <template>
-    <nav class="main">
+    <nav class="main"  :style="{backgroundColor: (darkmode)? 'var(--dark_mode)' : 'white'}">
         <div class="logo-container ">
             <span>ECG Archives</span>
         </div>
-        <div class="middle t"></div>
+        <div class="middle t">
+        </div>
         <div class="right ">
             <button class="minimize actions " style="cursor: pointer;" @click="minimize()">
                 <v-icon color="white" size="15">mdi-minus</v-icon>
@@ -19,19 +20,28 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, onMounted,  } from "vue";
 import { maximizeRestore, closeMain, minimize } from "@/lib/utils";
+import {useAppDetails} from "../stores/appDetails";
+import { storeToRefs } from "pinia";
 
+const store = useAppDetails();
+const {darkmode} = storeToRefs(store);
+
+
+
+// (document as DocumentEventTarget).addEventListener('theme-change', (event) => {
+//   console.log('Dark mode:', event.detail.darkMode);
+// });
 </script>
 
 <style scoped>
 .main {
     overflow: hidden;
     width: 100%;
-    height: 50px;
+    height: 6.5%;
     display: flex;
     align-items: center;
-    background-color: var(--app-bar-3);
     position: sticky;
     position: -webkit-sticky;
     top: 0;
@@ -73,5 +83,5 @@ import { maximizeRestore, closeMain, minimize } from "@/lib/utils";
 
 .actions:hover {
     cursor: pointer;
-    background-color: red !important;
+    background-color: rgb(177, 10, 10) !important;
 }</style>

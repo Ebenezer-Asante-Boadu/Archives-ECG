@@ -14,7 +14,7 @@ export function createSplashWindow() {
          minHeight: 270,
          maxHeight: 270,
          transparent: true,
-         frame: false,
+         titleBarStyle: "hidden",
          alwaysOnTop: true, 
          webPreferences:{
            sandbox:true,
@@ -24,10 +24,14 @@ export function createSplashWindow() {
      });
  
   
-    //  splashWindow.loadFile(path.join(__dirname, "..", "..", "..", "dist" ,"index.html"));
-     splashWindow.loadURL("http://localhost:5173");
+     if(process.env.ENV === 'DEVELOPMENT'){
+      splashWindow.loadURL("http://localhost:5173");
+     }else{
+      splashWindow.loadFile(path.join(__dirname, "..", "..", "..", "dist" ,"index.html"));
+     }
+     
+    //  
      splashWindow.center();
- 
    
      return splashWindow.id;
  }

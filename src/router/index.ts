@@ -40,6 +40,24 @@ const router = createRouter({
         requiresAuth: true,
         admin: false
       }
+    },
+    {
+      path: "/notifications",
+      name: "notifications",
+      component: () => import("../views/notifications.vue"),
+      meta: {
+        requiresAuth: true,
+        admin: false
+      }
+    },
+    {
+      path: "/scan",
+      name: "scan",
+      component: () => import("../views/scan_code.vue"),
+      meta: {
+        requiresAuth: true,
+        admin: false
+      }
     }
   ]
 });

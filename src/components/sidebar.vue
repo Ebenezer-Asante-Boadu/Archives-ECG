@@ -1,10 +1,11 @@
 <template>
-    <div class="main">
+    <div class="main" :style="{backgroundColor: (darkmode)? 'var(--dark_mode)' : 'white'}">
         <div class="logom" style="display:flex; justify-content:center; align-items:center; padding: 25% 0">
-            <img src="../assets/logo.jpg"  style="border-radius:50%; heigh: 80%; width:80%">
+            <img src="../assets/logo.jpg"  style="border-radius:50%; heigh: 70%; width:70%">
         </div>
         <div class="links">
-            <div class="link" v-for="link in links" @click="router.push(link.path)">
+            <div class="link" v-for="link in links" @click="router.push(link.path)" 
+            :class="router.currentRoute.value.path === link.path ? 'selected-link':'' ">
                 <v-tooltip :text="link.tooltip">
                     <template v-slot:activator="{ props }">
                         <button v-bind="props">
@@ -30,15 +31,20 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import router from "@/router"
+import router from "@/router";
+import {useAppDetails} from "../stores/appDetails";
+import { storeToRefs } from "pinia";
+
+const store = useAppDetails();
+const {darkmode} = storeToRefs(store);
 
 const links = ref([
     {name:"Home", icon: "mdi-home-outline", tooltip: "Home", type:"normal", path: "/front-page"}, 
     {name: "requests", icon: "mdi-send-outline", tooltip: "Send a file request", type:"normal", path:"/send-request"},
-    {name:"notifications", icon:"mdi-bell", tooltip:"Notifications", type:"normal", path:""},
-    {name:"help", icon:"mdi-help-network", tooltip:"Get help", type:"normal", path:""},
-    {name:"edit", icon:"mdi-file-edit", tooltip:"Start editing a file", type:"normal", path:"/edit-file"},
-    {name:"settings", icon:"mdi-cog", tooltip:"Settings", type:"not-normal", path:""}
+    {name:"notifications", icon:"mdi-bell-outline", tooltip:"Notifications", type:"normal", path:"/notifications"},
+    {name:"help", icon:"mdi-help-network-outline", tooltip:"Get help", type:"normal", path:""},
+    {name:"edit", icon:"mdi-file-edit-outline", tooltip:"Start editing a file", type:"normal", path:"/edit-file"},
+    {name:"settings", icon:"mdi-cog-outline", tooltip:"Settings", type:"not-normal", path:"/scan"}
     ])
 </script>
 
@@ -46,19 +52,18 @@ const links = ref([
 .main {
     overflow: hidden;
     height: 100%;
-    width: 4.5%;
+    width: 5%;
     display: flex;
     flex-direction: column;
     justify-content: left;
-    background-color: var(--app-bar-3)!important;
     /*background-color: white;*/
     position: fixed;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .logo {
-    height: 40px;
-    width: 40px;
+    height: 35px;
+    width: 35px;
     border-radius: 50%;
 }
 
@@ -75,7 +80,7 @@ const links = ref([
 .links{
     width: 100%;
     color: white;
-    padding: 30% 0;
+    padding: 30% 7%;
     display: flex;
     flex-direction: column;
     row-gap: 10px;
@@ -95,6 +100,10 @@ const links = ref([
 }
 .link:hover{
     background-color: rgb(40, 14, 102);
+}
+
+.selected-link{
+    background-color: rgb(0, 4, 255);
 }
 .link-name{
     flex: 100%;
