@@ -72,5 +72,12 @@ contextBridge.exposeInMainWorld("main", {
         console.log(err)
         return null
       }
+    },
+    showNotification: (message:string, email:string)=>{
+      try{
+        const res = ipcRenderer.send("show-notification", message, email);
+      }catch(err){
+        console.log(err)
+      }
     }
   })

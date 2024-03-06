@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta http-equiv="Content-Security-Policy" 
+    <!-- <meta http-equiv="Content-Security-Policy" 
     content="
     default-src 'self'; 
     script-src 'self' 'unsafe-inline'; 
@@ -12,9 +12,20 @@
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; 
     font-src 'self' https://fonts.gstatic.com data:;
     connect-src 'self' http://127.0.0.1:8080 https://identitytoolkit.googleapis.com https://*.googleapis.com;
+    "> -->
+    <meta http-equiv="Content-Security-Policy" 
+    content="
+    default-src 'self' https://cdnjs.cloudflare.com; 
+    script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; 
+    img-src 'self' data: https://cdnjs.cloudflare.com https://s3-us-west-2.amazonaws.com; 
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; 
+    font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:;
+    connect-src 'self' http://127.0.0.1:8080 https://identitytoolkit.googleapis.com https://*.googleapis.com;
     ">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:700i|Noto+Sans:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ECG ARCHIVES</title>
 </head>

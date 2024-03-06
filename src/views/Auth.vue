@@ -1,8 +1,8 @@
 <template>
-    <div class="main">
+    <div class="main no-select">
         <div class="left">
             <div class="left-head">
-                Good Afternoon
+                {{getGreeting()}}
             </div>
             <div class="instruction mt-8">
                 Have you forgotten your password? Then request a new password!
@@ -50,8 +50,8 @@ import router from "@/router";
 import { storeToRefs } from "pinia";
 import { useAppDetails } from "@/stores/appDetails";
 
-const store = useAppDetails();
-const {setAuthentication} = store;
+const store =  useAppDetails();
+const {setAuthentication, setEmail} = store;
 const {authenticated} = storeToRefs(store)
 const instruction = ref("Enter your credentials to sign in");
 const emailModel =  ref("");
@@ -66,6 +66,7 @@ async function validateForm(){
     valids.value.pass = passModel.value.length < 8 ? false : true;
 
     if(valids.value.email && valids.value.pass){
+        setEmail(emailModel.value);
         const res = await signUser();
     }
 }
@@ -97,6 +98,24 @@ async function signUser(){
         return null;
     }
 }
+
+
+function getGreeting(): string {
+    const currentTime = new Date();
+    const currentHour = currentTime.getHours();
+
+    let greeting: string;
+
+    if (currentHour < 12) {
+        greeting = "Good Morning";
+    } else if (currentHour < 18) {
+        greeting = "Good Afternoon";
+    } else {
+        greeting = "Good Evening";
+    }
+
+    return greeting;
+}
 // _signInWithEmailPassword(emailModel.value, passModel.value, )
 // .then(()=>{})
 </script>
@@ -109,10 +128,7 @@ async function signUser(){
     height: 100vh;
     display: grid;
     grid-template-columns: 35% 65%;
-    user-select: none;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
+    
 }
 .left{
     background: linear-gradient(66deg, #090532 37.32%, #2414E2 131.6%);
@@ -177,7 +193,6 @@ async function signUser(){
 .logo{
     height: 70px;
     height: 70px;
-    border-radius: 50%;
 }
 .body .subheading{
     text-align: center;

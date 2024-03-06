@@ -15,6 +15,7 @@ export function createSplashWindow() {
          maxHeight: 270,
          transparent: true,
          titleBarStyle: "hidden",
+         frame: true,
          alwaysOnTop: true, 
          webPreferences:{
            sandbox:true,

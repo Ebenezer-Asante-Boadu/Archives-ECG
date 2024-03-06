@@ -11,6 +11,7 @@ export function createApplicationWindow(){
       height: height-300 >= 500? height-300: 500,
       resizable:false,
       titleBarStyle: 'hidden',
+      frame: true,
       roundedCorners: false,
       transparent:true,
       center: true,

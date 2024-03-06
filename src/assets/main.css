@@ -69,11 +69,13 @@ input:focus{
 } */
 :root{
   --dark_mode: rgb(9, 0, 19)!important;
-  --dark_mode_2: rgb(31, 8, 58)!important;
+  --dark_mode_2: rgb(22, 4, 44)!important;
   --app-bar: rgb(27, 27, 27);
   --app-bar-2: #ebebeb;
   --app-bar-3: rgb(0, 0, 27);
   --light-system: white;
+  --body-height: 93.5vh;
+  --nav-height: 6.5vh;
   
 }
 
@@ -96,6 +98,13 @@ width:80% !important;
 
 textarea {
   resize: none;
+}
+
+.no-select{
+  user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }
 
 /* .swiper-slide {

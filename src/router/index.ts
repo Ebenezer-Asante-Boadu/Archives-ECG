@@ -1,5 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import { getVerifyVerification, getMainVerification } from '@/lib/utils';
+// import { storeToRefs } from 'pinia';
+// import { useAppDetails } from '@/stores/appDetails';
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -7,12 +9,22 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: () => import("../views/Verify.vue")
+      component: () => import("../views/Verify.vue"),
+      meta: {
+        backArrow: false,
+        admin: false,
+        requiresAuth: false
+      }
     },
     {
       path: '/app-auth',
       name: 'app-auth',
       component: () => import("../views/Auth.vue"),
+      meta: {
+        backArrow: false,
+        admin: false,
+        requiresAuth: false
+      }
     },
     {
       path: "/front-page",
@@ -20,7 +32,8 @@ const router = createRouter({
       component: () => import("../views/home.vue"),
       meta: {
         requiresAuth: true,
-        admin: false
+        admin: false,
+        backArrow: false
       }
     },
     {
@@ -29,7 +42,8 @@ const router = createRouter({
       component: () => import("../views/sendRequest.vue"),
       meta: {
         requiresAuth: true,
-        admin: false
+        admin: false,
+        backArrow: false
       }
     },
     {
@@ -38,7 +52,8 @@ const router = createRouter({
       component: () => import("../views/editFile.vue"),
       meta: {
         requiresAuth: true,
-        admin: false
+        admin: false,
+        backArrow: false
       }
     },
     {
@@ -47,7 +62,8 @@ const router = createRouter({
       component: () => import("../views/notifications.vue"),
       meta: {
         requiresAuth: true,
-        admin: false
+        admin: false,
+        backArrow: false
       }
     },
     {
@@ -56,7 +72,18 @@ const router = createRouter({
       component: () => import("../views/scan_code.vue"),
       meta: {
         requiresAuth: true,
-        admin: false
+        admin: false,
+        backArrow: false
+      }
+    },
+    {
+      path: "/gallery-details",
+      name: "gallery-details",
+      component: () => import("../views/gallery_details.vue"),
+      meta: {
+        requiresAuth: true,
+        admin: false,
+        backArrow: true
       }
     }
   ]
@@ -64,7 +91,16 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
   try {
+    // const store = useAppDetails();
+    // const {setShouldShowBackArrow} = store;
     const verified = from.name === 'home' ? await getVerifyVerification() : await getMainVerification();
+
+    // console.log(to.meta && to.meta.backArrow); 
+    // if(to.meta.backArrow){
+    //   setShouldShowBackArrow(true);
+    // }else{
+    //   setShouldShowBackArrow(false);
+    // }
 
     if (verified) {
       console.log("from verified")
@@ -88,6 +124,8 @@ router.beforeEach(async (to, from, next) => {
         next();
       }
     }
+
+    
   } catch (error) {
     console.error('Error during verification:', error);
     next(false); // Prevent navigation in case of an error

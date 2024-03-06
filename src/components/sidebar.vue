@@ -1,7 +1,7 @@
 <template>
     <div class="main" :style="{backgroundColor: (darkmode)? 'var(--dark_mode)' : 'white'}">
         <div class="logom" style="display:flex; justify-content:center; align-items:center; padding: 25% 0">
-            <img src="../assets/logo.jpg"  style="border-radius:50%; heigh: 70%; width:70%">
+            <img src="../assets/logo.jpg"  style="heigh: 70%; width:70%">
         </div>
         <div class="links">
             <div class="link" v-for="link in links" @click="router.push(link.path)" 
@@ -9,7 +9,7 @@
                 <v-tooltip :text="link.tooltip">
                     <template v-slot:activator="{ props }">
                         <button v-bind="props">
-                            <v-icon  class="link-name" size="22" >{{link.icon}}</v-icon>
+                            <v-icon  class="link-name" size="22" :color="darkmode? 'white':'black'">{{link.icon}}</v-icon>
                         </button>
                     </template>
                 </v-tooltip>

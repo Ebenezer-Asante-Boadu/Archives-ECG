@@ -1,4 +1,4 @@
-import { BrowserWindow, ipcMain, app, screen, nativeTheme } from "electron";
+import { BrowserWindow, ipcMain, app, screen, nativeTheme, Notification } from "electron";
 import { createApplicationWindow } from "./processes/main-process";
 import { createSplashWindow, generateDeviceFingerprint } from "./processes/verify-process";
 import { encryptAndSaveData, readAndDecryptData } from "./lib/user";
@@ -7,6 +7,7 @@ import { addRequest } from "./lib/firebase";
 import type { UserRequest } from "./types";
 import { saveWorkbook } from "./utils/fileUtils";
 import dotenv from "dotenv";
+import { sendEmail } from "./lib/nodemail";
 
 dotenv.config();
 
@@ -28,6 +29,20 @@ console.log(process.env.ENV)
   ipcMain.on("close-app", (event) => {
     app.quit();
   });
+
+  ipcMain.on("show-notification", async (event, message:string, email:string)=>{
+    try{
+      const res = await sendEmail(email, message);
+      const notification = new Notification({
+        title: "File Request",
+        body: message,
+        silent: false,
+      });
+      notification.show();
+    }catch(err){
+      console.log(err);
+    }
+  })
 
   // if(!event){
   //   const event = new CustomEvent("theme-change", {detail:{darkMode:${nativeTheme.shouldUseDarkColors}}}); 

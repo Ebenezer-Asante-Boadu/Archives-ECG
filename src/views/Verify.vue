@@ -1,5 +1,5 @@
 <template>
-    <div class="submain">
+    <div class="submain no-select">
         <div class="main" id="main">
             <div>
                 <div class="close" id="close-app">
