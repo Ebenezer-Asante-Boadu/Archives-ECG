@@ -1,146 +1,286 @@
 <template>
-    <div class="main flex justify-center items-center">
-        <div class="containern  rounded-sm flex flex-row">
-            <div class="left  w-1/4 flex flex-col items-center pt-7">
-                <p class=" w-5/6">Filter messages</p>
-                <label for="date" class=" w-5/6">
-                    <input type="date" name="" id="date" >
-                </label>
+    <div class="main">
+        <div class="left ">
+            <v-list lines="one" bg-color="rgb(22, 4, 44)" class="border-b-2 border-blue-950">
+                <v-list-item v-for="folder in folders" :key="folder.title" :subtitle="folder.subtitle"
+                    :title="folder.title" color="red">
+                    <template v-slot:prepend>
+                        <v-avatar color="grey-lighten-1">
+                            <img src="../assets/account.jpg" alt="">
+                        </v-avatar>
+                    </template>
 
-                <div class="notifications grid grid-flow-row gap-3">
-                    <div class="notification bg-white rounded-lg" v-for="n in notifications">
-                        <div class="top">
-                            <div class="title"> release</div>
-                            <div class="date">
-                                {{ n.date }}
-                            </div>
-                        </div>
-                        
-                        <div class="truncaten body">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere natus ullam saepe hic dolores, temporibus ea dolor alias!  </div>
+                    <template v-slot:append>
+                        <v-icon>mdi-dots-vertical</v-icon>
+                    </template>
+                </v-list-item>
+            </v-list>
+
+            <v-text-field :loading="false" density="compact" label="Search or start a new chat"
+                prepend-inner-icon="mdi-magnify" variant="solo-filled" class="p-3 text-sm" bg-color="rgb(22, 4, 44)"
+                hide-details single-line></v-text-field>
+
+            <section class="pl-1 pr-1 pb-3">
+                <div class="text-white pb-3 pl-2 pr-2">
+                    Messages
+                </div>
+                <div class="scroller">
+                    <v-list lines="one" bg-color="rgb(22, 4, 44)" active-color="white">
+                        <v-list-item v-for="folder, index in people" :key="index" :subtitle="folder.subtitle"
+                            :title="folder.title" :value="index" class="mb-4">
+
+                            <template v-slot:prepend>
+                                <v-avatar color="grey-lighten-1">
+                                    <img src="../assets/account.jpg" alt="">
+                                </v-avatar>
+                            </template>
+
+                            <template v-slot:append>
+                                <!-- <v-icon>mdi-dots-vertical</v-icon> -->
+                                <div class="flex-container">
+                                    <div class="time">5:56pm</div>
+                                    <v-avatar color="green" size="18">
+                                        <span style="font-size:13px">5</span>
+                                    </v-avatar>
+                                </div>
+                            </template>
+                        </v-list-item>
+                    </v-list>
+                </div>
+            </section>
+        </div>
+        <div class="right">
+            <div class="toolbar">
+                <v-list lines="one" bg-color="rgb(22, 4, 44)" class="border-b-2 border-blue-950">
+                    <v-list-item v-for="folder in folders" :key="folder.title" subtitle="Typing..."
+                        :title="folder.title" color="red">
+                        <template v-slot:prepend>
+                            <v-avatar color="grey-lighten-1">
+                                <img src="../assets/account.jpg" alt="">
+                            </v-avatar>
+                        </template>
+
+                        <template v-slot:append>
+                            <v-icon>mdi-dots-vertical</v-icon>
+
+                        </template>
+                    </v-list-item>
+                </v-list>
+            </div>
+
+            <div class="chatszone">
+                <div class="message-controller " v-for="message in messages"  
+                :class="{'justify-end' : message.who == 'you', 'justify-start': message.who=='them'}">
+                    <div class="message bg-orange-500"  >
+                        <div class="text">{{ message.message }}</div>
+                        <div class="time">{{message.time}}</div>
                     </div>
                 </div>
             </div>
-            <div class="right  w-3/4 ">
-                <div class="detail-pane">
-                    release of GPT 4
+
+            <div class="send-options">
+                <div class="text-input">
+                    <v-text-field :loading="false" density="comfortable" label="Type a message..."
+                        prepend-inner-icon="mdi-attachment" variant="solo-filled" class="p-3 text-sm "
+                        @click:prepend-inner="callThem"
+                        bg-color="rgb(22, 4, 44)"  hide-details single-line></v-text-field>
                 </div>
+
+                <v-btn class="btn" color="rgb(22, 4, 44)" rounded="xl" density="default" size="large" elevation="5">
+                    <v-icon size='18'>mdi-microphone-outline</v-icon>
+                </v-btn>
+
+                <v-btn class="btn" color="rgb(22, 4, 44)" rounded="xl" density="default" size="large" elevation="5">
+                    <v-icon size="18">mdi-send</v-icon>
+                </v-btn>
             </div>
         </div>
     </div>
 </template>
+
 <script setup lang="ts">
-import { ref } from 'vue';
-const notifications = ref([
-    {title: "release", date: "15 feb", images: [], 
-    paragraphs: [
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere natus ullam saepe hic dolores, temporibus ea dolor alias, repudiandae cupiditate perspiciatis blanditiis nulla mollitia! Quos eveniet distinctio debitis nam rerum!",
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero quasi numquam ab, eligendi veniam veritatis! Odio ea pariatur, provident alias minima, cum reiciendis minus vero magnam culpa iusto cumque sapiente."
-]},
+import { ref } from "vue";
 
-{title: "release of memebero", date: "15 feb", images: [], 
-    paragraphs: [
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere natus ullam saepe hic dolores, temporibus ea dolor alias, repudiandae cupiditate perspiciatis blanditiis nulla mollitia! Quos eveniet distinctio debitis nam rerum!",
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero quasi numquam ab, eligendi veniam veritatis! Odio ea pariatur, provident alias minima, cum reiciendis minus vero magnam culpa iusto cumque sapiente."
-]},
+const loading = ref(false);
+const folders = ref([
+    {
+        subtitle: 'My Account',
+        title: 'Recipes',
+    },
+]);
 
-{title: "release of memebero", date: "15 feb", images: [], 
-    paragraphs: [
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere natus ullam saepe hic dolores, temporibus ea dolor alias, repudiandae cupiditate perspiciatis blanditiis nulla mollitia! Quos eveniet distinctio debitis nam rerum!",
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero quasi numquam ab, eligendi veniam veritatis! Odio ea pariatur, provident alias minima, cum reiciendis minus vero magnam culpa iusto cumque sapiente."
-]},
+const people = ref([
+    {
+        subtitle: 'Do you 2k in your account?',
+        title: 'Tkay',
+    },
+    {
+        subtitle: 'Do you 2k in your account?',
+        title: 'Tkay',
+    },
+    {
+        subtitle: 'Do you 2k in your account?',
+        title: 'Tkay',
+    },
+    {
+        subtitle: 'Do you 2k in your account?',
+        title: 'Tkay',
+    },
+    {
+        subtitle: 'Do you 2k in your account?',
+        title: 'Tkay',
+    },
+    {
+        subtitle: 'Do you 2k in your account?',
+        title: 'Tkay',
+    },
+    {
+        subtitle: 'Do you 2k in your account?',
+        title: 'Tkay',
+    },
+    {
+        subtitle: 'Do you 2k in your account?',
+        title: 'Tkay',
+    },
+    {
+        subtitle: 'Do you 2k in your account?',
+        title: 'Tkay',
+    },
+    {
+        subtitle: 'Do you 2k in your account?',
+        title: 'Tkay',
+    },
+    {
+        subtitle: 'Do you 2k in your account?',
+        title: 'Tkay',
+    },
+]);
 
-{title: "release of memebero", date: "15 feb", images: [], 
-    paragraphs: [
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere natus ullam saepe hic dolores, temporibus ea dolor alias, repudiandae cupiditate perspiciatis blanditiis nulla mollitia! Quos eveniet distinctio debitis nam rerum!",
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero quasi numquam ab, eligendi veniam veritatis! Odio ea pariatur, provident alias minima, cum reiciendis minus vero magnam culpa iusto cumque sapiente."
-]},
+function callThem(){
+    alert("called oh");
+}
 
-{title: "release of memebero", date: "15 feb", images: [], 
-    paragraphs: [
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere natus ullam saepe hic dolores, temporibus ea dolor alias, repudiandae cupiditate perspiciatis blanditiis nulla mollitia! Quos eveniet distinctio debitis nam rerum!",
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero quasi numquam ab, eligendi veniam veritatis! Odio ea pariatur, provident alias minima, cum reiciendis minus vero magnam culpa iusto cumque sapiente."
-]},
-
-{title: "release of memebero", date: "15 feb", images: [], 
-    paragraphs: [
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere natus ullam saepe hic dolores, temporibus ea dolor alias, repudiandae cupiditate perspiciatis blanditiis nulla mollitia! Quos eveniet distinctio debitis nam rerum!",
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero quasi numquam ab, eligendi veniam veritatis! Odio ea pariatur, provident alias minima, cum reiciendis minus vero magnam culpa iusto cumque sapiente."
-]},
+const messages = ref([
+    {
+        type: "text",
+        time: "5:12pm",
+        message: "how are you?",
+        who: "you"
+    },
+    {
+        type: "text",
+        time: "5:12pm",
+        message: "how are you?",
+        who: "you"
+    },
+    {
+        type: "text",
+        time: "5:12pm",
+        message: "how are you?",
+        who: "them"
+    },
+    {
+        type: "text",
+        time: "5:12pm",
+        message: "how are you?",
+        who: "you"
+    },
+    {
+        type: "text",
+        time: "5:12pm",
+        message: "how are you?",
+        who: "them"
+    },
+    {
+        type: "text",
+        time: "5:12pm",
+        message: "how are you?",
+        who: "them"
+    },
+    {
+        type: "text",
+        time: "5:12pm",
+        message: "how are you?",
+        who: "you"
+    },
+    {
+        type: "text",
+        time: "5:12pm",
+        message: "how are you?",
+        who: "you"
+    },
+    {
+        type: "text",
+        time: "5:12pm",
+        message: "how are you?",
+        who: "you"
+    }
 ])
 </script>
 
 <style scoped>
-.main{
-    background: rgb(241, 241, 241);
+.main {
+    background-color: rgb(14, 14, 14);
     height: var(--body-height);
-}
-.containern{
-    width: 95%;
-    height: 95%;
-   /* box-shadow:
-        0 3px 6px rgba(0, 0, 0, 0.1),
-        0 3px 6px rgba(0, 0, 0, 0.1),
-        0 10px 20px rgba(0, 0, 0, 0.2),
-        0 20px 40px rgba(0, 0, 0, 0.3);*/
-}
-.left{
-    border-right: 1px solid rgb(173, 173, 173);
-}
-
-.right{
-    overflow-y: auto;
-}
-label input{
-    width: 100%;
-    border: 1px solid black;
-}
-.notification{
-    padding: 10px;
-    box-shadow:
-        0 3px 6px rgba(0, 0, 0, 0.1);
-}
-.notification:hover{
-    background-color: rgb(25, 2, 78)!important;
-    color: white!important;
-    cursor: pointer;
-}
-.notifications{
-    overflow-y: auto;
-}
-.notification .top{
     display: flex;
-    justify-content: space-between;
-}
-.notification .top .date{
-    color: rgb(55, 2, 141);
-    font-size: 13px;
-    font-weight: 600;
+    padding: 0;
+    padding-left: 10px;
 }
 
-.notification .top .title{
-    font-size: 16px;
+.left {
+    width: 26%;
+    height: 100%;
+    background-color: var(--dark_mode_2);
 }
 
-.notification .body{
-    font-size: 13.5px;
+.right {
+    width: 74%;
+    display: grid;
+    grid-template-rows: 10% 80% 10%;
 }
-.truncate {
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 3;
-        line-clamp: 3;
-        overflow: hidden !important;
-        width: 100%;
-    }
 
-    .right .detail-image{
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center
-    }
-    .right .detail-image img{
-        width: 80%;
-        height: 400px;
-    }
+.scroller {
+    height: 30%
+}
+
+.time {
+    font-size: 12px;
+    opacity: 0.7;
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+    justify-content: center;
+    align-items: center
+}
+
+.send-options {
+    display: flex;
+    align-items: center;
+    background-color: rgb(22, 4, 44);
+    column-gap: 1%;
+}
+
+.send-options .text-input {
+    width: 88%;
+}
+.send-options button.btn{
+    width: 5%;
+}
+
+.chatszone{
+    display: grid;
+    row-gap: 1%;
+    padding: 3%;
+    overflow-y: auto;
+}
+.message{
+    width: fit-content
+}
+.message-controller{
+    display: flex;
+}
+
 </style>
