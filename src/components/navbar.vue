@@ -1,8 +1,8 @@
 <template>
-    <nav class="main"  :style="{backgroundColor: (darkmode)? 'var(--dark_mode)' : 'white'}">
+    <nav class="main"  :style="{backgroundColor: (darkmode)? 'var(--dark_mode)' : 'rgb(238, 238, 238)'}">
         <div class="logo-container " :style="{color: (darkmode)? 'white':'black'}">
             <span @click="$router.go(-1)" v-if="shouldShowBackArrow" style="cursor:pointer"><v-icon size="20"  >mdi-arrow-left</v-icon></span>
-            <span>ECG Archives {{darkmode}}</span>
+            <span>ECG Archives </span>
         </div>
         <div class="middle t">
         </div>

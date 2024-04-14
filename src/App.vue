@@ -5,6 +5,7 @@ import router from './router';
 import { useAppDetails } from './stores/appDetails';
 import { storeToRefs } from 'pinia';
 
+
 const navbar = defineAsyncComponent(()=>import("./components/navbar.vue"))
 const store = useAppDetails();
 const {authenticated} = storeToRefs(store);

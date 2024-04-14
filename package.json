@@ -32,6 +32,7 @@
     "swiper": "^11.0.5",
     "vue": "^3.3.11",
     "vue-router": "^4.2.5",
+    "vuestic-ui": "^1.9.8",
     "vuetify": "^3.0.0-beta.0",
     "webfontloader": "^1.0.0"
   },

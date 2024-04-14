@@ -1,6 +1,6 @@
 <template>
-    <div class="main" :style="{backgroundColor: (darkmode)? 'var(--dark_mode)' : 'white'}">
-        <div class="logom" style="display:flex; justify-content:center; align-items:center; padding: 25% 0">
+    <div class="main" :style="{backgroundColor: (darkmode)? 'var(--dark_mode)' : 'rgb(238, 238, 238)'}">
+        <div class="logom" style="display:flex; justify-content:center; align-items:center; padding: 35% 15%">
             <img src="../assets/logo.jpg"  style="heigh: 70%; width:70%">
         </div>
         <div class="links">
@@ -39,12 +39,12 @@ const store = useAppDetails();
 const {darkmode} = storeToRefs(store);
 
 const links = ref([
-    {name:"Home", icon: "mdi-home-outline", tooltip: "Home", type:"normal", path: "/front-page"}, 
-    {name: "requests", icon: "mdi-send-outline", tooltip: "Send a file request", type:"normal", path:"/send-request"},
-    {name:"notifications", icon:"mdi-bell-outline", tooltip:"Notifications", type:"normal", path:"/notifications"},
-    {name:"help", icon:"mdi-help-network-outline", tooltip:"Get help", type:"normal", path:""},
-    {name:"edit", icon:"mdi-file-edit-outline", tooltip:"Start editing a file", type:"normal", path:"/edit-file"},
-    {name:"settings", icon:"mdi-cog-outline", tooltip:"Settings", type:"not-normal", path:"/scan"}
+    {name:"Home", icon: "mdi-home", tooltip: "Home", type:"normal", path: "/front-page"}, 
+    {name: "requests", icon: "mdi-send", tooltip: "Send a file request", type:"normal", path:"/send-request"},
+    {name:"notifications", icon:"mdi-bell", tooltip:"Notifications", type:"normal", path:"/notifications"},
+    {name:"help", icon:"mdi-help-network", tooltip:"Get help", type:"normal", path:""},
+    {name:"edit", icon:"mdi-file-edit", tooltip:"Start editing a file", type:"normal", path:"/edit-file"},
+    {name:"settings", icon:"mdi-cog", tooltip:"Settings", type:"not-normal", path:"/scan"}
     ])
 </script>
 
@@ -93,7 +93,7 @@ const links = ref([
     justify-content: center;
     
     padding: 14% 0;
-    border-radius: 10px;
+    border-radius: 5px;
     margin: 0 8%;
     cursor: pointer;
     color: white;
@@ -103,7 +103,8 @@ const links = ref([
 }
 
 .selected-link{
-    background-color: rgb(0, 4, 255);
+    background-color: white;
+    border-left: 6px solid rgb(21, 51, 185);
 }
 .link-name{
     flex: 100%;

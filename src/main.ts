@@ -4,7 +4,9 @@ import router from './router'
 import vuetify from './plugins/vuetify'
 import { loadFonts } from './plugins/webfontloader';
 import { createPinia } from 'pinia';
-import "./assets/main.css"
+import "./assets/main.css";
+import { createVuestic } from "vuestic-ui";
+import "vuestic-ui/css";
 
 loadFonts()
 const pinia = createPinia();
@@ -59,6 +61,7 @@ createApp(App)
   .use(router)
   .use(vuetify)
   .use(pinia)
+  .use(createVuestic())
   .mount('#app')
 
 

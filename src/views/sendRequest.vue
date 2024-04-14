@@ -93,12 +93,13 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-
 import { useAppDetails } from "../stores/appDetails";
 import { storeToRefs } from "pinia";
+import { useToast } from 'vuestic-ui';
 
 const store = useAppDetails();
 const { darkmode, userDetails } = storeToRefs(store);
+const { init, notify, close, closeAll } = useToast();
 const startValidation = ref(false)
 const inputs = ref({
     email: { value: userDetails.value.email, isValid: false },
@@ -146,8 +147,8 @@ function validateForm() {
     if (emailValid && cellValid && idValid && requestedValid && dateRequestedValid && descriptionValid && behalfValid && reasonValid && designationValid) {
         console.log("yeah");
        
-        window.main.showNotification(`Your request for the file titled ${inputs.value.description.value} has been sent to the admin for approval!!!`, inputs.value.email.value);
-         
+        // window.main.showNotification(`Your request for the file titled ${inputs.value.description.value} has been sent to the admin for approval!!!`, inputs.value.email.value);
+        notify( {message:"JUST CHECKING", position:"bottom-right"});
         inputs.value.behalf.value = "";
         inputs.value.cell_phone.value = "";
         inputs.value.description.value = "";
@@ -165,7 +166,7 @@ function validateForm() {
     display: flex;
     width: 100%;
     height: var(--body-height);
-    overflow-y: scroll;
+    overflow-y: auto;
     position: relative;
 }
 
@@ -180,7 +181,7 @@ function validateForm() {
 
 .right {
     width: 70%;
-    height: fit-content;
+    height:100%;
     display: grid;
     justify-content: center;
     grid-template-columns: 90%;
