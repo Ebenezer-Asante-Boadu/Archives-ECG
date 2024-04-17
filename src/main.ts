@@ -13,21 +13,9 @@ const pinia = createPinia();
 pinia.use((context) => {
   const storeId = context.store.$id;
 
-  // const serilizer = {
-  //   serialize : JSON.stringify,
-  //   deserialize : JSON.parse
-  // };
 
 
-  const propertiesToExclude = ["user",
-    "userProfileFirebase",
-    "sizeLimit",
-    "baseUrl",
-    "userphone",
-    "categories",
-    "categoryIcons",
-    "categoryIconsObject"]
-  // "user", "userphone", "isUserAuthenticated", "userDetail"];
+  const propertiesToExclude = [""]
 
   const serilizer = {
     serialize: (state: any) => {
@@ -64,34 +52,3 @@ createApp(App)
   .use(createVuestic())
   .mount('#app')
 
-
-// const itemsToClear = [
-//   'app-main',
-//   "dark_mode"
-//   // `userManagement${import.meta.env.VITE_STORE_REACH}`,
-//   // `orderHistory${import.meta.env.VITE_STORE_REACH}`,
-//   // `categoryStorea${import.meta.env.VITE_STORE_REACH}`,
-//   // `CartManagement${import.meta.env.VITE_STORE_REACH}`
-// ];
-
-// // Get all keys from localStorage
-// const allKeys = Object.keys(localStorage);
-
-// // Iterate through all keys
-// allKeys.forEach((key) => {
-//   // Check if the key is not in the itemsToClear array and does not start with "amplitude"
-//   if (!itemsToClear.includes(key) && !key.startsWith("amplitude")) {
-//     // Check if the key starts with "CartManagement"
-//     if (key.startsWith("CartManagement")) {
-//       // Retrieve the data associated with the key
-//       const cartManagementData = localStorage.getItem(key);
-
-//       // Store the data in the new CartManagement version
-//       const newKey = `CartManagement${import.meta.env.VITE_STORE_REACH}`;
-//       localStorage.setItem(newKey, cartManagementData || "");
-//     }
-
-//     // Remove the item from localStorage
-//     localStorage.removeItem(key);
-//   }
-// });

@@ -7,15 +7,17 @@
                         <v-icon size="23">mdi-window-close</v-icon>
                     </span>
                 </div>
-                <div class="lockl">
+                <div class="lockl mb-5">
                     <v-icon size="23" class="lock" :color="lockColor">mdi-lock</v-icon>
                     <!-- <i class="mdi mdi-lock" id="lock"></i> -->
                 </div>
                 <div class="heading pl-2">
-                    <div>Verify your identity with the company.</div>
+                    <div style=' font-family: "Roboto", sans-serif; font-weight:700; font-size:17px' class="mb-2">
+                        Verify your identity with the company.
+                    </div>
                     <div id="instruction" :style="{ color: instructionColor }">{{ instructionText }}</div>
                 </div>
-                <div class="input mt-2" ref="company-code">
+                <div class="input mt-3" ref="company-code">
                     <input type="password" name="company-code" id="company-code" placeholder="Enter company code"
                         ref="company_code" @input="continueValidate()">
                 </div>
@@ -199,7 +201,7 @@ function continueValidate() {
 
 .input #company-code {
     width: 100%;
-    padding: 5px;
+    padding: 8px;
     border-radius: 3px;
     border: 1px solid rgb(190, 190, 190);
     font-size: 14px;
@@ -212,4 +214,11 @@ function continueValidate() {
 
 .input:focus {
     outline: none !important;
-}</style>
+}
+ 
+#instruction{
+    font-family: "Roboto", sans-serif; 
+    font-weight:400;
+    font-size: 13px;
+}
+</style>
