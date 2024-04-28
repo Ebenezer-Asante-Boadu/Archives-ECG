@@ -1,224 +1,128 @@
 <template>
-    <div class="submain no-select">
-        <div class="main" id="main">
-            <div>
-                <div class="close" id="close-app">
-                    <span @click="close()">
+    <div class=" main-verify grid grid-flow-row p-5 no-select">
+        <div class=" header grid grid-flow-row pb-5">
+            <div class="section1 flex flex-row justify-between items-center pb-5">
+                <div class="left-section flex flex-row w-10/12 justify-start items-center gap-2">
+                    <div class="flex-grow-0 flex justify-start">
+                        <v-avatar color="rgb(212, 212, 241)" size="25">
+                            <v-icon size="15" class="lock" :color="verification.verified? 'rgb(0, 0, 66)' : 'red'">mdi-lock</v-icon>
+                        </v-avatar>
+                    </div>
+                    <div class="details flex-grow-0 text-base font-bold">
+                        Verify your identity
+                    </div>
+                </div>
+                <div class="right-section w-2/12 flex justify-end">
+                    <!-- <v-avatar> -->
+                    <span class="flex-grow-0 " style="cursor:pointer" @click="close()">
                         <v-icon size="23">mdi-window-close</v-icon>
                     </span>
-                </div>
-                <div class="lockl mb-5">
-                    <v-icon size="23" class="lock" :color="lockColor">mdi-lock</v-icon>
-                    <!-- <i class="mdi mdi-lock" id="lock"></i> -->
-                </div>
-                <div class="heading pl-2">
-                    <div style=' font-family: "Roboto", sans-serif; font-weight:700; font-size:17px' class="mb-2">
-                        Verify your identity with the company.
-                    </div>
-                    <div id="instruction" :style="{ color: instructionColor }">{{ instructionText }}</div>
-                </div>
-                <div class="input mt-3" ref="company-code">
-                    <input type="password" name="company-code" id="company-code" placeholder="Enter company code"
-                        ref="company_code" @input="continueValidate()">
+                    <!-- </v-avatar> -->
                 </div>
             </div>
-            <div class="footer">
-                <button id="cancel" @click="close()">Cancel</button>
-                <button id="verify" @click="validateCodeInput()">Verify</button>
-                <!-- <button @click="$router.push('/k')">ch</button> -->
+            <div class="section2 flex text-xs"
+                :class="{ 'text-black': verification.verified, 'text-red-600': !verification.verified, 'font-bold': !verification.verified, 'text-sm': !verification.verified }">
+                {{ verification.verified ? verification.default_message : verification.error_message }}
             </div>
+        </div>
+        <div class="body pt-6">
+            <div class="mb-5">
+                <div class="text-xs mb-3 pl-2">ID Number:</div>
+                <v-text-field placeholder="Enter your company ID Number" variant="outlined" density="compact"
+                    append-inner-icon="mdi-email" :rules="[rules.required, rules.Length]" v-model="verification.input"
+                    :base-color="isFocused ? 'rgb(0, 0, 66)' : 'grey'" @update:focused="(value) => isFocused = value">
+                </v-text-field>
+            </div>
+            <button class="verify" :disabled="!isIDValid" @click="startVerification()">{{ verify_button_text }}</button>
+
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
+import { close, getFingerprint, getVerifyVerification, verifyApp } from "../lib/utils";
 import { ref } from "vue";
 import router from "@/router";
-import { close, getFingerprint, getVerifyVerification, verifyApp } from "../lib/utils";
-// import { addRequest } from "@/lib/firebase";
-import { useAppDetails } from "../stores/appDetails";
-import { storeToRefs } from "pinia";
 
-const store = useAppDetails();
-// const { setVerified } = store;
-// const { verified } = storeToRefs(store)
-const lockColor = ref("#2A3BE3")
-const company_code = ref<HTMLInputElement | null>(null);
-const instructionText = ref("Enter your staff ID.");
-const instructionColor = ref("black");
-const startValidation = ref(false);
+const isFocused = ref(false);
+const number_pattern = /^\d+$/;
+const isIDValid = ref(false);
+const verify_button_text = ref("Verify identity");
+const verification = ref({
+    verified: true,
+    error_message: "hello",
+    input: "",
+    default_message: "Enter your company ID number to verify yourself"
+});
 
+const rules = {
+    // Defining a validation rule named 'required'
+    required: (value: any) => !!value || 'Please fill in the field!',
+    Length: (value: any) => {
+        isIDValid.value = (value.length == 16 && number_pattern.test(value));
+        return (value.length == 16 && number_pattern.test(value)) || "Invalid ID Number"
+    },
+}
 
-async function validateCodeInput(inputElement: HTMLInputElement | null = company_code.value) {
-    startValidation.value = true;
+async function startVerification() {
+    verify_button_text.value = "Verifying identity...";
+    const fingerprint = await getFingerprint();
 
-    if (inputElement && inputElement.value.length === 16) {
-        try {
-            // Reset styles and messages
-            resetValidationStyles();
+    if (fingerprint) {
+        const results = await verifyApp({
+            fingerprint: fingerprint,
+            date: "",
+            staff_id: verification.value.input
+        });
 
-            const fingerprint = await getFingerprint();
+        // console.log(results);
 
-            if (fingerprint && company_code.value) {
-                const results = await verifyApp({
-                    fingerprint: fingerprint,
-                    date: "",
-                    staff_id: company_code.value.value
-                });
-
-                console.log(results);
-
-                if (results.success) { 
-                    resetValidationStyles();
-                    router.push("/app-auth");
-                    return;
-                } else {
-                    console.log("Verification failed. Please try again.");
-                    if(results.message === 5000){
-                        handleInvalidInput(inputElement,"You've entered the wrong staff id!");
-                    }else{
-                        handleInvalidInput(inputElement, "You don't have authorized access!!!")
-                    }
-                }
+        if (results.success) {
+            verification.value.verified = true;
+            verify_button_text.value = "Verify identity";
+            router.push("/app-auth");
+            return;
+        } else {
+            verification.value.verified = false;
+            verify_button_text.value = "Verify identity";
+            // console.log("Verification failed. Please try again.");
+            if (results.message === 5000) {
+                verification.value.error_message = "You've entered the wrong staff id!";
             } else {
-                console.log("Couldn't add fingerprint or company code");
+                verification.value.error_message = "You don't have authorized access!!!";
             }
-        } catch (error) {
-            console.error("An error occurred during validation:", error);
         }
     } else {
-        // Handle invalid input
-        handleInvalidInput(inputElement);
+        verification.value.verified = false;
+        verify_button_text.value = "Verify identity";
+        verification.value.error_message = "Couldn't add fingerprint or ID Number";
     }
 }
-
-function resetValidationStyles() {
-    lockColor.value = "#2A3BE3";
-    company_code.value ? company_code.value.style.border = "1px solid #2A3BE3" : null;
-    instructionText.value = "Enter your staff ID.";
-    instructionColor.value = "black";
-}
-
-function handleInvalidInput(inputElement: HTMLInputElement | null, message:string="Please try again.") {
-    if (inputElement) {
-        lockColor.value = "red";
-        inputElement.style.border = "1px solid red";
-        instructionText.value = message;
-        instructionColor.value = "red";
-    }
-}
-
-
-function continueValidate() {
-    if (startValidation.value) {
-        validateCodeInput();
-    }
-}
-
-
 </script>
 
 <style scoped>
-.main {
+.main-verify {
     background-color: white;
-    /* background: linear-gradient(119deg, #D9D9D9 17.7%, rgba(137, 136, 176, 0.00) 96.71%); */
     width: 100vw;
     height: 100vh;
-    padding: 15px 20px;
-    /* border-radius: 15px; */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
 }
 
-.submain {
-    background-color: white;
-    /* border-radius: 15px; */
-    height: 100%;
+.main-verify * {
+    font-family: "Roboto", sans-serif;
+}
+
+.header {
+    height: fit-content;
     width: 100%;
+    border-bottom: 1px solid rgb(163, 163, 163);
 }
 
-.close {
-    width: 100%;
-    display: flex;
-    justify-content: right;
-
-}
-
-.close i {
-    font-size: 23px;
-    cursor: pointer;
-    color: rgb(61, 61, 61);
-}
-
-.lock {
-    background-color: #EDE5F0;
-    padding: 17px;
-    border-radius: 50%;
-}
-
-.footer {
-    display: flex;
-    justify-content: right;
-    column-gap: 5px;
-    width: 100%;
-    font-size: 14px;
-}
-
-.footer button:first-child {
-    background-color: white;
-    color: black;
-    border: 1px solid rgb(116, 116, 116);
-    padding: 3px 20px;
-    cursor: pointer;
-}
-
-.footer button:last-child {
+button.verify {
     background-color: rgb(0, 0, 66);
-    color: white;
-    border: 1px solid rgb(0, 0, 66);
-    padding: 3px 30px;
-    cursor: pointer;
-}
-
-.heading {
-    padding: 3% 0;
-    display: grid;
-    row-gap: 6%;
-    grid-template-columns: 100%;
-}
-
-.heading div:first-child {
-    font-size: 17px;
-    font-weight: 600;
-}
-
-.heading div:last-child {
-    font-size: 14px;
-    font-weight: 500;
-    color: rgb(97, 97, 97);
-}
-
-.input #company-code {
     width: 100%;
-    padding: 8px;
-    border-radius: 3px;
-    border: 1px solid rgb(190, 190, 190);
-    font-size: 14px;
-}
-
-.input {
-    display: flex;
-    justify-content: center;
-}
-
-.input:focus {
-    outline: none !important;
-}
- 
-#instruction{
-    font-family: "Roboto", sans-serif; 
-    font-weight:400;
+    color: white;
+    border-radius: 5px;
+    padding: 9px;
     font-size: 13px;
 }
 </style>

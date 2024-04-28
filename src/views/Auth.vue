@@ -1,11 +1,12 @@
 <template>
     <div class="main no-select">
-        <div class="left">
+        <div class="left p-3">
             <div class="left-head">
-                {{getGreeting()}}
+                {{ getGreeting() }}
             </div>
             <div class="instruction mt-8">
-                Have you forgotten your password? Then request a new password!
+                <pre>Have you forgotten your password?</pre>
+                <pre>Then request a new password!</pre>
             </div>
             <button class="reset mt-5">Request password reset</button>
         </div>
@@ -15,24 +16,30 @@
                     <v-icon size="20">mdi-minus</v-icon>
                 </span>
                 <span @click="closeMain()">
-                    <v-icon size="20" >mdi-window-close</v-icon>
+                    <v-icon size="20">mdi-window-close</v-icon>
                 </span>
             </div>
             <div class="body pt-6">
-                <div class="heading pt-6">Sign in to ECG-ARCHIVES</div>
                 <div class="logo-container pt-2 pb-2">
                     <img src="../assets/logo.jpg" alt="" class="logo">
                 </div>
-                <div class="subheading">{{instruction}}</div>
+                <div class="heading pt-6">Sign In </div>
+                
+                <!-- <div class="subheading">{{instruction}}</div> -->
 
-                <div class="form pt-10">
-                    <div class="input" :class="!valids.email && startValidation ? 'input-error':'input-success'">
-                        <v-icon :color="!valids.email && startValidation ? 'red':'black'" size="17">mdi-email</v-icon>
-                        <input type="text" placeholder="Enter email" v-model="emailModel">
+                <div class="form pt-10 " style="width:100%">
+                    <div class="input" :class="!valids.email && startValidation ? 'input-error' : 'input-success'">
+                        <label for="email">Email:</label>
+
+                        <!-- <v-icon :color="!valids.email && startValidation ? 'red':'black'" size="17">mdi-email</v-icon> -->
+                        <input type="text" v-model="emailModel" id="email">
                     </div>
-                    <div class="input"  :class="!valids.pass && startValidation ? 'input-error':'input-success'">
-                        <v-icon :color="!valids.pass && startValidation ? 'red':'black'" size="17">mdi-lock</v-icon>
-                        <input type="password" placeholder="Enter password" v-model="passModel">
+
+
+                    <div class="input" :class="!valids.pass && startValidation ? 'input-error' : 'input-success'">
+                        <label for="password">Password:</label>
+                        <!-- <v-icon :color="!valids.pass && startValidation ? 'red':'black'" size="17">mdi-lock</v-icon> -->
+                        <input type="password" v-model="passModel">
                     </div>
 
                     <button class="submit mt-3" @click="validateForm()">Sign in</button>
@@ -43,57 +50,57 @@
 </template>
 
 <script setup lang="ts">
-import {ref} from "vue";
-import {minimize, closeMain, getUserDetails, setAuthenticated} from "../lib/utils";
+import { ref } from "vue";
+import { minimize, closeMain, getUserDetails, setAuthenticated } from "../lib/utils";
 import { _signInWithEmailPassword } from "@/lib/firebase";
 import router from "@/router";
 import { storeToRefs } from "pinia";
 import { useAppDetails } from "@/stores/appDetails";
 
-const store =  useAppDetails();
-const {setAuthentication, setEmail} = store;
-const {authenticated} = storeToRefs(store)
+const store = useAppDetails();
+const { setAuthentication, setEmail } = store;
+const { authenticated } = storeToRefs(store)
 const instruction = ref("Enter your credentials to sign in");
-const emailModel =  ref("");
+const emailModel = ref("");
 const passModel = ref("");
-const valids = ref({email:false, pass:false});
+const valids = ref({ email: false, pass: false });
 const startValidation = ref(false);
 
-async function validateForm(){
+async function validateForm() {
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     startValidation.value = true;
     valids.value.email = !emailPattern.test(emailModel.value) ? false : true;
     valids.value.pass = passModel.value.length < 8 ? false : true;
 
-    if(valids.value.email && valids.value.pass){
+    if (valids.value.email && valids.value.pass) {
         setEmail(emailModel.value);
         const res = await signUser();
     }
 }
 
-function processCallback(m:string){
+function processCallback(m: string) {
     instruction.value = m;
 }
 
-async function signUser(){
-    try{
+async function signUser() {
+    try {
         const user = await getUserDetails();
 
-        if(!user){
+        if (!user) {
             setAuthentication(false);
             return null;
         }
-        
+
         const sign = await _signInWithEmailPassword(emailModel.value, passModel.value, user.staff_id, processCallback);
 
-        if(!sign.success){
+        if (!sign.success) {
             setAuthentication(false)
             return null;
         }
 
         setAuthentication(true)
         router.push("/front-page");
-    }catch(err){
+    } catch (err) {
         setAuthentication(false)
         return null;
     }
@@ -124,32 +131,40 @@ function getGreeting(): string {
 /*#home-container{
     -webkit-app-region:drag;
 }*/
-.main{
+.main {
     height: 100vh;
     display: grid;
-    grid-template-columns: 35% 65%;
-    
+    grid-template-columns: 50% 50%;
 }
-.left{
+
+.left {
     background: linear-gradient(66deg, #090532 37.32%, #2414E2 131.6%);
     height: inherit;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
 }
-.left .left-head{
+
+.left .left-head {
     color: white;
-    font-size: 27px;
-    font-weight: 600;
+    font-size: 35px;
+    font-weight: 500;
     text-align: center;
+    font-family: "Roboto", sans-serif;
+
 }
-.left .instruction{
+
+.left .instruction * {
     font-size: 15px;
     color: white;
     text-align: center;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
 }
-.left .reset{
+
+.left .reset {
     color: white;
     border: 1px solid white;
     border-radius: 25px;
@@ -157,7 +172,7 @@ function getGreeting(): string {
     padding: 8px 14px;
 }
 
-.left .reset{
+.left .reset {
     color: black;
     border: 1px solid white;
     background-color: white;
@@ -165,75 +180,105 @@ function getGreeting(): string {
     font-size: 13px;
     padding: 8px 14px;
     font-weight: 500;
+    font-family: "News_Cycle", sans-serif;
 }
 
-.right{
+.right {
     background-color: white;
 }
-.toolbar{
+
+.toolbar {
     display: flex;
     justify-content: right;
     column-gap: 1%;
-    padding: 1% ;
+    padding: 1%;
     width: 100%;
 }
-.toolbar span{
+
+.toolbar span {
     cursor: pointer;
 }
-.body .heading{
-    text-align: center;
+
+.body{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 0% 7.5%;
+}
+.body .heading {
+    text-align: left;
     font-size: 25px;
     font-weight: 600;
+    width: 100%;
+    color: #120a68;
 }
-.logo-container{
+
+.logo-container {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.logo{
+
+.logo {
     height: 70px;
     height: 70px;
 }
-.body .subheading{
-    text-align: center;
+
+.body .subheading {
+    text-align: left;
     font-size: 15px;
     font-weight: 400;
 }
 
-.form{
+.form {
     display: flex;
-    justify-content: center;
-    flex-direction: column;
+    justify-content: left;
     align-items: center;
-    row-gap: 12px;
+    flex-direction: column;
+    row-gap: 30px;
+    width:100%
 }
 
-.form .input{
-    padding: 8px 0;
-    width: 60%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    column-gap: 5px;
+.form .input {
+    padding: 0;
+    width: 100%;
+    background-color: white;
+    border-bottom: 2px solid black;
 }
-.input-error{
+.form .input:focus {
+    border-bottom: 2px solid #120a68!important;
+}
+label {
+    width: 100%;
+    color: #120a68;
+    font-weight: 500;
+}
+
+.input-error {
     background-color: rgba(196, 23, 23, 0.144);
 }
-.input-success{
+
+.input-success {
     background-color: rgb(238, 238, 238);
 }
-.input input{
-    width: 85%;
+
+.input input {
+    width: 100%;
 }
-.input input::placeholder{
+
+.input input::placeholder {
     font-size: 14px;
-    padding-left: 8px;
+    padding-left: 0px;
 }
-.form button{
+
+.form button {
     background: linear-gradient(66deg, #090532 37.32%, #2414E2 131.6%);
     color: white;
     padding: 8px 35px;
-    border-radius: 20px;
+    border-radius: 0px;
     font-size: 15px;
+    width: 100%;
 }
 </style>

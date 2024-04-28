@@ -1,36 +1,11 @@
+@import url(./font.css);
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@font-face {
-  font-family: 'Inter';
-  src: url('fonts/Inter/static/Inter-Black.ttf') format('truetype'),
-  url('fonts/Inter/static/Inter-Bold.ttf') format('truetype'),
-  url('fonts/Inter/static/Inter-ExtraBold.ttf') format('truetype'),
-  url('fonts/Inter/static/Inter-ExtraLight.ttf') format('truetype'),
-  url('fonts/Inter/static/Inter-Light.ttf') format('truetype'),
-  url('fonts/Inter/static/Inter-Medium.ttf') format('truetype'),
-  url('fonts/Inter/static/Inter-Regular.ttf') format('truetype'),
-  url('fonts/Inter/static/Inter-SemiBold.ttf') format('truetype'),
-  url('fonts/Inter/static/Inter-Thin.ttf') format('truetype'),
-  /* Add additional font weights and styles as needed */
-}
-@font-face {
-  font-family: 'Roboto';
-  src: url('fonts/Roboto/Roboto-Black.ttf') format('truetype'),
-       url('fonts/Roboto/Roboto-BlackItalic.ttf') format('truetype'),
-       url('fonts/Roboto/Roboto-Bold.ttf') format('truetype'),
-       url('fonts/Roboto/Roboto-BoldItalic.ttf') format('truetype'),
-       url('fonts/Roboto/Roboto-Italic.ttf') format('truetype'),
-       url('fonts/Roboto/Roboto-Light.ttf') format('truetype'),
-       url('fonts/Roboto/Roboto-LightItalic.ttf') format('truetype'),
-       url('fonts/Roboto/Roboto-Medium.ttf') format('truetype'),
-       url('fonts/Roboto/Roboto-MediumItalic.ttf') format('truetype'),
-       url('fonts/Roboto/Roboto-Regular.ttf') format('truetype'),
-       url('fonts/Roboto/Roboto-Thin.ttf') format('truetype'),
-  /* Add additional font weights and styles as needed */
-}
 
-/* @import url(./base.css); */
+
+
 
 #app {
   margin: 0;

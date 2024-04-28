@@ -7,8 +7,8 @@ export function createApplicationWindow(){
     // Create the browser window.
     const applicationWindow = new BrowserWindow({
       backgroundColor: "white",
-      width: width-700 >= 750 ? width-700: 750,
-      height: height-300 >= 500? height-300: 500,
+      width: width-850 > 595 ? width-850: 595,
+      height: height-300 > 500? height-300: 500,
       resizable:false,
       titleBarStyle: 'hidden',
       frame: true,
