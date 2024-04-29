@@ -17,6 +17,7 @@ export function createSplashWindow() {
          titleBarStyle: "hidden",
          frame: true,
          alwaysOnTop: true, 
+         resizable: false,
          webPreferences:{
            sandbox:true,
              preload: path.join(__dirname, "..", "preloads", "verify-preload.js"), 

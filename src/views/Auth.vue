@@ -24,26 +24,29 @@
                     <img src="../assets/logo.jpg" alt="" class="logo">
                 </div>
                 <div class="heading pt-6">Sign In </div>
-                
+
                 <!-- <div class="subheading">{{instruction}}</div> -->
 
-                <div class="form pt-10 " style="width:100%">
-                    <div class="input" :class="!valids.email && startValidation ? 'input-error' : 'input-success'">
-                        <label for="email">Email:</label>
-
-                        <!-- <v-icon :color="!valids.email && startValidation ? 'red':'black'" size="17">mdi-email</v-icon> -->
-                        <input type="text" v-model="emailModel" id="email">
+                <div class="form pt-10 gap-2" >
+                    <div class="input">
+                        <div class="text-sm pl-2">Email:</div>
+                        <v-text-field color="primary" variant="underlined" placeholder="Enter your email" type="email"
+                        :rules="[rules.required, rules.email]"
+                            density="compact" v-model="inputs.email.value"></v-text-field>
                     </div>
 
-
-                    <div class="input" :class="!valids.pass && startValidation ? 'input-error' : 'input-success'">
-                        <label for="password">Password:</label>
-                        <!-- <v-icon :color="!valids.pass && startValidation ? 'red':'black'" size="17">mdi-lock</v-icon> -->
-                        <input type="password" v-model="passModel">
+                    <div class="input">
+                        <div class="text-sm pl-2">Password:</div>
+                        <v-text-field color="primary" variant="underlined" placeholder="Enter your password"
+                        :rules="[rules.required, rules.password]" :append-inner-icon="inputs.password.show ? 'mdi-eye' : 'mdi-eye-off'"  
+                        @click:append-inner="inputs.password.show = !inputs.password.show"
+                        :type="inputs.password.show ? 'text' : 'password'" density="compact" v-model="inputs.password.value"></v-text-field>
                     </div>
 
-                    <button class="submit mt-3" @click="validateForm()">Sign in</button>
+                    <button class="submit mt-3" @click="LogIn()" :disabled="!inputs.password.valid">Sign in</button>
                 </div>
+
+                <div class="error-message text-red-600 text-base font-bold mt-2" style="width:100%" v-if="showErrorMessage">{{ instruction }}</div>
             </div>
         </div>
     </div>
@@ -61,47 +64,62 @@ const store = useAppDetails();
 const { setAuthentication, setEmail } = store;
 const { authenticated } = storeToRefs(store)
 const instruction = ref("Enter your credentials to sign in");
-const emailModel = ref("");
-const passModel = ref("");
-const valids = ref({ email: false, pass: false });
-const startValidation = ref(false);
+const inputs = ref({
+    email: { value: "", valid: false, pattern: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/ },
+    password: { value: "", valid: false, show: false }
+});
+const showErrorMessage = ref(false);
 
-async function validateForm() {
-    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    startValidation.value = true;
-    valids.value.email = !emailPattern.test(emailModel.value) ? false : true;
-    valids.value.pass = passModel.value.length < 8 ? false : true;
-
-    if (valids.value.email && valids.value.pass) {
-        setEmail(emailModel.value);
-        const res = await signUser();
+const rules = {
+    // Defining a validation rule named 'required'
+    required: (value: any) => !!value || 'Please fill in the field!',
+    email: (value: any) => {
+        inputs.value.email.valid = inputs.value.email.pattern.test(value);
+        return inputs.value.email.pattern.test(value) || "Invalid email format"
+    },
+    password: (value: any) => {
+        inputs.value.password.valid = value.length > 8;
+        return value.length > 8 || "Invalid password format"
     }
+}
+async function LogIn() {
+    setEmail(inputs.value.email.value);
+    const res = await signUser();
 }
 
 function processCallback(m: string) {
+    // alert(m);
+    // console.log("ahh");
     instruction.value = m;
 }
 
 async function signUser() {
+    console.log("not doing");
     try {
         const user = await getUserDetails();
 
         if (!user) {
             setAuthentication(false);
+            processCallback("Unauthorized appp usage!");
+            showErrorMessage.value  = true;
             return null;
         }
 
-        const sign = await _signInWithEmailPassword(emailModel.value, passModel.value, user.staff_id, processCallback);
+        const sign = await _signInWithEmailPassword(inputs.value.email.value, inputs.value.password.value, user.staff_id, processCallback);
 
         if (!sign.success) {
+            showErrorMessage.value = true;
             setAuthentication(false)
             return null;
         }
 
+        // console.log(sign.success);
         setAuthentication(true)
         router.push("/front-page");
-    } catch (err) {
-        setAuthentication(false)
+    } catch (err) {alert(9);
+        setAuthentication(false);
+        processCallback("Unauthorized appp usage!");
+            showErrorMessage.value  = true;
         return null;
     }
 }
@@ -199,7 +217,7 @@ function getGreeting(): string {
     cursor: pointer;
 }
 
-.body{
+.body {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -207,6 +225,7 @@ function getGreeting(): string {
     align-items: center;
     padding: 0% 7.5%;
 }
+
 .body .heading {
     text-align: left;
     font-size: 25px;
@@ -237,19 +256,17 @@ function getGreeting(): string {
     justify-content: left;
     align-items: center;
     flex-direction: column;
-    row-gap: 30px;
-    width:100%
+    width: 100%
 }
 
 .form .input {
-    padding: 0;
     width: 100%;
-    background-color: white;
-    border-bottom: 2px solid black;
 }
-.form .input:focus {
-    border-bottom: 2px solid #120a68!important;
+
+/*.form .input:focus {
+    border-bottom: 2px solid #120a68 !important;
 }
+
 label {
     width: 100%;
     color: #120a68;
@@ -271,7 +288,7 @@ label {
 .input input::placeholder {
     font-size: 14px;
     padding-left: 0px;
-}
+}*/
 
 .form button {
     background: linear-gradient(66deg, #090532 37.32%, #2414E2 131.6%);

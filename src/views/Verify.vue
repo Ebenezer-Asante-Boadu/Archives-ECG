@@ -28,7 +28,7 @@
         <div class="body pt-6">
             <div class="mb-5">
                 <div class="text-xs mb-3 pl-2">ID Number:</div>
-                <v-text-field placeholder="Enter your company ID Number" variant="outlined" density="compact"
+                <v-text-field placeholder="Enter your company ID Number" variant="outlined" density="compact" type="text"
                     append-inner-icon="mdi-email" :rules="[rules.required, rules.Length]" v-model="verification.input"
                     :base-color="isFocused ? 'rgb(0, 0, 66)' : 'grey'" @update:focused="(value) => isFocused = value">
                 </v-text-field>
