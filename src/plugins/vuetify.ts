@@ -4,7 +4,8 @@ import 'vuetify/styles'
 
 // Vuetify
 import { createVuetify } from 'vuetify';
-import { VIcon, VSlideGroup, VSlideGroupItem,VBtn, VSheet, VTooltip, VSwitch, VList, VListItem, VAvatar, VTextField } from 'vuetify/components';
+import { VIcon, VSlideGroup, VSlideGroupItem,VBtn, VSheet, VTooltip, VSwitch, VList, VListItem, VCardText, VCard, VTable,
+  VAvatar, VTextField , VSelect} from 'vuetify/components';
 
 export default createVuetify({
   components: {
@@ -18,7 +19,11 @@ export default createVuetify({
     VList,
     VListItem,
     VAvatar,
-    VTextField
+    VTextField,
+    VCardText,
+    VCard,
+    VTable,
+    VSelect
   }
 }
 )

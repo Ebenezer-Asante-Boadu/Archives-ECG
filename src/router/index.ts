@@ -50,6 +50,7 @@ const router = createRouter({
       path: "/edit-file",
       name: "edit-file",
       component: () => import("../views/editFile.vue"),
+      // component: () => import("../views/cloud_files.vue"),
       meta: {
         requiresAuth: true,
         admin: false,
@@ -60,6 +61,16 @@ const router = createRouter({
       path: "/notifications",
       name: "notifications",
       component: () => import("../views/notifications.vue"),
+      meta: {
+        requiresAuth: true,
+        admin: false,
+        backArrow: false
+      }
+    },
+    {
+      path: "/cloud-files",
+      name: "cloud-files",
+      component: () => import("../views/cloud_files.vue"),
       meta: {
         requiresAuth: true,
         admin: false,

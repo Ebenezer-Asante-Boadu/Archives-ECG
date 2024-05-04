@@ -20,3 +20,14 @@ export interface userDetails{
     status:string,
     staff_id:string
 }
+
+export interface TableColumn{
+    key: string,
+    sortable: Boolean
+}
+
+export interface TableData {
+    id: number;
+    [key: string|symbol]: number | string;
+}
+

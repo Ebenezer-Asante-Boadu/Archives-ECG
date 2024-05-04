@@ -281,6 +281,9 @@ export async function _signInWithEmailPassword(
                   case 'auth/invalid-credential':
                       errorMessage = 'Invalid credentials';
                       break;
+                  case 'auth/network-request-failed':
+                      errorMessage = "Poor Internet Connectivity";
+                      break;
                   default:
                       errorMessage = signInError.message;
               }

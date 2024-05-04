@@ -8,7 +8,7 @@
                 <pre>Have you forgotten your password?</pre>
                 <pre>Then request a new password!</pre>
             </div>
-            <button class="reset mt-5">Request password reset</button>
+            <button class="reset mt-5" @click="show_reset = true">Request password reset</button>
         </div>
         <div class="right">
             <div class="toolbar">
@@ -23,30 +23,36 @@
                 <div class="logo-container pt-2 pb-2">
                     <img src="../assets/logo.jpg" alt="" class="logo">
                 </div>
-                <div class="heading pt-6">Sign In </div>
+                <div class="heading pt-6 text-2xl font-bold">{{ show_reset ? "Reset your password" : "Sign In" }}</div>
+                <div class="sub_instruction text-xs mt-3" v-if="show_reset" style="width:100%">Enter your email address below to reset.</div>
 
                 <!-- <div class="subheading">{{instruction}}</div> -->
 
-                <div class="form pt-10 gap-2" >
+                <div class="form gap-2" 
+                :class="{ 'pt-10' : !show_reset, 'pt-7' : show_reset }">
                     <div class="input">
                         <div class="text-sm pl-2">Email:</div>
                         <v-text-field color="primary" variant="underlined" placeholder="Enter your email" type="email"
-                        :rules="[rules.required, rules.email]"
-                            density="compact" v-model="inputs.email.value"></v-text-field>
+                            :rules="[rules.required, rules.email]" density="compact"
+                            v-model="inputs.email.value"></v-text-field>
                     </div>
 
-                    <div class="input">
+                    <div class="input" v-if="!show_reset">
                         <div class="text-sm pl-2">Password:</div>
                         <v-text-field color="primary" variant="underlined" placeholder="Enter your password"
-                        :rules="[rules.required, rules.password]" :append-inner-icon="inputs.password.show ? 'mdi-eye' : 'mdi-eye-off'"  
-                        @click:append-inner="inputs.password.show = !inputs.password.show"
-                        :type="inputs.password.show ? 'text' : 'password'" density="compact" v-model="inputs.password.value"></v-text-field>
+                            :rules="[rules.required, rules.password]"
+                            :append-inner-icon="inputs.password.show ? 'mdi-eye' : 'mdi-eye-off'"
+                            @click:append-inner="inputs.password.show = !inputs.password.show"
+                            :type="inputs.password.show ? 'text' : 'password'" density="compact"
+                            v-model="inputs.password.value"></v-text-field>
                     </div>
 
-                    <button class="submit mt-3" @click="LogIn()" :disabled="!inputs.password.valid">Sign in</button>
+                    <button class="submit mt-3" @click="LogIn()" :disabled="!inputs.password.valid">{{ button_text
+                        }}</button>
                 </div>
 
-                <div class="error-message text-red-600 text-base font-bold mt-2" style="width:100%" v-if="showErrorMessage">{{ instruction }}</div>
+                <div class="error-message text-red-600 text-sm font-bold mt-2" style="width:100%"
+                    v-if="showErrorMessage">{{ instruction }}</div>
             </div>
         </div>
     </div>
@@ -69,6 +75,8 @@ const inputs = ref({
     password: { value: "", valid: false, show: false }
 });
 const showErrorMessage = ref(false);
+const button_text = ref("Sign in"); 
+const show_reset = ref(false);
 
 const rules = {
     // Defining a validation rule named 'required'
@@ -91,17 +99,18 @@ function processCallback(m: string) {
     // alert(m);
     // console.log("ahh");
     instruction.value = m;
+    button_text.value = m == "Signing in..." ? m : "Sign in";
 }
 
 async function signUser() {
-    console.log("not doing");
+    button_text.value = "Signing in...";
     try {
         const user = await getUserDetails();
 
         if (!user) {
             setAuthentication(false);
             processCallback("Unauthorized appp usage!");
-            showErrorMessage.value  = true;
+            showErrorMessage.value = true;
             return null;
         }
 
@@ -116,10 +125,11 @@ async function signUser() {
         // console.log(sign.success);
         setAuthentication(true)
         router.push("/front-page");
-    } catch (err) {alert(9);
+    } catch (err) {
+        alert(9);
         setAuthentication(false);
         processCallback("Unauthorized appp usage!");
-            showErrorMessage.value  = true;
+        showErrorMessage.value = true;
         return null;
     }
 }
@@ -228,10 +238,8 @@ function getGreeting(): string {
 
 .body .heading {
     text-align: left;
-    font-size: 25px;
-    font-weight: 600;
     width: 100%;
-    color: #120a68;
+    /*color: #120a68;*/
 }
 
 .logo-container {
