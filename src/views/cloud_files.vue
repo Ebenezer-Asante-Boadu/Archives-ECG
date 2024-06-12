@@ -25,8 +25,8 @@
 
       <div class="scroller w-100  h-3/5">
         <div class="flex justify-start items-center pl-4 gap-2 mt-2" v-if="people.length == 0">
-          <div class="flex-grow-0 "><v-icon color="white">mdi-database-search-outline</v-icon></div>
-          <div class="info text-white">Empty results...</div>
+          <div class="flex-grow-0 "><v-icon color="black">mdi-database-search-outline</v-icon></div>
+          <div class="info text-black">Empty results...</div>
         </div>
         <v-list lines="one" :bg-color="page_mode_dark ? 'var(--light-black)' : 'rgba(207, 207, 207, 0.173)'"
           active-color="white">
@@ -82,8 +82,8 @@
           <!-- <v-card :max-height="'100%'"> -->
           <VaDataTable :items="items" :columns="columns" :striped="false" :clickable="true" :loading="false"
             :hide-default-header="false" :footer-clone="false" :sort-by="selected_sort" :filter="searchModel"
-            :filter-method="customFilteringFn" @row:click="handleClick" @row:dblclick="handleClick" :selectable="false"
-            @row:contextmenu="handleClick" :allow-footer-sorting="false" :animated="true" virtual-scroller hoverable
+            :filter-method="customFilteringFn" @row:click="router.push('/faker')" @row:dblclick="router.push('/faker')" :selectable="false"
+            @row:contextmenu="router.push('/faker')" :allow-footer-sorting="false" :animated="true" virtual-scroller hoverable
             sorting-order="asc" sticky-header @filtered="filteredCount = $event.items.length" :style="{
               '--va-data-table-thead-background': (page_mode_dark) ? 'black' : 'white',
               '--va-data-table-grid-tr-border': '10px solid white'
@@ -138,171 +138,157 @@ import {
 } from "vue";
 import type { DataTableCell, DataTableFilterMethod } from "vuestic-ui";
 import codepunterTable from "@/components/codepunterTable.vue";
-const page_mode_dark = ref(false);
+import { useAppDetails } from "../stores/appDetails";
+import { storeToRefs } from "pinia";
+import router from "@/router";
+
+const store = useAppDetails();
+const { darkmode } = storeToRefs(store);
+const page_mode_dark = ref(darkmode.value);
 
 const people_original = ref([
   {
     subtitle: "Nov 6, 2006 at 3:30pm",
-    title: "Tkay1",
+    title: "prepaids.xls",
   },
   {
-    subtitle: "Nov 6, 2006 at 3:30pm",
-    title: "Tkay2",
+    subtitle: "Nov 7, 2006 at 4:00pm",
+    title: "engagements.xls",
   },
   {
-    subtitle: "Nov 6, 2006 at 3:30pm",
-    title: "Tkay3",
+    subtitle: "Nov 8, 2006 at 3:45pm",
+    title: "tasks.xlsx",
   },
   {
-    subtitle: "Nov 6, 2006 at 3:30pm",
-    title: "Tkay4",
+    subtitle: "Nov 9, 2006 at 2:30pm",
+    title: "reports.docx",
   },
   {
-    subtitle: "Nov 6, 2006 at 3:30pm",
-    title: "Tkay5",
+    subtitle: "Nov 10, 2006 at 3:15pm",
+    title: "projects.pptx",
   },
   {
-    subtitle: "Nov 6, 2006 at 3:30pm",
-    title: "Tkay6",
+    subtitle: "Nov 11, 2006 at 4:20pm",
+    title: "summaries.pdf",
   },
   {
-    subtitle: "Nov 6, 2006 at 3:30pm",
-    title: "Tkay7",
+    subtitle: "Nov 12, 2006 at 3:00pm",
+    title: "surveys.xls",
   },
   {
-    subtitle: "Nov 6, 2006 at 3:30pm",
-    title: "Tkay8",
+    subtitle: "Nov 13, 2006 at 3:40pm",
+    title: "analysis.xlsx",
   },
   {
-    subtitle: "Nov 6, 2006 at 3:30pm",
-    title: "Tkay9",
+    subtitle: "Nov 14, 2006 at 2:50pm",
+    title: "budgets.xls",
   },
   {
-    subtitle: "Nov 6, 2006 at 3:30pm",
-    title: "Tkay10",
+    subtitle: "Nov 15, 2006 at 3:35pm",
+    title: "plans.pptx",
   },
   {
-    subtitle: "Nov 6, 2006 at 3:30pm",
-    title: "Tkay11",
+    subtitle: "Nov 16, 2006 at 3:25pm",
+    title: "presentations.pptx",
   },
 ]);
+
 
 const people = ref([...people_original.value]);
 
 const items = ref([
   {
-    id: 1,
-    name: "Leanne Graham",
-    username: "Bret",
-    email: "Sincere@april.biz",
-    phone: "1-770-736-8031 x56442",
+    Name: "status_code.xls",
+    Size: "5 MB",
+    Uploaded: "Nov 6, 2023 at 12:10",
+    Member: "Kojo Bill Gates"
   },
   {
-    id: 2,
-    name: "Ervin Howell",
-    username: "Antonette",
-    email: "Shanna@melissa.tv",
-    phone: "010-692-6593 x09125",
+    Name: "report.docx",
+    Size: "10 MB",
+    Uploaded: "Dec 12, 2023 at 09:30",
+    Member: "Alice Johnson"
   },
   {
-    id: 3,
-    name: "Clementine Bauch",
-    username: "Samantha",
-    email: "Nathan@yesenia.net",
-    phone: "1-463-123-4447",
+    Name: "presentation.pptx",
+    Size: "8 MB",
+    Uploaded: "Jan 15, 2024 at 14:45",
+    Member: "John Smith"
   },
   {
-    id: 4,
-    name: "Patricia Lebsack",
-    username: "Karianne",
-    email: "Julianne.OConner@kory.org",
-    phone: "493-170-9623 x156",
+    Name: "data.csv",
+    Size: "3 MB",
+    Uploaded: "Feb 22, 2024 at 17:20",
+    Member: "Emma Brown"
   },
   {
-    id: 5,
-    name: "Chelsey Dietrich",
-    username: "Kamren",
-    email: "Lucio_Hettinger@annie.ca",
-    phone: "(254)954-1289",
+    Name: "plan.pdf",
+    Size: "2 MB",
+    Uploaded: "Mar 30, 2024 at 10:00",
+    Member: "Michael White"
   },
   {
-    id: 6,
-    name: "Leanne Graham",
-    username: "Bret",
-    email: "Sincere@april.biz",
-    phone: "1-770-736-8031 x56442",
+    Name: "project.zip",
+    Size: "15 MB",
+    Uploaded: "Apr 8, 2024 at 08:55",
+    Member: "Sophia Green"
   },
   {
-    id: 7,
-    name: "Ervin Howell",
-    username: "Antonette",
-    email: "Shanna@melissa.tv",
-    phone: "010-692-6593 x09125",
+    Name: "presentation.pdf",
+    Size: "7 MB",
+    Uploaded: "May 5, 2024 at 11:25",
+    Member: "David Lee"
   },
   {
-    id: 8,
-    name: "Clementine Bauch",
-    username: "Samantha",
-    email: "Nathan@yesenia.net",
-    phone: "1-463-123-4447",
+    Name: "task_list.xlsx",
+    Size: "6 MB",
+    Uploaded: "Jun 12, 2024 at 13:40",
+    Member: "Olivia Taylor"
   },
   {
-    id: 9,
-    name: "Patricia Lebsack",
-    username: "Karianne",
-    email: "Julianne.OConner@kory.org",
-    phone: "493-170-9623 x156",
+    Name: "survey_results.xls",
+    Size: "4 MB",
+    Uploaded: "Jul 18, 2024 at 16:15",
+    Member: "Ethan Martinez"
   },
   {
-    id: 10,
-    name: "Chelsey Dietrich",
-    username: "Kamren",
-    email: "Lucio_Hettinger@annie.ca",
-    phone: "(254)954-1289",
+    Name: "budget.xls",
+    Size: "9 MB",
+    Uploaded: "Aug 25, 2024 at 09:50",
+    Member: "Ava Anderson"
   },
   {
-    id: 11,
-    name: "Leanne Graham",
-    username: "Bret",
-    email: "Sincere@april.biz",
-    phone: "1-770-736-8031 x56442",
+    Name: "analysis.docx",
+    Size: "12 MB",
+    Uploaded: "Sep 3, 2024 at 14:30",
+    Member: "Noah Wilson"
   },
   {
-    id: 12,
-    name: "Ervin Howell",
-    username: "Antonette",
-    email: "Shanna@melissa.tv",
-    phone: "010-692-6593 x09125",
+    Name: "proposal.pptx",
+    Size: "11 MB",
+    Uploaded: "Oct 11, 2024 at 10:20",
+    Member: "Isabella Clark"
   },
   {
-    id: 13,
-    name: "Clementine Bauch",
-    username: "Samantha",
-    email: "Nathan@yesenia.net",
-    phone: "1-463-123-4447",
+    Name: "summary.pdf",
+    Size: "6 MB",
+    Uploaded: "Nov 16, 2024 at 12:05",
+    Member: "Liam Baker"
   },
   {
-    id: 14,
-    name: "Patricia Lebsack",
-    username: "Karianne",
-    email: "Julianne.OConner@kory.org",
-    phone: "493-170-9623 x156",
-  },
-  {
-    id: 15,
-    name: "Chelsey Dietrich",
-    username: "Kamren",
-    email: "Lucio_Hettinger@annie.ca",
-    phone: "(254)954-1289",
+    Name: "task_report.xlsx",
+    Size: "7 MB",
+    Uploaded: "Dec 20, 2024 at 15:00",
+    Member: "Mia Gonzalez"
   },
 ]);
 
 const columns = ref([
-  { key: "id", sortable: true },
-  { key: "username", sortable: true },
-  { key: "name", sortable: true },
-  { key: "email", sortable: true },
-  { key: "phone", sortable: true },
+  // { key: "id", sortable: true },
+  { key: "Name", sortable: true },
+  { key: "Size", sortable: true },
+  { key: "Uploaded", sortable: true },
+  { key: "Member", sortable: true },
   { key: "actions" },
 ]);
 
@@ -334,6 +320,8 @@ const customFilteringFn = (source: any, cellData: DataTableCell) => {
 function handleClick(event: any) {
   //   rowEventType = event.event.type;
   //   rowId = event.item.id;
+  // alert(9)
+  router.push("/faker")
 }
 
 function filterPeopleByTitle() {

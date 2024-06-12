@@ -61,7 +61,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { minimize, closeMain, getUserDetails, setAuthenticated } from "../lib/utils";
-import { _signInWithEmailPassword } from "@/lib/firebase";
+import { _signInWithEmailPassword } from "@/lib/firebase_user_service";
 import router from "@/router";
 import { storeToRefs } from "pinia";
 import { useAppDetails } from "@/stores/appDetails";

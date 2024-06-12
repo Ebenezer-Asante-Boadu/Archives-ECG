@@ -49,8 +49,8 @@ const router = createRouter({
     {
       path: "/edit-file",
       name: "edit-file",
-      component: () => import("../views/editFile.vue"),
-      // component: () => import("../views/cloud_files.vue"),
+      // component: () => import("../views/editFile.vue"),
+      component: () => import("../views/cloud_files.vue"),
       meta: {
         requiresAuth: true,
         admin: false,
@@ -78,9 +78,29 @@ const router = createRouter({
       }
     },
     {
+      path: "/settings",
+      name: "settings",
+      component: () => import("../views/settings.vue"),
+      meta: {
+        requiresAuth: true,
+        admin: false,
+        backArrow: false
+      }
+    },
+    {
       path: "/scan",
       name: "scan",
       component: () => import("../views/scan_code.vue"),
+      meta: {
+        requiresAuth: true,
+        admin: false,
+        backArrow: false
+      }
+    },
+    {
+      path: "/faker",
+      name: "faker",
+      component: () => import("../views/test.vue"),
       meta: {
         requiresAuth: true,
         admin: false,

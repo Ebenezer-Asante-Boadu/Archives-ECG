@@ -79,5 +79,13 @@ contextBridge.exposeInMainWorld("main", {
       }catch(err){
         console.log(err)
       }
+    },
+    openFileDialog: async()=>{
+      try{
+        const res = await ipcRenderer.invoke("open-file-dialog");
+        return res;
+      }catch(err){
+        return null;
+      }
     }
   })

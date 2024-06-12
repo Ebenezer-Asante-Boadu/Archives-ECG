@@ -1,81 +1,293 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>Title of the document</title>
-    <style>
-        .table-container {
-            height: 100%;
-            /* Ensure the container fills its parent */
-            overflow: auto;
-            /* Enable scrolling if needed */
-        }
-
-        .custom-table {
-            width: 100%;
-            height: 100%;
-            /* Make the table fill its parent's height */
-            border-collapse: collapse;
-            background-color: gold;
-            /* Collapse table borders */
-        }
-
-        .custom-table thead {
-            background-color: brown;
-            display: block;
-            /* Enable block layout for thead */
-            height: 20%;
-            /* Set thead height to 20% of the table */
-            overflow-y: auto;
-            /* Enable vertical scrolling if needed */
-        }
-
-        .custom-table tbody {
-            background-color: violet;
-            display: block;
-            /* Enable block layout for tbody */
-            height: 80%;
-            /* Set tbody height to 80% of the table */
-            overflow-y: auto;
-            /* Enable vertical scrolling if needed */
-        }
-
-        .custom-table th,
-        .custom-table td {
-            border: 1px solid black;
-            /* Example border styling */
-            padding: 8px;
-            /* Example padding */
-        }
-    </style>
-</head>
-
-<body>
-    <div style="height: 100vh; background-color: red; width: 100vw; display: flex; flex-flow: column;">
-        <div class="head" style="background-color: blue; height: 20%; width: 100%; flex-grow: 0;">head</div>
-        <div class="body" style="background-color: green; height: 80%; width: 100%; flex-grow: 1;">
-            <div class="table-container">
-                <table class="custom-table">
-                    <thead>
-                        <tr>
-                            <th>Header 1</th>
-                            <th>Header 2</th>
-                            <!-- Add more header columns as needed -->
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Data 1</td>
-                            <td>Data 2</td>
-                            <!-- Add more data columns as needed -->
-                        </tr>
-                        <!-- Add more rows of data as needed -->
-                    </tbody>
-                </table>
+<template>
+    <div class="main" :style="{ backgroundColor: (darkmode) ? 'var(--dark_mode)' : 'var(--dark_mode_2)' }">
+        <div class="left flex-grow-1">
+            <div class="h-1/5">
+                <v-list lines="one" :bg-color="(darkmode) ? 'var(--dark_mode)' : 'var(--dark_mode_2)'" class="border-b-2 border-blue-950">
+                    <v-list-item v-for="folder in folders" :key="folder.title" :subtitle="folder.subtitle"
+                    :base-color="darkmode ? 'white' : 'black'"     :color="darkmode ? 'white' : 'black'"
+                        :title="folder.title" >
+                        <template v-slot:prepend>
+                            <v-avatar color="grey-lighten-1">
+                                <img src="../assets/account.jpg" alt="">
+                            </v-avatar>
+                        </template>
+    
+                        <template v-slot:append>
+                            <v-icon>mdi-dots-vertical</v-icon>
+                        </template>
+                    </v-list-item>
+                </v-list>
+    
+                <v-text-field :loading="false" density="compact" label="Search or start a new chat"
+                    prepend-inner-icon="mdi-magnify" variant="solo-filled" class="p-3 text-sm" 
+                    :bg-color="(darkmode) ? 'var(--dark_mode)' : 'var(--dark_mode_2)'"
+                    :color="darkmode ? 'white' : 'black'"
+                    hide-details single-line></v-text-field>
+            </div>
+  
+            <section class="pl-1 pr-1 pb-3 h-4/5" style="overflow:auto">
+                <div class="text-white pb-3 pl-2 pr-2">
+                    Messages
+                </div>
+                <div class="scroller">
+                    <v-list lines="one" :bg-color="(darkmode) ? 'var(--dark_mode)' : 'var(--dark_mode_2)'" active-color="white">
+                        <v-list-item v-for="folder, index in people" :key="index" :subtitle="folder.subtitle"
+                        :base-color="darkmode ? 'white' : 'black'"  :color="darkmode ? 'white' : 'black'"
+                            :title="folder.title" :value="index" class="mb-4">
+  
+                            <template v-slot:prepend>
+                                <v-avatar color="grey-lighten-1">
+                                    <img src="../assets/account.jpg" alt="">
+                                </v-avatar>
+                            </template>
+  
+                            <template v-slot:append>
+                                <!-- <v-icon>mdi-dots-vertical</v-icon> -->
+                                <div class="flex-container">
+                                    <div class="time">5:56pm</div>
+                                    <v-avatar color="green" size="18">
+                                        <span style="font-size:13px">5</span>
+                                    </v-avatar>
+                                </div>
+                            </template>
+                        </v-list-item>
+                    </v-list>
+                </div>
+            </section>
+        </div>
+        <div class="right">
+            <div class="toolbar">
+                <v-list lines="one" :bg-color="(darkmode) ? 'var(--dark_mode)' : 'var(--dark_mode_2)'" class="border-b-2 border-blue-950">
+                    <v-list-item v-for="folder in folders" :key="folder.title" subtitle="Typing..." :base-color="darkmode ? 'white' : 'black'"     :color="darkmode ? 'white' : 'black'"
+                        :title="folder.title" >
+                        <template v-slot:prepend>
+                            <v-avatar color="grey-lighten-1">
+                                <img src="../assets/account.jpg" alt="">
+                            </v-avatar>
+                        </template>
+  
+                        <template v-slot:append>
+                            <v-icon>mdi-dots-vertical</v-icon>
+  
+                        </template>
+                    </v-list-item>
+                </v-list>
+            </div>
+  
+            <div class="chatszone">
+                <div class="message-controller " v-for="message in messages"  
+                :class="{'justify-end' : message.who == 'you', 'justify-start': message.who=='them'}">
+                    <div class="message bg-orange-500"  >
+                        <div class="text">{{ message.message }}</div>
+                        <div class="time">{{message.time}}</div>
+                    </div>
+                </div>
+            </div>
+  
+            <div class="send-options" :style="{ backgroundColor: (darkmode) ? 'var(--dark_mode)' : 'var(--dark_mode_2)' }">
+                <div class="text-input">
+                    <v-text-field :loading="false" density="comfortable" label="Type a message..."
+                        prepend-inner-icon="mdi-attachment" variant="solo-filled" class="p-3 text-sm "
+                        @click:prepend-inner="callThem"
+                        :bg-color="(darkmode) ? 'var(--dark_mode)' : 'var(--dark_mode_2)'"  hide-details single-line></v-text-field>
+                </div>
+  
+                <v-btn class="btn" :color="darkmode ? 'white' : 'black'" rounded="xl" density="default" size="large" elevation="5">
+                    <v-icon size='18'>mdi-microphone-outline</v-icon>
+                </v-btn>
+  
+                <v-btn class="btn" :color="darkmode ? 'white' : 'black'" rounded="xl" density="default" size="large" elevation="5">
+                    <v-icon size="18">mdi-send</v-icon>
+                </v-btn>
             </div>
         </div>
     </div>
-
-</body>
-
-</html>
+  </template>
+  
+  <script setup lang="ts">
+  import { ref } from "vue";
+  
+  const loading = ref(false);
+  import { useAppDetails } from "../stores/appDetails";
+  import { storeToRefs } from "pinia";
+  const store = useAppDetails();
+  const { darkmode } = storeToRefs(store);
+  const folders = ref([
+    {
+        subtitle: 'My Account',
+        title: 'Recipes',
+    },
+  ]);
+  
+  const people = ref([
+    {
+        subtitle: 'Do you 2k in your account?',
+        title: 'Tkay',
+    },
+    {
+        subtitle: 'Do you 2k in your account?',
+        title: 'Tkay',
+    },
+    {
+        subtitle: 'Do you 2k in your account?',
+        title: 'Tkay',
+    },
+    {
+        subtitle: 'Do you 2k in your account?',
+        title: 'Tkay',
+    },
+    {
+        subtitle: 'Do you 2k in your account?',
+        title: 'Tkay',
+    },
+    {
+        subtitle: 'Do you 2k in your account?',
+        title: 'Tkay',
+    },
+    {
+        subtitle: 'Do you 2k in your account?',
+        title: 'Tkay',
+    },
+    {
+        subtitle: 'Do you 2k in your account?',
+        title: 'Tkay',
+    },
+    {
+        subtitle: 'Do you 2k in your account?',
+        title: 'Tkay',
+    },
+    {
+        subtitle: 'Do you 2k in your account?',
+        title: 'Tkay',
+    },
+    {
+        subtitle: 'Do you 2k in your account?',
+        title: 'Tkay',
+    },
+  ]);
+  
+  function callThem(){
+    alert("called oh");
+  }
+  
+  const messages = ref([
+    {
+        type: "text",
+        time: "5:12pm",
+        message: "how are you?",
+        who: "you"
+    },
+    {
+        type: "text",
+        time: "5:12pm",
+        message: "how are you?",
+        who: "you"
+    },
+    {
+        type: "text",
+        time: "5:12pm",
+        message: "how are you?",
+        who: "them"
+    },
+    {
+        type: "text",
+        time: "5:12pm",
+        message: "how are you?",
+        who: "you"
+    },
+    {
+        type: "text",
+        time: "5:12pm",
+        message: "how are you?",
+        who: "them"
+    },
+    {
+        type: "text",
+        time: "5:12pm",
+        message: "how are you?",
+        who: "them"
+    },
+    {
+        type: "text",
+        time: "5:12pm",
+        message: "how are you?",
+        who: "you"
+    },
+    {
+        type: "text",
+        time: "5:12pm",
+        message: "how are you?",
+        who: "you"
+    },
+    {
+        type: "text",
+        time: "5:12pm",
+        message: "how are you?",
+        who: "you"
+    }
+  ])
+  </script>
+  
+  <style scoped>
+  .main {
+    height: var(--body-height);
+    display: flex;
+    padding: 0;
+    padding-left: 10px;
+  }
+  
+  .left {
+    width: 26%;
+    height: 100%;
+  }
+  
+  .right {
+    width: 74%;
+    display: grid;
+    grid-template-rows: 10% 80% 10%;
+  }
+  
+  .scroller {
+    height: 30%
+  }
+  
+  .time {
+    font-size: 12px;
+    opacity: 0.7;
+  }
+  
+  .flex-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+    justify-content: center;
+    align-items: center
+  }
+  
+  .send-options {
+    display: flex;
+    align-items: center;
+    column-gap: 1%;
+  }
+  
+  .send-options .text-input {
+    width: 88%;
+  }
+  .send-options button.btn{
+    width: 5%;
+  }
+  
+  .chatszone{
+    display: grid;
+    row-gap: 1%;
+    padding: 3%;
+    overflow-y: auto;
+  }
+  .message{
+    width: fit-content
+  }
+  .message-controller{
+    display: flex;
+  }
+  
+  </style>

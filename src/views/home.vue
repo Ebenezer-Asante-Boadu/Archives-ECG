@@ -1,5 +1,5 @@
 <template>
-  <div class="main flex flex-col p-4">
+  <div class="main flex flex-col p-4" :style="{ backgroundColor: (darkmode) ? 'var(--dark_mode)' : 'var(--dark_mode_2)' }">
     <!-- <div class="slide-container" v-for="n in 20">
       <v-slide-group show-arrows >
         <v-slide-group-item v-for="n in slides" :key="n" v-slot="{ isSelected, toggle }" class="min">
@@ -11,16 +11,17 @@
       <swiper :slidesPerView="1.5" :spaceBetween="15" :pagination="{
         clickable: true,
       }" :autoplay="{
-  delay: 3500,
-  disableOnInteraction: false,
-}" :navigation="false" :modules="modules" class="mySwiper ">
+        delay: 3500,
+        disableOnInteraction: false,
+      }" :navigation="false" :modules="modules" class="mySwiper ">
         <swiper-slide v-for="n in slides">
           <div class="slide  flex flex-col justify-center" :style="{ backgroundImage: `url(${n})` }">
             <!-- <img :src="n" alt="" class="slide"> -->
-            <div class="pl-6 popup">
-              <p class="text-white text-4xl font-semibold">History of ECG</p>
-              <p class="text-white text-sm font-normal">Getting all you need, you will bin goto</p>
-              <button style="color:white; " class="bg-indigo-900  pl-3 pr-3  see-more" @click="$router.push('/gallery-details')">
+            <div class="pl-6 popup flex-grow-0">
+              <p class="text-white text-5xl font-semibold">History of ECG</p>
+              <p class="text-white text-base font-normal">Getting all you need, you will bin goto</p>
+              <button style="color:white; " class="bg-indigo-900  pl-3 pr-3  see-more pt-2 pb-2"
+                @click="$router.push('/gallery-details')">
                 <v-icon>mdi-chevron-right</v-icon>
                 See more</button>
             </div>
@@ -63,10 +64,10 @@ resetDefault();
 
 const modules = [Pagination, Autoplay, Navigation];
 
-function getNeeded(num:number){
-  if(num === 1){
-    return slides.slice(0,3);
-  }else if(num === 2){
+function getNeeded(num: number) {
+  if (num === 1) {
+    return slides.slice(0, 3);
+  } else if (num === 2) {
     return slides.slice(3, 6)
   }
   return slides.slice(6, 9);
@@ -75,7 +76,6 @@ function getNeeded(num:number){
 
 <style scoped>
 .main {
-  background-color: var(--dark_mode_2);
   row-gap: 2%;
   height: var(--body-height);
   overflow-y: scroll;
@@ -93,8 +93,10 @@ function getNeeded(num:number){
   height: 100%;
   background-repeat: no-repeat;
   border-radius: 10px;
+  box-shadow: 10px 10px 20px -5px rgba(173, 173, 173, 0.5);
 }
-.slide::before{
+
+.slide::before {
   content: "";
   position: absolute;
   top: 0;
@@ -103,33 +105,35 @@ function getNeeded(num:number){
   height: 100%;
   /*background-color: rgba(0, 0, 0, 0.548);*/
   background: linear-gradient(to right, rgba(0, 0, 0, 0.648) 50%, rgba(0, 0, 0, 0) 100%);
-  }
+}
 
 .slide-container {
-  background-color: var(--dark_mode_2);
+  background: none;
   height: fit-content;
-  
+
   border-radius: 10px;
   width: 100%;
 }
-.popup{
- /* background: linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8));  Adjust the gradient to your liking */
-  z-index: 1; /* Ensure the shine is above the image */
+
+.popup {
+  /* background: linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8));  Adjust the gradient to your liking */
+  z-index: 1;
+  /* Ensure the shine is above the image */
   display: grid;
   row-gap: 20px;
   position: relative;
   z-index: 5;
 }
 
-button.see-more{
+button.see-more {
   width: 15%;
   border-radius: 5px;
   padding: 3px 0;
   font-size: 14px;
-  box-shadow: 
-        0 3px 6px rgba(0, 0, 0, 0.1),
-        0 3px 6px rgba(0, 0, 0, 0.1),
-        0 10px 20px rgba(0, 0, 0, 0.2),
-        0 20px 40px rgba(0, 0, 0, 0.3);
+  box-shadow:
+    0 3px 6px rgba(0, 0, 0, 0.1),
+    0 3px 6px rgba(0, 0, 0, 0.1),
+    0 10px 20px rgba(0, 0, 0, 0.2),
+    0 20px 40px rgba(0, 0, 0, 0.3);
 }
 </style>

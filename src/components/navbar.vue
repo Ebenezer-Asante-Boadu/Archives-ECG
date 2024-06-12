@@ -1,29 +1,29 @@
 <template>
-    <nav class="nav-main flex items-center justify-between" >
+    <nav class="nav-main flex items-center justify-between"  :style="{ backgroundColor: (darkmode) ? 'var(--dark_mode_2)' : 'var(--light-system)' }" >
         <div class="logo-container flex items-center flex-grow-0" :style="{color: (darkmode)? 'white':'black'}">
             <span @click="$router.go(-1)" v-if="shouldShowBackArrow" style="cursor:pointer"><v-icon size="20"  >mdi-arrow-left</v-icon></span>
             <!-- <span>ECG Archives </span> -->
-            <div class="flex items-center text-white gap-4">
+            <!-- <div class="flex items-center text-white gap-4">
                 <v-switch label="AutoSave" hide-details color="purple-accent-4"></v-switch>
                 <button>
                     <v-icon>mdi-download</v-icon>
                 </button>
                 <button><v-icon>mdi-undo</v-icon></button>
                 <button><v-icon>mdi-redo</v-icon></button>
-            </div>
+            </div> -->
         </div>
         <div class="middle t flex-grow flex justify-center items-center text-white">
-            Book1 - Excel
+            <!-- Book1 - Excel {{ darkmode }} -->
         </div>
         <div class="right flex-grow-0">
-            <button class="minimize actions " style="cursor: pointer" @click="minimize()">
-                <v-icon :color="darkmode? 'white':'white'" size="15">mdi-minus</v-icon>
+            <button class="minimize actions " style="cursor: pointer" @click="minimize()" @mouseover="hovers.minus = true" @mouseleave="hovers.minus = false">
+                <v-icon :color="darkmode || hovers.minus ? 'white':'black'" size="15">mdi-minus</v-icon>
             </button>
-            <button class="maximize actions" @click="maximizeRestore()">
-                <v-icon :color="darkmode? 'white':'white'" size="15">mdi-window-maximize</v-icon>
+            <button class="maximize actions" @click="maximizeRestore()" @mouseover="hovers.maximize = true" @mouseleave="hovers.maximize = false">
+                <v-icon :color="darkmode || hovers.maximize ? 'white':'black'" size="15">mdi-window-maximize</v-icon>
             </button>
-            <button class="close actions" @click="closeMain()">
-                <v-icon :color="darkmode? 'white':'white'" size="18">mdi-close</v-icon>
+            <button class="close actions" @click="closeMain()" @mouseover="hovers.close = true" @mouseleave="hovers.close = false">
+                <v-icon :color="darkmode || hovers.close ? 'white':'black'" size="18">mdi-close</v-icon>
             </button>
         </div>
     </nav>
@@ -37,7 +37,11 @@ import { storeToRefs } from "pinia";
 
 const store = useAppDetails();
 const {darkmode, shouldShowBackArrow} = storeToRefs(store);
-
+const hovers = ref({
+    minus: false,
+    maximize: false,
+    close:false
+})
 
 console.log("darkmode: ", darkmode.value);
 // (document as DocumentEventTarget).addEventListener('theme-change', (event) => {
@@ -56,7 +60,6 @@ console.log("darkmode: ", darkmode.value);
     position: -webkit-sticky;
     top: 0;
     z-index: 9000;
-    background-color: var(--dark_mode_2);
 }
 
 .middle{

@@ -1,4 +1,5 @@
-import { BrowserWindow, ipcMain, app, screen, nativeTheme, Notification } from "electron";
+import { BrowserWindow, ipcMain, app, screen, nativeTheme, Notification, dialog } from "electron";
+import * as fs from 'fs';
 import { createApplicationWindow } from "./processes/main-process";
 import { createSplashWindow, generateDeviceFingerprint } from "./processes/verify-process";
 import { encryptAndSaveData, readAndDecryptData } from "./lib/user";
@@ -42,7 +43,30 @@ console.log(process.env.ENV)
     }catch(err){
       console.log(err);
     }
-  })
+  });
+
+  ipcMain.handle('open-file-dialog', async (event) => {
+   try{
+    const window = BrowserWindow.fromId(mainWindowId);
+    const result = await dialog.showOpenDialog(window!, {
+      properties: ['openFile'],
+      filters: [
+        { name: 'Images', extensions: ['jpg', 'png'] },
+      ],
+    });
+  
+    if (result.canceled) {
+      return null;
+    } else {
+      const filePath = result.filePaths[0];
+      const fileData = fs.readFileSync(filePath);
+    const base64Data = fileData.toString('base64');
+    return { filePath, base64Data };
+    }
+   }catch(err){
+    return null;
+   }
+  });
 
   // if(!event){
   //   const event = new CustomEvent("theme-change", {detail:{darkMode:${nativeTheme.shouldUseDarkColors}}}); 
@@ -173,7 +197,7 @@ console.log(process.env.ENV)
     return returnValue;
   });
 
-
+// vidaedjetey@gmail.com
   ipcMain.handle("get-userDetails", () => {
     if (userinfo) {
       return { status: userinfo.status, staff_id: userinfo.staff_id }

@@ -22,6 +22,7 @@ interface Window {
       getAuthenticated: ()=>Promise<boolean>;
       exportExcel: (data:Array<Array<string>>) => Promise<any>;
       showNotification: (message:string, email:string) => void;
+      openFileDialog: ()=> Promise<{ filePath: string; base64Data: string } | null>;
     }
   }
 

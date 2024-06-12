@@ -1,7 +1,7 @@
 <template>
     <div class="main">
-        <div class="left ">
-            <v-list lines="one" bg-color="rgb(22, 4, 44)" class="border-b-2 border-blue-950">
+        <div class="left " >
+            <v-list lines="one" bg-color="rgb(88, 18, 90)" class="border-b-2 border-blue-950">
                 <v-list-item v-for="folder in folders" :key="folder.title" :subtitle="folder.subtitle"
                     :title="folder.title" color="red">
                     <template v-slot:prepend>
@@ -20,12 +20,12 @@
                 prepend-inner-icon="mdi-magnify" variant="solo-filled" class="p-3 text-sm" bg-color="rgb(22, 4, 44)"
                 hide-details single-line></v-text-field>
 
-            <section class="pl-1 pr-1 pb-3">
+            <section class="pl-1 pr-1 pb-3 " >
                 <div class="text-white pb-3 pl-2 pr-2">
-                    Messages
+                    Messages {{ darkmode }}
                 </div>
                 <div class="scroller">
-                    <v-list lines="one" bg-color="rgb(22, 4, 44)" active-color="white">
+                    <v-list lines="one" bg-color="rgb(88, 18, 90)" active-color="white">
                         <v-list-item v-for="folder, index in people" :key="index" :subtitle="folder.subtitle"
                             :title="folder.title" :value="index" class="mb-4">
 
@@ -51,7 +51,7 @@
         </div>
         <div class="right">
             <div class="toolbar">
-                <v-list lines="one" bg-color="rgb(22, 4, 44)" class="border-b-2 border-blue-950">
+                <v-list lines="one" bg-color="white" class="border-b-2 border-blue-950">
                     <v-list-item v-for="folder in folders" :key="folder.title" subtitle="Typing..."
                         :title="folder.title" color="red">
                         <template v-slot:prepend>
@@ -83,14 +83,14 @@
                     <v-text-field :loading="false" density="comfortable" label="Type a message..."
                         prepend-inner-icon="mdi-attachment" variant="solo-filled" class="p-3 text-sm "
                         @click:prepend-inner="callThem"
-                        bg-color="rgb(22, 4, 44)"  hide-details single-line></v-text-field>
+                        bg-color="white"  hide-details single-line></v-text-field>
                 </div>
 
-                <v-btn class="btn" color="rgb(22, 4, 44)" rounded="xl" density="default" size="large" elevation="5">
+                <v-btn class="btn" color="white" rounded="xl" density="default" size="large" elevation="5">
                     <v-icon size='18'>mdi-microphone-outline</v-icon>
                 </v-btn>
 
-                <v-btn class="btn" color="rgb(22, 4, 44)" rounded="xl" density="default" size="large" elevation="5">
+                <v-btn class="btn" color="white" rounded="xl" density="default" size="large" elevation="5">
                     <v-icon size="18">mdi-send</v-icon>
                 </v-btn>
             </div>
@@ -100,6 +100,11 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
+import { useAppDetails } from "../stores/appDetails";
+import { storeToRefs } from "pinia";
+
+const store = useAppDetails();
+const { darkmode } = storeToRefs(store);
 
 const loading = ref(false);
 const folders = ref([
@@ -220,7 +225,7 @@ const messages = ref([
 
 <style scoped>
 .main {
-    background-color: rgb(14, 14, 14);
+    background-color: rgb(88, 18, 90);
     height: var(--body-height);
     display: flex;
     padding: 0;
@@ -230,13 +235,15 @@ const messages = ref([
 .left {
     width: 26%;
     height: 100%;
-    background-color: var(--dark_mode_2);
+    background-color: rgb(88, 18, 90);
+    /*rgba(64, 46, 88, 1)*/
 }
 
 .right {
     width: 74%;
     display: grid;
     grid-template-rows: 10% 80% 10%;
+    background-color: white;
 }
 
 .scroller {
@@ -259,7 +266,7 @@ const messages = ref([
 .send-options {
     display: flex;
     align-items: center;
-    background-color: rgb(22, 4, 44);
+    background-color: white;
     column-gap: 1%;
 }
 

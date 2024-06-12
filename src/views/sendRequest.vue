@@ -1,8 +1,8 @@
 <template>
-    <div class="main" :style="{ backgroundColor: (darkmode) ? 'var(--dark_mode_2)' : 'white' }">
+    <div class="main" >
         <div class="left ">
-            <p class="text-right font-extrabold text-4xl  md:text-5xl  font-mono leading-10 pt-9 mb-4"
-                :class="{ 'text-white': darkmode, 'text-blue-950': !darkmode }">
+            <p class="text-right font-extrabold text-4xl  md:text-5xl  font-mono leading-10 pt-9 mb-4 text-white"
+               >
                 Requisition Board
             </p>
             <img src="../assets/desktop-design-outline.png" alt="">
@@ -168,6 +168,7 @@ function validateForm() {
     height: var(--body-height);
     overflow-y: auto;
     position: relative;
+    background-color: rgb(44, 6, 66);
 }
 
 .left {

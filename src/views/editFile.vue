@@ -1,7 +1,7 @@
 <template>
   <div class="excel-main bg-red-600">
     <div class="toolbar bg-gray-300">
-      <div class="toolbar-top">g</div>
+      <div class="toolbar-top">hello world</div>
     </div>
     <div class="body bg-green-400"></div>
   </div>
@@ -20,5 +20,5 @@
 .toolbar{
   height: 25%;
 }
-.body{m}
+.body{}
 </style>

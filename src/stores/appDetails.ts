@@ -2,7 +2,7 @@ import { ref, computed, watchEffect, onBeforeUnmount } from 'vue'
 import { defineStore } from 'pinia';
 import {setAuthenticated, getAuthenticated} from "../lib/utils";
 import { onAuthStateChanged, getAuth } from 'firebase/auth';
-import { startFirebaseApp } from '@/lib/firebase';
+import { startFirebaseApp } from '@/lib/firebase_user_service';
 import router from '@/router';
 import { getUserDetails } from '../lib/utils';
 
@@ -20,7 +20,7 @@ export const useAppDetails = defineStore('app-main',  () => {
   const authenticated = ref(false);
   const systemColor = ref("red-blackk");
   // const darkmode = ref(localStorage.getItem("dark_mode") === "true" ? true: false);
-  const darkmode = ref(false);
+  const darkmode = ref(true);
   const shouldShowBackArrow = ref(false);
 
 // console.log(localStorage.getItem("dark_mode"), darkmode.value)
