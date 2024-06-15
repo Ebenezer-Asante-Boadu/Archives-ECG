@@ -7,7 +7,7 @@
 
             <button class=" text-white p-1 rounded-md px-5 py-2 " style="background-color:rgb(88, 18, 90)">Update</button>
         </div>
-        <div class="body flex flex-col flex-grow pt-5 overflow-y-auto">
+        <div class="body flex flex-col flex-grow pt-5 overflow-y-auto pr-10">
             <div class="flex flex-col h-fit flex-grow-0 items-center justify-center">
                 <div>
                     <v-icon size="130" color="gray" v-if="image == null">mdi-account-circle</v-icon>
@@ -22,22 +22,22 @@
 
             <div class="username flex flex-row items-center justify-center h-fit flex-grow-0 gap-10">
                 <span class="detail flex-grow-0 w-2/12">Username</span>
-                <v-text-field bg-color="white"  :model-value="inputs.username.value" :rules="[rules.required]"></v-text-field>
+                <v-text-field bg-color="white"  :model-value="inputs.username.value" :rules="[rules.required]" density="compact"></v-text-field>
             </div>
 
             <div class="useremail flex flex-row items-center justify-center h-fit flex-grow-0 gap-10">
                 <span class="detail  flex-grow-0 w-2/12">Email</span>
-                <v-text-field bg-color="white" :model-value="inputs.email.value" :rules="[rules.required, rules.email]" ></v-text-field>
+                <v-text-field bg-color="white" :model-value="inputs.email.value" :rules="[rules.required, rules.email]" density="compact"></v-text-field>
             </div>
 
             <div class="useremail flex flex-row items-center justify-center h-fit flex-grow-0 gap-10">
                 <span class="detail  flex-grow-0 w-2/12">Gender</span>
-                <v-select  :items="['Male', 'Female']" variant="underlined" v-model="inputs.gender.value" :rules="[rules.required, rules.gender]"></v-select>
+                <v-select density="compact" :items="['Male', 'Female']" variant="underlined" v-model="inputs.gender.value" :rules="[rules.required, rules.gender]"></v-select>
             </div>
 
             <div class="status flex flex-row items-center justify-center h-fit flex-grow-0 gap-10">
                 <span class="detail  flex-grow-0 w-2/12">Status</span>
-                <v-text-field bg-color="white" :model-value="inputs.status.value" :rules="[rules.required, rules.status]"></v-text-field>
+                <v-text-field density="compact" bg-color="white" :model-value="inputs.status.value" :rules="[rules.required, rules.status]"></v-text-field>
             </div>
         </div>
     </div>
@@ -45,6 +45,11 @@
 
 <script setup lang="ts">
 import {ref} from "vue";
+import { storeToRefs } from "pinia";
+import { useAppDetails } from "@/stores/appDetails";
+
+const store = useAppDetails();
+const { darkmode, userDetails } = storeToRefs(store);
 const image = ref<string|null>(null);
     const inputs = ref({
     email: { value: "", valid: false, pattern: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/ },

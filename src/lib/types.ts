@@ -5,10 +5,10 @@ export interface UserRequest{
     verified:boolean
 }
 
-export interface User{
-    email:string,
-    status:"admin"|"normal"
-}
+// export interface User{
+//     email:string,
+//     status:"admin"|"normal"
+// }
 
 export interface FirebaseUser{
     email:string,
@@ -31,3 +31,35 @@ export interface TableData {
     [key: string|symbol]: number | string;
 }
 
+export enum Gender {
+    Male = "MALE",
+    Female = "FEMALE"
+  };
+  
+  export enum Status {
+    Admin = "ADMIN",
+    Normal = "NORMAL"
+  }
+  
+ export  interface User {
+    staff_id: string;
+    email: string;
+    name: string;
+    gender: Gender,
+    status: Status,
+    uid: string;
+    profile: string |null;
+  }
+
+  export interface SearchedUser{
+    staff_id: string;
+    email: string;
+    name: string;
+    gender: Gender,
+    status: Status,
+    uid: string;
+    profile: string |null;
+    lastMessage: string|null;
+    lastMessageTime: string|null;
+    unreadMessages: number|null;
+  }

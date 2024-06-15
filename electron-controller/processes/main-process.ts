@@ -12,6 +12,7 @@ export function createApplicationWindow(){
       resizable:false,
       titleBarStyle: 'hidden',
       frame: true,
+      hasShadow: true,
       roundedCorners: false,
       transparent:true,
       center: true,

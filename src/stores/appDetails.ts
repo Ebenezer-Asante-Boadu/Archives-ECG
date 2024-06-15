@@ -15,7 +15,7 @@ export const useAppDetails = defineStore('app-main',  () => {
     name: "",
     email: "",
     phone: ""
-  })
+  }) 
   const auth = getAuth();
   const authenticated = ref(false);
   const systemColor = ref("red-blackk");

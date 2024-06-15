@@ -1,5 +1,5 @@
 <template>
-    <div class="main" >
+    <div class="main nice-bg" >
         <div class="left ">
             <p class="text-right font-extrabold text-4xl  md:text-5xl  font-mono leading-10 pt-9 mb-4 text-white"
                >
@@ -9,7 +9,7 @@
         </div>
         <div class="right">
             <div class="container ">
-                <form action="" class="form grid gap-y-5 bg-purple-100" @submit="(e) => { e.preventDefault() }">
+                <form action="" class="form grid gap-y-5 bg-white bg-opacity-70" @submit="(e) => { e.preventDefault() }">
                     <div class="grid grid-cols-2 gap-6">
                         <label for="email">
                             <span class="spans">Email:</span>
@@ -147,8 +147,8 @@ function validateForm() {
     if (emailValid && cellValid && idValid && requestedValid && dateRequestedValid && descriptionValid && behalfValid && reasonValid && designationValid) {
         console.log("yeah");
        
-        // window.main.showNotification(`Your request for the file titled ${inputs.value.description.value} has been sent to the admin for approval!!!`, inputs.value.email.value);
-        notify( {message:"JUST CHECKING", position:"bottom-right"});
+        window.main.showNotification(`Your request for the file titled ${inputs.value.description.value} has been sent to the admin for approval!!!`, inputs.value.email.value);
+        // notify( {message:"JUST CHECKING", position:"bottom-right"});
         inputs.value.behalf.value = "";
         inputs.value.cell_phone.value = "";
         inputs.value.description.value = "";
@@ -168,7 +168,6 @@ function validateForm() {
     height: var(--body-height);
     overflow-y: auto;
     position: relative;
-    background-color: rgb(44, 6, 66);
 }
 
 .left {

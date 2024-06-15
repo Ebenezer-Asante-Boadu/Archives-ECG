@@ -31,7 +31,7 @@ console.log(process.env.ENV)
     app.quit();
   });
 
-  ipcMain.on("show-notification", async (event, message:string, email:string)=>{
+  ipcMain.handle("show-notification", async (event, message:string, email:string)=>{
     try{
       const res = await sendEmail(email, message);
       const notification = new Notification({
