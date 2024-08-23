@@ -47,6 +47,16 @@ const router = createRouter({
       }
     },
     {
+      path: "/database",
+      name: "database",
+      component: () => import("../views/database.vue"),
+      meta: {
+        requiresAuth: true,
+        admin: false,
+        backArrow: false
+      }
+    },
+    {
       path: "/edit-file",
       name: "edit-file",
       // component: () => import("../views/editFile.vue"),

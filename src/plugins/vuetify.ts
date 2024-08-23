@@ -5,10 +5,12 @@ import 'vuetify/styles'
 // Vuetify
 import { createVuetify } from 'vuetify';
 import { VIcon, VSlideGroup, VSlideGroupItem,VBtn, VSheet, VTooltip, VSwitch, VList, VListItem, VCardText, VCard, VTable,
-  VAvatar, VTextField , VSelect, VDivider, VRow, VCol, VListSubheader} from 'vuetify/components';
+  VAvatar, VTextField , VSelect, VDivider, VRow, VCol, VListSubheader, VToolbar, VDataTable} from 'vuetify/components';
 
 export default createVuetify({
   components: {
+    VToolbar,
+    VDataTable,
     VRow,
     VCol,
     VListSubheader,

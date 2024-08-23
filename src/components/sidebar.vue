@@ -70,7 +70,7 @@ const links = ref([
     { name: "Home", icon: "mdi-home", tooltip: "Home", type: "normal", path: "/front-page", mouseOver: false },
     { name: "requests", icon: "mdi-send", tooltip: "Send a file request", type: "normal", path: "/send-request", mouseOver: false },
     { name: "notifications", icon: "mdi-forum-outline", tooltip: "Notifications", type: "normal", path: "/notifications", mouseOver: false },
-    // { name: "notifications", icon: "mdi-forum-outline", tooltip: "Notifications", type: "normal", path: "/notifications", mouseOver: false },
+    { name: "database", icon: "mdi-database", tooltip: "Database", type: "normal", path: "/database", mouseOver: false },
     // { name: "help", icon: "mdi-help-network", tooltip: "Get help", type: "normal", path: "", mouseOver: false },
     { name: "edit", icon: "mdi-file-edit", tooltip: "Start editing a file", type: "normal", path: "/edit-file", mouseOver: false },
     { name: "settings", icon: "mdi-cog", tooltip: "Settings", type: "not-normal", path: "/settings", mouseOver: false }
